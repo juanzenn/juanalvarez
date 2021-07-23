@@ -7,11 +7,11 @@ export default function Projects({ slice }) {
 
   return (
     <div className='px-4 py-12 lg:w-2/3 mx-auto'>
-      <header className='mb-8'>
-        <span className='text-4xl font-bold tracking-tight'>
+      <header className='mb-4'>
+        <span className='text-2xl font-bold tracking-tight'>
           <RichText render={primary.title} />
         </span>
-        <span className='text-base font-light tracking-wide'>
+        <span className='text-lg text-gray-700'>
           {primary.subtitle.length == 0 ? (
             ``
           ) : (
@@ -19,22 +19,25 @@ export default function Projects({ slice }) {
           )}
         </span>
       </header>
-      <main className='grid lg:grid-cols-2 gap-8'>
+      <main className='grid lg:grid-cols-2 gap-12'>
         {items.map((item, index) => (
           <article key={`project-${index}`}>
             <header className='mb-2'>
-              <span className='uppercase tracking-wider font-bold text-sm text-blue-300'>
+              <span className='uppercase tracking-wider font-bold text-sm text-blue-700'>
                 {item.project_type}
               </span>
-              <a
-                href={item.link.url}
-                className='text-2xl font-bold tracking-tight hover:text-blue-300 transition-colors'>
+              <span className='text-2xl font-bold tracking-tight'>
                 <RichText render={item.project_title} />
-              </a>
+              </span>
             </header>
-            <p className='text-lg'>
+            <p className='text-lg text-gray-900'>
               <RichText render={item.project_description} />
             </p>
+            <a
+              href={item.link.url}
+              className='block w-full mt-6 py-2 text-white font-semibold text-base text-center bg-blue-700 hover:bg-blue-800 rounded transition duration-300'>
+              Live View
+            </a>
           </article>
         ))}
       </main>

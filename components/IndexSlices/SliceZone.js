@@ -19,16 +19,13 @@ export default function SliceZone(props) {
             );
           case 'projects':
             return (
-              <section
-                id='projects'
-                key={`slice-${index}`}
-                className='bg-blue-800 text-gray-100'>
+              <section className='py-4' id='projects' key={`slice-${index}`}>
                 <Projects slice={slice} />
               </section>
             );
           case 'blog_posts':
             return (
-              <section id='blog' key={`slice-${index}`}>
+              <section className='py-4' id='blog' key={`slice-${index}`}>
                 <BlogPosts slice={slice} />
               </section>
             );
