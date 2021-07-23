@@ -6,7 +6,7 @@ export default function Projects({ slice }) {
   const { primary, items } = slice;
 
   return (
-    <div className='px-4 py-12  lg:w-2/3 mx-auto'>
+    <div className='px-4 py-12 lg:w-2/3 mx-auto'>
       <header className='mb-8'>
         <span className='text-4xl font-bold tracking-tight'>
           <RichText render={primary.title} />
@@ -32,7 +32,7 @@ export default function Projects({ slice }) {
                 <RichText render={item.project_title} />
               </a>
             </header>
-            <p className='text-lg font-light'>
+            <p className='text-lg'>
               <RichText render={item.project_description} />
             </p>
           </article>

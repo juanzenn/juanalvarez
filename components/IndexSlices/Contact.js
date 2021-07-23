@@ -9,7 +9,7 @@ export default function Contact({ slice }) {
     <>
       <hr className='w-10/12 my-4 mx-auto text-gray-400' />
 
-      <div className='flex justify-center gap-4'>
+      <div className='flex justify-center gap-4 pb-12'>
         {items.map((item, index) => {
           switch (item.contact_label) {
             case 'Mail':

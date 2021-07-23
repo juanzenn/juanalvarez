@@ -8,9 +8,7 @@ export default function HeroAbout({ slice }) {
       <span className='text-5xl text-gray-900 font-bold tracking-tight mb-2'>
         <RichText render={slice.primary.title} />
       </span>
-
-      <h1 className=''></h1>
-      <section className='space-y-4'>
+      <section className='space-y-4 lg:w-8/12'>
         <span className='text-lg text-gray-900 tracking-wide space-y-4'>
           <RichText render={slice.primary.about} />
         </span>

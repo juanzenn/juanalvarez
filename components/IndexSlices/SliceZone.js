@@ -8,18 +8,19 @@ export default function SliceZone(props) {
   const { slices } = props;
 
   return (
-    <main>
+    <main className=''>
       {slices.map((slice, index) => {
         switch (slice.slice_type) {
           case 'heroabout':
             return (
-              <section key={`slice-${index}`}>
+              <section id='about' key={`slice-${index}`}>
                 <HeroAbout slice={slice} />
               </section>
             );
           case 'projects':
             return (
               <section
+                id='projects'
                 key={`slice-${index}`}
                 className='bg-blue-800 text-gray-100'>
                 <Projects slice={slice} />
@@ -27,7 +28,7 @@ export default function SliceZone(props) {
             );
           case 'blog_posts':
             return (
-              <section key={`slice-${index}`}>
+              <section id='blog' key={`slice-${index}`}>
                 <BlogPosts slice={slice} />
               </section>
             );
