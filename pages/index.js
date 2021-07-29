@@ -42,6 +42,8 @@ export default function Home({ slices }) {
           content="I make websites and web applications for modern businesses. If you want to have a strong online presence, contact me. Let's work together."
         />
         <meta property='twitter:image' content='' />
+        <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
+        <link rel='icon' href='/favicon.ico' type='image/x-icon' />
       </Head>
       <Navbar />
 
