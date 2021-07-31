@@ -24,6 +24,8 @@ export default function BlogPosts({ slice }) {
           <article key={`article-${index}`}>
             <header className=''>
               <a
+                href={item.blog_link.url}
+                target='_blank'
                 className='block mb-2 h-40 rounded-md cursor-pointer bg-cover bg-center bg-no-repeat hover:brightness-105 transform transition-all duration-300'
                 style={{ backgroundImage: `url(${item.blog_cover.url})` }}></a>
               <span className='text-xl font-bold'>
@@ -33,7 +35,10 @@ export default function BlogPosts({ slice }) {
             <p className='text-base text-gray-700 mb-2 mt-4'>
               <RichText render={item.blog_description} />
             </p>
-            <a className='w-max block text-right cursor-pointer text-gray-600 hover:text-blue-700 transition-all'>
+            <a
+              href={item.blog_link.url}
+              target='_blank'
+              className='w-max block text-right cursor-pointer text-gray-600 hover:text-blue-700 transition-all'>
               Read more
             </a>
           </article>
