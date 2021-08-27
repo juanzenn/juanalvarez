@@ -8,7 +8,7 @@ export default function SliceZone(props) {
   const { slices } = props;
 
   return (
-    <main className=''>
+    <main>
       {slices.map((slice, index) => {
         switch (slice.slice_type) {
           case 'heroabout':

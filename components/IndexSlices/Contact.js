@@ -18,7 +18,7 @@ export default function Contact({ slice }) {
                   key={`link-${index}`}
                   href='mailto:juanandres140299@gmail.com'>
                   <Envelope
-                    className='hover:text-blue-600 transition-all'
+                    className='hover:text-primary-600 transition-all'
                     size={36}
                   />
                 </a>
@@ -27,7 +27,7 @@ export default function Contact({ slice }) {
               return (
                 <a key={`link-${index}`} href={item.contact_link.url}>
                   <TwitterFill
-                    className='hover:text-blue-600 transition-all'
+                    className='hover:text-primary-600 transition-all'
                     size={36}
                   />
                 </a>
@@ -36,7 +36,7 @@ export default function Contact({ slice }) {
               return (
                 <a key={`link-${index}`} href={item.contact_link.url}>
                   <GithubFill
-                    className='hover:text-blue-600 transition-all'
+                    className='hover:text-primary-600 transition-all'
                     size={36}
                   />
                 </a>
@@ -45,7 +45,7 @@ export default function Contact({ slice }) {
               return (
                 <a key={`link-${index}`} href={item.contact_link.url}>
                   <LinkedInV1Fill
-                    className='hover:text-blue-600 transition-all'
+                    className='hover:text-primary-600 transition-all'
                     size={36}
                   />
                 </a>
