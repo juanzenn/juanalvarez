@@ -39,7 +39,7 @@ export default function Projects({ slice }) {
 
             <section className='flex justify-center items-center gap-6'>
               <a
-                href={item.link.url}
+                href={item.github_link.url}
                 className='flex items-center gap-2 w-max py-2 px-6 text-white font-semibold text-base text-center bg-gray-700 hover:bg-gray-800 rounded transition duration-300'>
                 GitHub
                 <GithubFill size={20} />
