@@ -19,7 +19,7 @@ export default function BlogPost({ blogPost }) {
         <meta property='og:type' content='article' />
         <meta
           property='og:url'
-          content={`${window.location.host}/${blogPost.slug}`}
+          content={`https://juanalvarez.vercel.app/blog/${blogPost.slug}`}
         />
         <meta property='og:title' content={blogPost.title[0].text} />
         <meta
@@ -31,7 +31,7 @@ export default function BlogPost({ blogPost }) {
         <meta property='twitter:card' content='summary_large_image' />
         <meta
           property='twitter:url'
-          content={`${window.location.host}/${blogPost.slug}`}
+          content={`https://juanalvarez.vercel.app/blog/${blogPost.slug}`}
         />
         <meta property='twitter:title' content={blogPost.title[0].text} />
         <meta
