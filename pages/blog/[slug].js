@@ -17,7 +17,10 @@ export default function BlogPost({ blogPost }) {
         <meta name='description' content={blogPost.description[0].text} />
 
         <meta property='og:type' content='article' />
-        <meta property='og:url' content='https://metatags.io/' />
+        <meta
+          property='og:url'
+          content={`${window.location.host}/${blogPost.slug}`}
+        />
         <meta property='og:title' content={blogPost.title[0].text} />
         <meta
           property='og:description'
@@ -26,7 +29,10 @@ export default function BlogPost({ blogPost }) {
         <meta property='og:image' content={blogPost.coverImage.src} />
 
         <meta property='twitter:card' content='summary_large_image' />
-        <meta property='twitter:url' content='https://metatags.io/' />
+        <meta
+          property='twitter:url'
+          content={`${window.location.host}/${blogPost.slug}`}
+        />
         <meta property='twitter:title' content={blogPost.title[0].text} />
         <meta
           property='twitter:description'
@@ -154,6 +160,7 @@ export const getStaticProps = async ({ params }) => {
       src: data.cover.url,
     },
     content: data.content,
+    slug: data.slug,
   };
 
   return {
