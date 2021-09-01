@@ -6,8 +6,24 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
       colors: {
         primary: colors.blue,
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              'text-decoration': 'none',
+
+              '&:hover': {
+                color: colors.blue[700],
+              },
+            },
+          },
+        },
       },
     },
   },

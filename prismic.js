@@ -1,7 +1,9 @@
-const Prismic = require('@prismicio/client');
+import Prismic from '@prismicio/client';
 
 const apiEndpoint = process.env.API_ENDPOINT;
 
-export const Client = () => Prismic.client(apiEndpoint);
+const client = () => Prismic.client(apiEndpoint);
+
+const Client = client();
 
 export default Client;

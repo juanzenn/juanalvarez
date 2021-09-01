@@ -1,9 +1,12 @@
 import Head from 'next/head';
 
-import { Client } from '../prismic';
+import Client from '../prismic';
+import Prismic from '@prismicio/client';
 
 import SliceZone from '../components/IndexSlices/SliceZone';
 import Navbar from '../components/Navbar';
+import React from 'react';
+import Layout from '../components/Layout';
 
 export default function Home({ slices }) {
   return (
@@ -45,18 +48,20 @@ export default function Home({ slices }) {
         <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
         <link rel='icon' href='/favicon.ico' type='image/x-icon' />
 
-        <script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=juan-alvarez"></script>
+        <script
+          async
+          defer
+          src='https://static.cdn.prismic.io/prismic.js?new=true&repo=juan-alvarez'></script>
       </Head>
-      <Navbar />
-
-      <SliceZone slices={slices} />
+      <Layout>
+        <SliceZone slices={slices} />
+      </Layout>
     </>
   );
 }
 
-export async function getStaticProps(context) {
-  const client = Client();
-  const doc = await client.getSingle('index');
+export async function getStaticProps() {
+  const doc = await Client.getSingle('index');
   const slices = doc.data.body;
 
   return {
