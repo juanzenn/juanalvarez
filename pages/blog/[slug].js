@@ -90,7 +90,14 @@ export default function BlogPost({ blogPost }) {
 
         <section className='my-8'>
           <section className='flex gap-4 items-center'>
-            <figure className='w-12 h-12 flex-shrink-0 bg-gray-300 rounded-full'></figure>
+            <figure className='h-24 w-24 relative overflow-hidden flex-shrink-0 rounded-full'>
+              <Image
+                layout='fill'
+                src='/me.jpg'
+                objectFit='cover'
+                objectPosition='center'
+              />
+            </figure>
             <article>
               <strong className='text-sm lg:text-base mb-1'>
                 Juan Alvarez
@@ -99,20 +106,23 @@ export default function BlogPost({ blogPost }) {
                 I’m a front-end developer from Venezuela. I do freelance work
                 and create content about web development and JavaScript.
               </p>
-              <section className='flex gap-2'>
+              <section className='flex gap-4'>
                 <a
                   className='text-primary-600 hover:text-primary-700 font-semibold transition-colors'
-                  href=''>
+                  href='https://twitter.com/juanzenweb'
+                  target='_blank'>
                   <TwitterFill />
                 </a>
                 <a
                   className='text-primary-600 hover:text-primary-700 font-semibold transition-colors'
-                  href=''>
+                  href='https://linkedin.com/in/juan-alvarez11/'
+                  target='_blank'>
                   <LinkedInV1Fill />
                 </a>
                 <a
                   className='text-primary-600 hover:text-primary-700 font-semibold transition-colors'
-                  href=''>
+                  href='https://github.com/juanzenn'
+                  target='_blank'>
                   <GithubFill />
                 </a>
               </section>
