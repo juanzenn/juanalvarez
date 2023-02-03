@@ -17,24 +17,11 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
           />
-          <Script
-            async
-            defer
-            src="https://static.cdn.prismic.io/prismic.js?new=true&repo=juan-alvarez"
-          ></Script>
         </Head>
+
         <body>
           <Main />
           <NextScript />
-          <Script
-            async
-            id="7d19bd28-efc8-11eb-b589-901b0edac50a"
-            dangerouslySetInnerHTML={{
-              __html: `
-            (function(v,i,s,a){if(!v._visaSettings){v._visaSettings={};}v._visaSettings["7d19bd28-efc8-11eb-b589-901b0edac50a"]={v:"0.3",s:"7d19bd28-efc8-11eb-b589-901b0edac50a",a:"1"};_v=i.getElementsByTagName("body")[0];_a=_v;_i=i.createElement("script");_s=_i;_s.defer="defer";_s.src=s+a+v._visaSettings["7d19bd28-efc8-11eb-b589-901b0edac50a"].v;_a.appendChild(_s);})(window,document,"//app-worker.visitor-analytics.io/main",".js?s=7d19bd28-efc8-11eb-b589-901b0edac50a&v=")
-            `,
-            }}
-          />
         </body>
       </Html>
     );
