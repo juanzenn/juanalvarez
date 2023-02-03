@@ -5,7 +5,7 @@ import "tailwindcss/tailwind.css";
 function MyApp({ Component, pageProps }) {
   return (
     <PrismicProvider>
-      <PrismicPreview repositoryName={PROCESS.env.API_ENDPOINT}>
+      <PrismicPreview repositoryName={process.env.API_ENDPOINT}>
         <Component {...pageProps} />
       </PrismicPreview>
     </PrismicProvider>
