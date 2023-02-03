@@ -9,8 +9,6 @@ import PostPreview from "../../components/PostPreview";
 import client from "../../prismic";
 
 export default function Index({ posts }) {
-  console.log(posts);
-
   return (
     <>
       <Head>
@@ -50,7 +48,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      posts: posts?.map((p) => p.data) ?? [],
+      posts: posts?.map((p) => ({ ...p.data, id: p.id })) ?? [],
     },
   };
 };
