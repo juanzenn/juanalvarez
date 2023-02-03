@@ -8,7 +8,7 @@ import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
-import Client from "../../prismic";
+import createClient from "../../prismic";
 
 export default function BlogPost({ post }) {
   const { data } = post;
@@ -147,10 +147,12 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params, previewData }) => {
+  const client = createClient({ previewData });
+
   const { slug } = params;
 
-  const post = await Client.getSingle("blog_post", {
+  const post = await client.getSingle("blog_post", {
     predicates: [prismic.predicate.at("my.blog_post.slug", slug)],
   });
 

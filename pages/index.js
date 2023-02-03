@@ -7,7 +7,7 @@ import Contact from "../components/IndexSlices/Contact";
 import HeroAbout from "../components/IndexSlices/HeroAbout";
 import Projects from "../components/IndexSlices/Projects";
 import Layout from "../components/Layout";
-import client from "../prismic";
+import createClient from "../prismic";
 
 export default function Home({ slices }) {
   return (
@@ -71,7 +71,9 @@ export default function Home({ slices }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ previewData }) {
+  const client = createClient({ previewData });
+
   const doc = await client.getSingle("index");
   const slices = doc.data.body;
 

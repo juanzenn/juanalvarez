@@ -6,7 +6,7 @@ import Prismic from "@prismicio/client";
 import { ArrowRight } from "akar-icons";
 import { RichText } from "prismic-reactjs";
 import PostPreview from "../../components/PostPreview";
-import client from "../../prismic";
+import createClient from "../../prismic";
 
 export default function Index({ posts }) {
   return (
@@ -38,7 +38,8 @@ export default function Index({ posts }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ previewData }) => {
+  const client = createClient({ previewData });
   const posts = await client.getAllByType("blog_post", {
     orderings: {
       field: "document.last_publication_date",

@@ -1,7 +1,19 @@
-import * as Prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client";
+import * as prismicH from "@prismicio/helpers";
+import * as prismicNext from "@prismicio/next";
 
-const apiEndpoint = Prismic.getRepositoryEndpoint(process.env.API_ENDPOINT);
+const apiEndpoint = prismic.getRepositoryEndpoint(process.env.API_ENDPOINT);
 
-const client = Prismic.createClient(apiEndpoint);
+const createClient = ({ config = {} }) => {
+  const client = prismic.createClient(apiEndpoint, config);
 
-export default client;
+  prismicNext.enableAutoPreviews({
+    client,
+    previewData: config.previewData,
+    req: config.req,
+  });
+
+  return client;
+};
+
+export default createClient;
