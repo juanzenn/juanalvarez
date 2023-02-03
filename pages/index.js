@@ -1,57 +1,55 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import Client from '../prismic';
-import Prismic from '@prismicio/client';
-
-import SliceZone from '../components/IndexSlices/SliceZone';
-import Navbar from '../components/Navbar';
-import React from 'react';
-import Layout from '../components/Layout';
+import React from "react";
+import SliceZone from "../components/IndexSlices/SliceZone";
+import Layout from "../components/Layout";
+import client from "../prismic";
 
 export default function Home({ slices }) {
   return (
     <>
       <Head>
         <title>Juan Alvarez | Front-end web developer</title>
-        <meta name='title' content='Juan Alvarez | Front-end web developer' />
+        <meta name="title" content="Juan Alvarez | Front-end web developer" />
         <meta
-          name='description'
+          name="description"
           content="I make websites and web applications for modern businesses. If you want to have a strong online presence, contact me. Let's work together."
         />
 
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content='https://juanalvarez.vercel.app/' />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://juanalvarez.vercel.app/" />
         <meta
-          property='og:title'
-          content='Juan Alvarez | Front-end web developer'
+          property="og:title"
+          content="Juan Alvarez | Front-end web developer"
         />
         <meta
-          property='og:description'
+          property="og:description"
           content="I make websites and web applications for modern businesses. If you want to have a strong online presence, contact me. Let's work together."
         />
-        <meta property='og:image' content='/cover.png' />
+        <meta property="og:image" content="/cover.png" />
 
-        <meta property='twitter:card' content='summary_large_image' />
+        <meta property="twitter:card" content="summary_large_image" />
         <meta
-          property='twitter:url'
-          content='https://juanalvarez.vercel.app/'
+          property="twitter:url"
+          content="https://juanalvarez.vercel.app/"
         />
         <meta
-          property='twitter:title'
-          content='Juan Alvarez | Front-end web developer'
+          property="twitter:title"
+          content="Juan Alvarez | Front-end web developer"
         />
         <meta
-          property='twitter:description'
+          property="twitter:description"
           content="I make websites and web applications for modern businesses. If you want to have a strong online presence, contact me. Let's work together."
         />
-        <meta property='twitter:image' content='/cover.png' />
-        <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
-        <link rel='icon' href='/favicon.ico' type='image/x-icon' />
+        <meta property="twitter:image" content="/cover.png" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
         <script
           async
           defer
-          src='https://static.cdn.prismic.io/prismic.js?new=true&repo=juan-alvarez'></script>
+          src="https://static.cdn.prismic.io/prismic.js?new=true&repo=juan-alvarez"
+        ></script>
       </Head>
       <Layout>
         <SliceZone slices={slices} />
@@ -61,7 +59,7 @@ export default function Home({ slices }) {
 }
 
 export async function getStaticProps() {
-  const doc = await Client.getSingle('index');
+  const doc = await client.getSingle("index");
   const slices = doc.data.body;
 
   return {

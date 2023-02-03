@@ -1,7 +1,12 @@
-import 'tailwindcss/tailwind.css'
+import { PrismicProvider } from "@prismicio/react";
+import "tailwindcss/tailwind.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <PrismicProvider>
+      <Component {...pageProps} />
+    </PrismicProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

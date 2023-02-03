@@ -1,9 +1,7 @@
-import Prismic from '@prismicio/client';
+import * as Prismic from "@prismicio/client";
 
-const apiEndpoint = process.env.API_ENDPOINT;
+const apiEndpoint = Prismic.getRepositoryEndpoint(process.env.API_ENDPOINT);
 
-const client = () => Prismic.client(apiEndpoint);
+const client = Prismic.createClient(apiEndpoint);
 
-const Client = client();
-
-export default Client;
+export default client;
