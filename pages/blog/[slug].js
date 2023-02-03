@@ -151,8 +151,8 @@ export const getStaticPaths = async ({ previewData }) => {
   };
 };
 
-export const getStaticProps = async ({ params, previewData }) => {
-  const client = createClient({ previewData });
+export const getStaticProps = async ({ params }) => {
+  const client = createClient();
 
   const { slug } = params;
 

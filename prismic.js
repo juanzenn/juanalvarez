@@ -4,7 +4,7 @@ import * as prismicNext from "@prismicio/next";
 
 const apiEndpoint = prismic.getRepositoryEndpoint(process.env.API_ENDPOINT);
 
-const createClient = ({ config = {} }) => {
+const createClient = (config = {}) => {
   const client = prismic.createClient(apiEndpoint, config);
 
   prismicNext.enableAutoPreviews({
