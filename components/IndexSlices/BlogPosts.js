@@ -5,6 +5,8 @@ import { PrismicRichText, PrismicText } from "@prismicio/react";
 export default function BlogPosts({ slice }) {
   const { primary, items } = slice;
 
+  return null;
+
   return (
     <div className="px-4 py-12  lg:w-3/4 mx-auto">
       <header className="mb-4">
