@@ -27,12 +27,14 @@ export default function BlogPosts({ slice }) {
             <header className="mb-4">
               <a
                 href={item.blog_link.url}
+                rel="noreferrer"
                 target="_blank"
                 className="block mb-2 h-40 rounded-md cursor-pointer bg-cover bg-center bg-no-repeat hover:brightness-105 transform transition-all duration-300"
                 style={{ backgroundImage: `url(${item.blog_cover.url})` }}
               ></a>
               <a
                 href={item.blog_link.url}
+                rel="noreferrer"
                 target="_blank"
                 className="text-xl font-bold tracking-tight hover:text-primary-600 transition-colors"
               >
@@ -45,6 +47,7 @@ export default function BlogPosts({ slice }) {
             </p>
             <a
               href={item.blog_link.url}
+              rel="noreferrer"
               target="_blank"
               className="w-max block text-right cursor-pointer text-primary-600 hover:underline transition-all"
             >

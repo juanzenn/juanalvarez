@@ -89,7 +89,7 @@ export default function BlogPost({ post }) {
         <footer className="my-8">
           <section className="flex gap-4 items-center">
             <figure className="h-24 w-24 relative overflow-hidden flex-shrink-0 rounded-full">
-              <Image fill src="/me.jpg" />
+              <Image fill src="/me.jpg" alt="" />
             </figure>
 
             <article>
@@ -105,6 +105,7 @@ export default function BlogPost({ post }) {
                   className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"
                   href="https://twitter.com/juanzenweb"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <TwitterFill />
                 </a>
@@ -112,6 +113,7 @@ export default function BlogPost({ post }) {
                   className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"
                   href="https://linkedin.com/in/juan-alvarez11/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <LinkedInV1Fill />
                 </a>
@@ -119,6 +121,7 @@ export default function BlogPost({ post }) {
                   className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"
                   href="https://github.com/juanzenn"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <GithubFill />
                 </a>
@@ -131,8 +134,9 @@ export default function BlogPost({ post }) {
   );
 }
 
-export const getStaticPaths = async () => {
-  const docs = await Client.getAllByType("blog_post");
+export const getStaticPaths = async ({ previewData }) => {
+  const client = createClient({ previewData });
+  const docs = await client.getAllByType("blog_post");
   const paths = docs.map((doc) => {
     return {
       params: {

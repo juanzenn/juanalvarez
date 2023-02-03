@@ -48,13 +48,13 @@ export default function Home({ slices }) {
         <meta property="twitter:image" content="/cover.png" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-        <Script
-          async
-          defer
-          src="https://static.cdn.prismic.io/prismic.js?new=true&repo=juan-alvarez"
-        ></Script>
       </Head>
+
+      <Script
+        async
+        defer
+        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=juan-alvarez"
+      ></Script>
 
       <Layout>
         <SliceZone
