@@ -1,71 +1,73 @@
-// @ts-check
-import React from "react";
 import Head from "next/head";
 import Image from "next/image";
+import React from "react";
 import Layout from "../../components/Layout";
 
-import Client from "../../prismic";
-import Prismic from "@prismicio/client";
-import { RichText } from "prismic-reactjs";
+import * as prismic from "@prismicio/client";
+import * as prismicH from "@prismicio/helpers";
+import { PrismicNextImage } from "@prismicio/next";
+import { PrismicText } from "@prismicio/react";
 import { GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
+import Client from "../../prismic";
 
-export default function BlogPost({ blogPost }) {
+export default function BlogPost({ post }) {
+  const { data } = post;
+  const { title, description, coverImage, slug, content } = data;
+  console.log(data);
+
   return (
     <Layout>
       <Head>
-        <title>{blogPost.title[0].text}</title>
-        <meta name="description" content={blogPost.description[0].text} />
+        <title>{prismicH.asText(title)}</title>
+        <meta name="description" content={prismicH.asText(description)} />
 
         <meta property="og:type" content="article" />
         <meta
           property="og:url"
-          content={`https://juanalvarez.vercel.app/blog/${blogPost.slug}`}
+          content={`https://juanalvarez.vercel.app/blog/${slug}`}
         />
-        <meta property="og:title" content={blogPost.title[0].text} />
+        <meta property="og:title" content={prismicH.asText(title)} />
         <meta
           property="og:description"
-          content={blogPost.description[0].text}
+          content={prismicH.asText(description)}
         />
-        <meta property="og:image" content={blogPost.coverImage.src} />
+        <meta property="og:image" content={coverImage?.src} />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content={`https://juanalvarez.vercel.app/blog/${blogPost.slug}`}
+          content={`https://juanalvarez.vercel.app/blog/${slug}`}
         />
-        <meta property="twitter:title" content={blogPost.title[0].text} />
+        <meta property="twitter:title" content={prismicH.asText(title)} />
         <meta
           property="twitter:description"
-          content={blogPost.description[0].text}
+          content={prismicH.asText(description)}
         />
-        <meta property="twitter:image" content={blogPost.coverImage.src} />
+        <meta property="twitter:image" content={coverImage?.src} />
       </Head>
 
       <main className="w-screen lg:w-7/12 px-4 mx-auto py-8">
         <header>
           <article className="text-4xl font-bold tracking-tighter mb-2">
-            <RichText render={blogPost.title} />
+            <PrismicText field={title} />
           </article>
+
           <article className="text-gray-600 prose mb-8">
-            <RichText render={blogPost.description} />
+            <PrismicText field={description} />
           </article>
+
           <figure className="relative w-screen md:w-full -left-4 md:left-0 h-[60vh] mb-8">
-            <Image
-              src={blogPost.coverImage.src}
-              alt={
-                blogPost.coverImage.alt
-                  ? blogPost.coverImage.alt
-                  : blogPost.title[0].text
-              }
-              layout="fill"
-              objectFit="cover"
+            <PrismicNextImage
+              fill
+              field={coverImage}
+              alt={prismicH.asText(title)}
             />
           </figure>
         </header>
 
         <main className="mb-6">
-          <article className="prose lg:prose-lg prose prose-primary max-w-none">
-            <RichText render={blogPost.content} />
+          <article className="prose lg:prose-lg prose-primary max-w-none">
+            <PrismicText field={content} />
           </article>
         </main>
 
@@ -93,13 +95,9 @@ export default function BlogPost({ blogPost }) {
         <section className="my-8">
           <section className="flex gap-4 items-center">
             <figure className="h-24 w-24 relative overflow-hidden flex-shrink-0 rounded-full">
-              <Image
-                layout="fill"
-                src="/me.jpg"
-                objectFit="cover"
-                objectPosition="center"
-              />
+              <Image fill src="/me.jpg" />
             </figure>
+
             <article>
               <strong className="text-sm lg:text-base mb-1">
                 Juan Alvarez
@@ -140,47 +138,31 @@ export default function BlogPost({ blogPost }) {
 }
 
 export const getStaticPaths = async () => {
-  const response = await Client.query(
-    Prismic.Predicates.at("document.type", "blog_post")
-  );
-
-  const paths = response.results.reduce((acc, value) => {
-    const newPath = {
+  const docs = await Client.getAllByType("blog_post");
+  const paths = docs.map((doc) => {
+    return {
       params: {
-        slug: value.data.slug,
+        slug: doc.data.slug,
       },
     };
-    acc.push(newPath);
-    return acc;
-  }, []);
+  });
 
   return {
-    paths: [...paths],
+    paths,
     fallback: false,
   };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const response = await Client.query(
-    Prismic.Predicates.at("my.blog_post.slug", params.slug)
-  );
+  const { slug } = params;
 
-  const { data } = response.results[0];
-
-  const blogPost = {
-    title: data.title,
-    description: data.description,
-    coverImage: {
-      alt: data.cover.alt,
-      src: data.cover.url,
-    },
-    content: data.content,
-    slug: data.slug,
-  };
+  const post = await Client.getSingle("blog_post", {
+    predicates: [prismic.predicate.at("my.blog_post.slug", slug)],
+  });
 
   return {
     props: {
-      blogPost,
+      post,
     },
   };
 };
