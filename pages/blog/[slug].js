@@ -6,14 +6,13 @@ import Layout from "../../components/Layout";
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
-import { PrismicText } from "@prismicio/react";
+import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
 import Client from "../../prismic";
 
 export default function BlogPost({ post }) {
   const { data } = post;
-  const { title, description, coverImage, slug, content } = data;
-  console.log(data);
+  const { title, description, cover, slug, content } = data;
 
   return (
     <Layout>
@@ -31,8 +30,7 @@ export default function BlogPost({ post }) {
           property="og:description"
           content={prismicH.asText(description)}
         />
-        <meta property="og:image" content={coverImage?.src} />
-
+        <meta property="og:image" content={cover?.src} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
@@ -43,7 +41,7 @@ export default function BlogPost({ post }) {
           property="twitter:description"
           content={prismicH.asText(description)}
         />
-        <meta property="twitter:image" content={coverImage?.src} />
+        <meta property="twitter:image" content={cover?.src} />
       </Head>
 
       <main className="w-screen lg:w-7/12 px-4 mx-auto py-8">
@@ -56,18 +54,14 @@ export default function BlogPost({ post }) {
             <PrismicText field={description} />
           </article>
 
-          <figure className="relative w-screen md:w-full -left-4 md:left-0 h-[60vh] mb-8">
-            <PrismicNextImage
-              fill
-              field={coverImage}
-              alt={prismicH.asText(title)}
-            />
+          <figure className="relative w-screen md:w-full md:left-0 mb-8 rounded-md shadow-md overflow-hidden">
+            <PrismicNextImage field={cover} alt={prismicH.asText(title)} />
           </figure>
         </header>
 
         <main className="mb-6">
-          <article className="prose lg:prose-lg prose-primary max-w-none">
-            <PrismicText field={content} />
+          <article className="prose prose-primary max-w-none">
+            <PrismicRichText field={content} />
           </article>
         </main>
 
@@ -92,7 +86,7 @@ export default function BlogPost({ post }) {
           </article>
         </section>
 
-        <section className="my-8">
+        <footer className="my-8">
           <section className="flex gap-4 items-center">
             <figure className="h-24 w-24 relative overflow-hidden flex-shrink-0 rounded-full">
               <Image fill src="/me.jpg" />
@@ -131,7 +125,7 @@ export default function BlogPost({ post }) {
               </section>
             </article>
           </section>
-        </section>
+        </footer>
       </main>
     </Layout>
   );
