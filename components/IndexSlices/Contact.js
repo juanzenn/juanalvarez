@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Envelope, GithubFill, TwitterFill, LinkedInV1Fill } from "akar-icons";
+import { Envelope, GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
 
 export default function Contact({ slice }) {
   const { items } = slice;
@@ -16,7 +16,7 @@ export default function Contact({ slice }) {
               return (
                 <a
                   key={`link-${index}`}
-                  href="mailto:juanandres140299@gmail.com"
+                  href="mailto:alvarezdasilvaj@gmail.com"
                 >
                   <Envelope
                     className="hover:text-primary-600 transition-all"
