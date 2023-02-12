@@ -3,14 +3,59 @@ name: Cypress
 on: [push]
 
 jobs:
-  cypress-run:
+  install:
     runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node18.12.0-chrome107
+      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Cypress run
+      - name: Cypress install
         uses: cypress-io/github-action@v5
         with:
+          runTests: false
           build: npm run build
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: .next
+          if-no-files-found: error
+
+  e2e-chrome-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node18.12.0-chrome107
+      options: --user 1001
+    needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: "UI Tests - Chrome"
+        uses: cypress-io/github-action@v5 # use the explicit version number
+        with:
           start: npm start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: "UI - Chrome"
+          spec: cypress/e2e/*
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
