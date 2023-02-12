@@ -16,9 +16,9 @@ export default function Index({ posts }) {
       </Head>
 
       <Layout>
-        <section className="px-4 mx-auto w-full lg:w-9/12 mb-2">
+        <section className="mx-auto mb-2 w-full px-4 lg:w-9/12">
           <header className="py-12">
-            <h1 className="text-4xl font-bold tracking-tight mb-2">
+            <h1 className="mb-2 text-4xl font-bold tracking-tight">
               Blog Posts
             </h1>
             <p className="prose prose-sm mb-6">
@@ -27,7 +27,7 @@ export default function Index({ posts }) {
             </p>
           </header>
 
-          <section className="mb-12 grid md:grid-cols-2 gap-6 lg:gap-12">
+          <section className="mb-12 grid gap-6 md:grid-cols-2 lg:gap-12">
             {posts.map((post) => (
               <PostPreview post={post} key={post?.id} />
             ))}

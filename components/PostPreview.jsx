@@ -21,24 +21,24 @@ export default function PostPreview({ post }) {
       <LinkToPost href={postHref}>
         <PrismicNextImage
           field={cover}
-          className="rounded-md mb-4 shadow-sm"
+          className="mb-4 rounded-md shadow-sm"
           alt={<PrismicText field={title} />}
         />
       </LinkToPost>
 
       <LinkToPost href={postHref}>
-        <h3 className="font-bold tracking-tight text-2xl mb-1 text-primary-900 hover:underline">
+        <h3 className="mb-1 text-2xl font-bold tracking-tight text-primary-900 hover:underline">
           <PrismicText field={title} />
         </h3>
       </LinkToPost>
 
-      <p className="text-gray-600 leading-relaxed mb-6">
+      <p className="mb-6 leading-relaxed text-gray-600">
         <PrismicText field={description} />
       </p>
 
       <LinkToPost
         href={postHref}
-        className="w-fit flex gap-2 items-center hover:text-primary-600 hover:bg-primary-100 px-6 py-2 rounded-md text-gray-400 transition-all ml-auto font-semibold"
+        className="ml-auto flex w-fit items-center gap-2 rounded-md px-6 py-2 font-semibold text-gray-400 transition-all hover:bg-primary-100 hover:text-primary-600"
       >
         Read more <ArrowRight size={20} />
       </LinkToPost>

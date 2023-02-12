@@ -13,7 +13,7 @@ const BlogPost = ({ data }) => {
         <PrismicImage
           field={cover}
           alt={prismicH.asText(title)}
-          className="rounded-lg shadow-sm mb-4"
+          className="mb-4 rounded-lg shadow-sm"
         />
       </Link>
 
@@ -23,7 +23,7 @@ const BlogPost = ({ data }) => {
         </strong>
       </Link>
 
-      <p className="text-gray-600 mt-2 prose-sm">
+      <p className="prose-sm mt-2 text-gray-600">
         <PrismicText field={description} />
       </p>
     </article>
@@ -32,10 +32,10 @@ const BlogPost = ({ data }) => {
 
 export default function BlogPosts({ posts }) {
   return (
-    <section className="px-4 py-12 lg:w-3/4 mx-auto">
-      <h2 className="text-4xl font-bold tracking-tight mb-6">Latest Blogs</h2>
+    <section className="mx-auto px-4 py-12 lg:w-3/4">
+      <h2 className="mb-6 text-4xl font-bold tracking-tight">Latest Blogs</h2>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <BlogPost key={post.id} data={post?.data} />
         ))}

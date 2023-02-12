@@ -44,40 +44,40 @@ export default function BlogPost({ post }) {
         <meta property="twitter:image" content={cover?.src} />
       </Head>
 
-      <main className="w-screen lg:w-7/12 px-4 mx-auto py-8">
+      <main className="mx-auto w-screen px-4 py-8 lg:w-7/12">
         <header>
-          <article className="text-4xl font-bold tracking-tighter mb-2">
+          <article className="mb-2 text-4xl font-bold tracking-tighter">
             <PrismicText field={title} />
           </article>
 
-          <article className="text-gray-600 prose mb-8">
+          <article className="prose mb-8 text-gray-600">
             <PrismicText field={description} />
           </article>
 
-          <figure className="relative w-screen md:w-full md:left-0 mb-8 rounded-md shadow-md overflow-hidden">
+          <figure className="relative mb-8 w-screen overflow-hidden rounded-md shadow-md md:left-0 md:w-full">
             <PrismicNextImage field={cover} alt={prismicH.asText(title)} />
           </figure>
         </header>
 
         <main className="mb-6">
-          <article className="prose prose-primary max-w-none">
+          <article className="prose-primary prose max-w-none">
             <PrismicRichText field={content} />
           </article>
         </main>
 
-        <section className="flex flex-col lg:flex-row gap-4 items-center my-8">
-          <hr className="w-full lg:w-2/3 text-gray-300" />
-          <article className="w-full lg:w-1/3 flex justify-between gap-4 px-4">
+        <section className="my-8 flex flex-col items-center gap-4 lg:flex-row">
+          <hr className="w-full text-gray-300 lg:w-2/3" />
+          <article className="flex w-full justify-between gap-4 px-4 lg:w-1/3">
             <span className="uppercase text-gray-400">share</span>
             <section className="space-x-12 lg:space-x-4">
               <a
-                className="text-primary-600 hover:text-primary-700 font-semibold transition-colors "
+                className="font-semibold text-primary-600 transition-colors hover:text-primary-700 "
                 href="#"
               >
                 Twitter
               </a>
               <a
-                className="text-primary-600 hover:text-primary-700 font-semibold transition-colors "
+                className="font-semibold text-primary-600 transition-colors hover:text-primary-700 "
                 href="#"
               >
                 Facebook
@@ -87,13 +87,13 @@ export default function BlogPost({ post }) {
         </section>
 
         <footer className="my-8">
-          <section className="flex gap-4 items-center">
-            <figure className="h-24 w-24 relative overflow-hidden flex-shrink-0 rounded-full">
+          <section className="flex items-center gap-4">
+            <figure className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full">
               <Image fill src="/me.jpg" alt="" />
             </figure>
 
             <article>
-              <strong className="text-sm lg:text-base mb-1">
+              <strong className="mb-1 text-sm lg:text-base">
                 Juan Alvarez
               </strong>
               <p className="prose prose-sm mb-4">
@@ -102,7 +102,7 @@ export default function BlogPost({ post }) {
               </p>
               <section className="flex gap-4">
                 <a
-                  className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"
+                  className="font-semibold text-primary-600 transition-colors hover:text-primary-700"
                   href="https://twitter.com/juanzenweb"
                   target="_blank"
                   rel="noreferrer"
@@ -110,7 +110,7 @@ export default function BlogPost({ post }) {
                   <TwitterFill />
                 </a>
                 <a
-                  className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"
+                  className="font-semibold text-primary-600 transition-colors hover:text-primary-700"
                   href="https://linkedin.com/in/juan-alvarez11/"
                   target="_blank"
                   rel="noreferrer"
@@ -118,7 +118,7 @@ export default function BlogPost({ post }) {
                   <LinkedInV1Fill />
                 </a>
                 <a
-                  className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"
+                  className="font-semibold text-primary-600 transition-colors hover:text-primary-700"
                   href="https://github.com/juanzenn"
                   target="_blank"
                   rel="noreferrer"

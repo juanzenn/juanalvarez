@@ -3,12 +3,12 @@ import React from "react";
 
 export default function HeroAbout({ slice }) {
   return (
-    <div className="px-4 py-12 lg:w-3/4 mx-auto flex flex-col items-start justify-center">
-      <span className="text-5xl text-primary-700 font-bold tracking-tighter mb-4">
+    <div className="mx-auto flex flex-col items-start justify-center px-4 py-12 lg:w-3/4">
+      <span className="mb-4 text-5xl font-bold tracking-tighter text-primary-700">
         <PrismicRichText field={slice.primary.title} />
       </span>
 
-      <span className="inline-block prose-lg max-w-lg">
+      <span className="prose-lg inline-block max-w-lg">
         <PrismicRichText field={slice.primary.about} />
       </span>
     </div>
