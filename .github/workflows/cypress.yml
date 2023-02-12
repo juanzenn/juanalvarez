@@ -25,13 +25,6 @@ jobs:
           path: .next
           if-no-files-found: error
 
-      - name: Save node_modules
-        uses: actions/upload-artifact@v3
-        with:
-          name: node_modules
-          if-no-files-found: error
-          path: node_modules
-
   e2e-chrome-tests:
     runs-on: ubuntu-latest
     container:
@@ -51,12 +44,6 @@ jobs:
         with:
           name: build
           path: .next
-
-      - name: Download node_modules
-        uses: actions/download-artifact@v3
-        with:
-          name: node_modules
-          path: node_modules
 
       - name: "UI Tests - Chrome"
         uses: cypress-io/github-action@v5 # use the explicit version number
