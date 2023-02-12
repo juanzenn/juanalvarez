@@ -42,7 +42,11 @@ jobs:
       - name: Download the build folders
         uses: actions/download-artifact@v3
         with:
+<<<<<<< HEAD
           name: build
+=======
+          name: .next
+>>>>>>> fix name and paths
           path: .next
 
       - name: "UI Tests - Chrome"
