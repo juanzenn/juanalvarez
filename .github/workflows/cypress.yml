@@ -52,6 +52,12 @@ jobs:
           name: build
           path: .next
 
+      - name: Download node_modules
+        uses: actions/download-artifact@v3
+        with:
+          name: node_modules
+          path: node_modules
+
       - name: "UI Tests - Chrome"
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
