@@ -19,7 +19,7 @@ jobs:
       - name: Save build folder
         uses: actions/upload-artifact@v3
         with:
-          name: .next
+          name: build
           if-no-files-found: error
           path: .next
 
