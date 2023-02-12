@@ -31,8 +31,6 @@ const BlogPost = ({ data }) => {
 };
 
 export default function BlogPosts({ posts }) {
-  console.log(posts);
-
   return (
     <section className="px-4 py-12 lg:w-3/4 mx-auto">
       <h2 className="text-4xl font-bold tracking-tight mb-6">Latest Blogs</h2>

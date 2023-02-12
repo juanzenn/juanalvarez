@@ -14,7 +14,8 @@
     "lint": "next lint",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@prismicio/client": "^6.0.0",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.13",
+    "cypress": "^12.5.1",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "postcss": "^8.4.21",
