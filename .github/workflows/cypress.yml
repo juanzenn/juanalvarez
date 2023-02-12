@@ -19,9 +19,9 @@ jobs:
       - name: Save build folder
         uses: actions/upload-artifact@v3
         with:
-          name: build
+          name: .next
           if-no-files-found: error
-          path: build
+          path: .next
 
   e2e-chrome-tests:
     runs-on: ubuntu-latest
