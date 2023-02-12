@@ -12,7 +12,7 @@ const BlogPost = ({ data }) => {
       <Link href={blogHref}>
         <PrismicImage
           field={cover}
-          alt={prismicH.asText(title)}
+          fallbackAlt=""
           className="mb-4 rounded-lg shadow-sm"
         />
       </Link>

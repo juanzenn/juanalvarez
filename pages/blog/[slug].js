@@ -54,8 +54,8 @@ export default function BlogPost({ post }) {
             <PrismicText field={description} />
           </article>
 
-          <figure className="relative mb-8 w-screen overflow-hidden rounded-md shadow-md md:left-0 md:w-full">
-            <PrismicNextImage field={cover} alt={prismicH.asText(title)} />
+          <figure className="relative -mx-4 mb-2 overflow-hidden shadow-md md:left-0 md:rounded-md lg:mx-0">
+            <PrismicNextImage field={cover} fallbackAlt="" />
           </figure>
         </header>
 
