@@ -39,7 +39,7 @@ jobs:
       - name: Download the build folders
         uses: actions/download-artifact@v3
         with:
-          name: .next
+          name: build
           path: .next
 
       - name: "UI Tests - Chrome"
