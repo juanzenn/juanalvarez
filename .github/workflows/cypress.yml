@@ -25,6 +25,13 @@ jobs:
           path: .next
           if-no-files-found: error
 
+      - name: Save node_modules
+        uses: actions/upload-artifact@v3
+        with:
+          name: node_modules
+          if-no-files-found: error
+          path: node_modules
+
   e2e-chrome-tests:
     runs-on: ubuntu-latest
     container:
