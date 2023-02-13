@@ -17,7 +17,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 isolate z-10 flex h-[56px] flex-col items-center justify-center border-gray-50 border-opacity-25 bg-white py-2 lg:flex-row lg:gap-8 lg:border-b lg:shadow">
+    <nav className="sticky top-0 isolate z-10 flex h-[56px] flex-col items-center justify-center border-b border-gray-50 border-opacity-25 bg-white py-2 shadow lg:flex-row lg:gap-8">
       <article className="flex w-full justify-between px-4 lg:w-max lg:px-8">
         <Link
           href="/"

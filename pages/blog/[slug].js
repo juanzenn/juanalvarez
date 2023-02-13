@@ -14,6 +14,13 @@ export default function BlogPost({ post }) {
   const { data } = post;
   const { title, description, cover, slug, content } = data;
 
+  const currentUrl = "https://juanalvarez.dev";
+  const link = `${currentUrl}/blog/${slug}`;
+  const twitterShare = `https://twitter.com/intent/tweet?url=${link}&text=${prismicH.asText(
+    title
+  )}`;
+  const fbShare = `http://www.facebook.com/share.php?u=${link}`;
+
   return (
     <Layout>
       <Head>
@@ -72,13 +79,17 @@ export default function BlogPost({ post }) {
             <section className="space-x-12 lg:space-x-4">
               <a
                 className="font-semibold text-primary-600 transition-colors hover:text-primary-700 "
-                href="#"
+                target="_blank"
+                rel="noreferrer"
+                href={twitterShare}
               >
                 Twitter
               </a>
               <a
                 className="font-semibold text-primary-600 transition-colors hover:text-primary-700 "
-                href="#"
+                target="_blank"
+                rel="noreferrer"
+                href={fbShare}
               >
                 Facebook
               </a>
