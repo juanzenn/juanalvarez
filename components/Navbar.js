@@ -20,10 +20,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const scrolled = useScroll(50);
 
-  const handleClose = (e) => {
-    e.stopPropagation();
-    setOpen(!open);
-  };
+  const handleClose = () => setOpen(!open);
 
   const navbarClass = clsx(
     "transition-all bg-transparent sticky top-0 isolate z-10 flex h-[56px] flex-col items-center justify-center lg:flex-row lg:gap-8, py-2",
@@ -35,9 +32,9 @@ export default function Navbar() {
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "auto";
     }
-  });
+  }, [open]);
 
   return (
     <nav className={navbarClass}>

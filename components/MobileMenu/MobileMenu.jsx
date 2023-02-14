@@ -1,40 +1,31 @@
 import { Cross } from "akar-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useRef } from "react";
-import { useOnClickOutside } from "../hooks/useOnClickOutside";
-import { LinkItem } from "./Navbar";
-
-const backdropVariants = {
-  visible: { opacity: 1, transition: { duration: 0.1 } },
-  hidden: { opacity: 0, transition: { duration: 0.1, delay: 0.2 } },
-};
-
-const menuVariants = {
-  visible: { x: 0, transition: { duration: 0.3, delay: 0.1 } },
-  hidden: { x: "100%", transition: { duration: 0.2 } },
-};
+import { useOnClickOutside } from "usehooks-ts";
+import { LinkItem } from "../Navbar";
+import { backdropVariants, menuVariants } from "./variants";
 
 function MobileMenu({ handleClose, open }) {
   const mobileNavRef = useRef(null);
   useOnClickOutside(mobileNavRef, handleClose);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="popLayout">
       {open && (
         <motion.div
           variants={backdropVariants}
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="fixed top-0 z-20 flex h-screen w-full justify-end bg-black bg-opacity-30 lg:hidden"
+          className="absolute top-0 flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden"
         >
           <motion.ul
             variants={menuVariants}
             initial="hidden"
             animate="visible"
             exit="hidden"
+            className="absolute top-0 right-0 flex h-screen w-3/4 flex-col gap-4 bg-white py-4 shadow-inner md:w-1/2"
             ref={mobileNavRef}
-            className="flex w-3/5 flex-col gap-4 bg-white py-4 shadow-inner"
           >
             <Cross
               className="mr-4 mb-6 self-end text-primary-900"
