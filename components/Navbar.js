@@ -1,6 +1,7 @@
 import { Cross, TextAlignJustified } from "akar-icons";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useScroll } from "../hooks/useScroll";
 import { clsx } from "../utils/clsx";
 
 const LinkItem = ({ href, children }) => (
@@ -16,9 +17,8 @@ const LinkItem = ({ href, children }) => (
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const scrolled = useScroll();
 
-  // bg-white shadow
   const navbarClass = clsx(
     "transition-all bg-transparent sticky top-0 isolate z-10 flex h-[56px] flex-col items-center justify-center lg:flex-row lg:gap-8, py-2",
     scrolled &&
@@ -26,23 +26,22 @@ export default function Navbar() {
     open && "shadow-none border-none bg-white"
   );
 
-  const handleScroll = () => {
-    const offset = window.scrollY;
-    setScrolled(offset > 200);
-  };
+  // const handleScroll = () => {
+  //   const offset = window.scrollY;
+  //   setScrolled(offset > 200);
+  // };
 
-  React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-    }
+  // React.useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     window.addEventListener("scroll", handleScroll);
+  //   }
 
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
-  // className="sticky top-0 isolate z-10 flex h-[56px] flex-col items-center justify-center border-b border-gray-50 border-opacity-25 bg-white py-2 shadow lg:flex-row lg:gap-8"
+  //   return () => {
+  //     if (typeof window !== "undefined") {
+  //       window.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, []);
 
   return (
     <nav className={navbarClass}>
