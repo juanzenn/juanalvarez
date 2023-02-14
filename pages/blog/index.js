@@ -1,10 +1,5 @@
 import Head from "next/head";
-import Link from "next/link";
 import Layout from "../../components/Layout";
-
-import Prismic from "@prismicio/client";
-import { ArrowRight } from "akar-icons";
-import { RichText } from "prismic-reactjs";
 import PostPreview from "../../components/PostPreview";
 import createClient from "../../prismic";
 

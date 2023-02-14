@@ -6,3 +6,36 @@ body {
 body {
   @apply bg-gray-50;
 }
+
+.hero-decoration {
+  --size: calc(100vw * 1.25);
+  --final-color: 25%;
+  --top: 35%;
+
+  position: absolute;
+  top: var(--top);
+  left: 50%;
+  width: var(--size);
+  height: var(--size);
+  background: linear-gradient(180deg, #f9fafb 0%, #2563eb var(--final-color));
+  opacity: 0.5;
+  border-radius: 50%;
+  z-index: -1;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  .hero-decoration {
+    --size: calc(100vw * 1.5);
+    --final-color: 35%;
+    --top: 38%;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-decoration {
+    --size: calc(100vw * 2);
+    --final-color: 50%;
+    --top: 50%;
+  }
+}

@@ -6,7 +6,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main className="mx-auto min-h-full">{children}</main>
       <Footer />
     </>
   );
