@@ -1,17 +1,14 @@
 const spring = {
-  type: "spring",
-  stiffness: 100,
-  damping: 15,
-  mass: 0.5,
+  type: "tween",
 };
-const delay = 0.125;
+const delay = 0.1;
 
 const backdropVariants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.2,
       type: "tween",
+      duration: 0.1,
     },
   },
   hidden: {
@@ -19,7 +16,7 @@ const backdropVariants = {
     transition: {
       delay,
       type: "tween",
-      duration: delay,
+      duration: 0.125,
     },
   },
 };
@@ -29,13 +26,15 @@ const menuVariants = {
     x: 0,
     transition: {
       delay,
-      ...spring,
+      type: "tween",
+      duration: 0.125,
     },
   },
   hidden: {
     x: "100%",
     transition: {
       ...spring,
+      duration: 0.1,
     },
   },
 };

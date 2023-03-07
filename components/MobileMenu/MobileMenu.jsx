@@ -10,9 +10,10 @@ function MobileMenu({ handleClose, open }) {
   useOnClickOutside(mobileNavRef, handleClose);
 
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence presenceAffectsLayout>
       {open && (
         <motion.div
+          layout
           variants={backdropVariants}
           initial="hidden"
           animate="visible"
@@ -20,6 +21,7 @@ function MobileMenu({ handleClose, open }) {
           className="absolute top-0 flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden"
         >
           <motion.ul
+            layout
             variants={menuVariants}
             initial="hidden"
             animate="visible"
