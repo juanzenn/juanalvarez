@@ -7,18 +7,17 @@ export default function Index({ posts }) {
   return (
     <>
       <Head>
-        <title>All Blog Posts - Juan Alvarez</title>
+        <title>Blog - Juan Alvarez</title>
       </Head>
 
       <Layout>
         <section className="mx-auto mb-2 w-full px-4 lg:w-9/12">
           <header className="py-12">
-            <h1 className="mb-2 text-4xl font-bold tracking-tight">
-              Blog Posts
+            <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-800">
+              Blog
             </h1>
-            <p className="prose prose-sm mb-6">
-              My notes on JavaScript, web development or my personal life and
-              projects.
+            <p className="prose prose-sm mb-6 text-gray-500">
+              Personal notes from my thoughts
             </p>
           </header>
 
