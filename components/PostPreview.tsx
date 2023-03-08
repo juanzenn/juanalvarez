@@ -1,10 +1,19 @@
+import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicText } from "@prismicio/react";
 import { ArrowRight } from "akar-icons";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import React from "react";
 
-function LinkToPost({ children, href, ...rest }) {
+function LinkToPost({
+  children,
+  href,
+  ...rest
+}: {
+  children: React.ReactNode;
+  href: string;
+} & LinkProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <Link href={href} {...rest}>
       {children}
@@ -12,7 +21,11 @@ function LinkToPost({ children, href, ...rest }) {
   );
 }
 
-export default function PostPreview({ post }) {
+export default function PostPreview({
+  post,
+}: {
+  post: Content.BlogPostDocument["data"];
+}) {
   const { cover, description, slug, title } = post;
   const postHref = `/blog/${slug}`;
 
@@ -22,7 +35,7 @@ export default function PostPreview({ post }) {
         <PrismicNextImage
           field={cover}
           className="mb-4 rounded-md shadow-sm"
-          alt={<PrismicText field={title} />}
+          alt=""
         />
       </LinkToPost>
 

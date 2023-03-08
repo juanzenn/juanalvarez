@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import GoTop from "./GoTop";
 import Navbar from "./Navbar";
 
-export default function Layout({ children }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />

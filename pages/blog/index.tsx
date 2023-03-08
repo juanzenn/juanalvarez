@@ -1,9 +1,12 @@
+import { InferGetStaticPropsType, PreviewData } from "next";
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import PostPreview from "../../components/PostPreview";
 import createClient from "../../prismic";
 
-export default function Index({ posts }) {
+export default function Index({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -32,12 +35,16 @@ export default function Index({ posts }) {
   );
 }
 
-export const getStaticProps = async ({ previewData }) => {
+export const getStaticProps = async ({
+  previewData,
+}: {
+  previewData: PreviewData;
+}) => {
   const client = createClient({ previewData });
   const posts = await client.getAllByType("blog_post", {
     orderings: {
       field: "document.last_publication_date",
-      order: "desc",
+      direction: "desc",
     },
   });
 

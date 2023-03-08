@@ -1,8 +1,15 @@
 import React from "react";
 
+import { Content } from "@prismicio/client";
+import { asLink } from "@prismicio/helpers";
+import { SliceComponentProps } from "@prismicio/react";
 import { Envelope, GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
 
-export default function Contact({ slice }) {
+export default function Contact({
+  slice,
+}: {
+  slice: SliceComponentProps<Content.IndexDocumentDataBodyContactSlice>["slice"];
+}) {
   const { items } = slice;
 
   return (
@@ -26,7 +33,7 @@ export default function Contact({ slice }) {
               );
             case "Twitter":
               return (
-                <a key={`link-${index}`} href={item.contact_link.url}>
+                <a key={`link-${index}`} href={asLink(item.contact_link) ?? ""}>
                   <TwitterFill
                     className="transition-all hover:text-primary-600"
                     size={36}
@@ -35,7 +42,7 @@ export default function Contact({ slice }) {
               );
             case "Github":
               return (
-                <a key={`link-${index}`} href={item.contact_link.url}>
+                <a key={`link-${index}`} href={asLink(item.contact_link) ?? ""}>
                   <GithubFill
                     className="transition-all hover:text-primary-600"
                     size={36}
@@ -44,7 +51,7 @@ export default function Contact({ slice }) {
               );
             case "Linkedin":
               return (
-                <a key={`link-${index}`} href={item.contact_link.url}>
+                <a key={`link-${index}`} href={asLink(item.contact_link) ?? ""}>
                   <LinkedInV1Fill
                     className="transition-all hover:text-primary-600"
                     size={36}

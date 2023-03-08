@@ -8,9 +8,12 @@ import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
+import { GetStaticProps, InferGetStaticPropsType, PreviewData } from "next";
 import createClient from "../../prismic";
 
-export default function BlogPost({ post }) {
+export default function BlogPost({
+  post,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const { data } = post;
   const { title, description, cover, slug, content } = data;
 
@@ -25,17 +28,23 @@ export default function BlogPost({ post }) {
     <Layout>
       <Head>
         <title>{prismicH.asText(title)}</title>
-        <meta name="description" content={prismicH.asText(description)} />
+        <meta
+          name="description"
+          content={prismicH.asText(description) ?? undefined}
+        />
 
         <meta property="og:type" content="article" />
         <meta
           property="og:url"
           content={`https://juanalvarez.vercel.app/blog/${slug}`}
         />
-        <meta property="og:title" content={prismicH.asText(title)} />
+        <meta
+          property="og:title"
+          content={prismicH.asText(title) ?? undefined}
+        />
         <meta
           property="og:description"
-          content={prismicH.asText(description)}
+          content={prismicH.asText(description) ?? undefined}
         />
         <meta property="og:image" content={cover?.src} />
         <meta property="twitter:card" content="summary_large_image" />
@@ -43,10 +52,13 @@ export default function BlogPost({ post }) {
           property="twitter:url"
           content={`https://juanalvarez.vercel.app/blog/${slug}`}
         />
-        <meta property="twitter:title" content={prismicH.asText(title)} />
+        <meta
+          property="twitter:title"
+          content={prismicH.asText(title) ?? undefined}
+        />
         <meta
           property="twitter:description"
-          content={prismicH.asText(description)}
+          content={prismicH.asText(description) ?? undefined}
         />
         <meta property="twitter:image" content={cover?.src} />
       </Head>
@@ -145,7 +157,11 @@ export default function BlogPost({ post }) {
   );
 }
 
-export const getStaticPaths = async ({ previewData }) => {
+export const getStaticPaths = async ({
+  previewData,
+}: {
+  previewData: PreviewData;
+}) => {
   const client = createClient({ previewData });
   const docs = await client.getAllByType("blog_post");
   const paths = docs.map((doc) => {
@@ -162,10 +178,15 @@ export const getStaticPaths = async ({ previewData }) => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const client = createClient();
 
-  const { slug } = params;
+  const { slug } = params ?? {};
+
+  if (!slug)
+    return {
+      notFound: true,
+    };
 
   const post = await client.getSingle("blog_post", {
     predicates: [prismic.predicate.at("my.blog_post.slug", slug)],

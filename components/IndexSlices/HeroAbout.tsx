@@ -1,7 +1,10 @@
-import { PrismicText } from "@prismicio/react";
+import { Content } from "@prismicio/client";
+import { PrismicText, SliceComponentProps } from "@prismicio/react";
 import React from "react";
 
-export default function HeroAbout({ slice }) {
+export default function HeroAbout({
+  slice,
+}: SliceComponentProps<Content.IndexDocumentDataBodyHeroaboutSlice>) {
   return (
     <div className="relative h-screen items-start overflow-hidden px-4 py-12 text-center lg:items-center">
       <section className="mx-auto flex h-full flex-col justify-center md:h-3/4 lg:w-3/4">

@@ -5,7 +5,13 @@ import { useOnClickOutside } from "usehooks-ts";
 import { LinkItem } from "../Navbar";
 import { backdropVariants, menuVariants } from "./variants";
 
-function MobileMenu({ handleClose, open }) {
+function MobileMenu({
+  handleClose,
+  open,
+}: {
+  handleClose: () => void;
+  open: boolean;
+}) {
   const mobileNavRef = useRef(null);
   useOnClickOutside(mobileNavRef, handleClose);
 
