@@ -60,9 +60,20 @@ export default function Navbar() {
       <ul className="hidden w-screen items-center gap-4 font-medium lg:flex lg:justify-start">
         <LinkItem href="/">Home</LinkItem>
         <LinkItem href="/blog">Blog</LinkItem>
+        <LinkItem href="/contact">Contact</LinkItem>
       </ul>
 
-      <MobileMenu open={open} handleClose={handleClose} />
+      <MobileMenu open={open} handleClose={handleClose}>
+        <LinkItem onClick={handleClose} href="/">
+          Home
+        </LinkItem>
+        <LinkItem onClick={handleClose} href="/blog">
+          Blog
+        </LinkItem>
+        <LinkItem onClick={handleClose} href="/contact">
+          Contact
+        </LinkItem>
+      </MobileMenu>
     </nav>
   );
 }
