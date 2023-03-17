@@ -2,15 +2,16 @@ import { Cross } from "akar-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
-import { LinkItem } from "../Navbar";
 import { backdropVariants, menuVariants } from "./variants";
 
 function MobileMenu({
   handleClose,
   open,
+  children,
 }: {
   handleClose: () => void;
   open: boolean;
+  children: React.ReactNode;
 }) {
   const mobileNavRef = useRef(null);
   useOnClickOutside(mobileNavRef, handleClose);
@@ -40,12 +41,7 @@ function MobileMenu({
               size={20}
               onClick={handleClose}
             />
-            <LinkItem onClick={handleClose} href="/">
-              Home
-            </LinkItem>
-            <LinkItem onClick={handleClose} href="/blog">
-              Blog
-            </LinkItem>
+            {children}
           </motion.ul>
         </motion.div>
       )}
