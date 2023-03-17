@@ -43,7 +43,7 @@ export default function ContactPage() {
     <Layout>
       <form
         onSubmit={handleSbumit}
-        className="mx-auto my-12 grid w-1/2 max-w-[500px] gap-6 rounded-md bg-white p-6 shadow"
+        className="mx-6 my-12 grid gap-6 rounded-md bg-white p-6 shadow lg:mx-auto lg:w-1/2 lg:max-w-[500px]"
       >
         <h1 className="text-4xl font-bold">Contact</h1>
 
