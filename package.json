@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "next lint",
     "dev": "next dev",
-    "build": "next build && npm run db-migrate",
+    "build": "next build",
     "start": "next start",
     "cypress:open": "cypress open",
     "dev:env-local": "dotenv -e .env.local",
