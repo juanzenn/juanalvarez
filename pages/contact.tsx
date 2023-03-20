@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { useState } from "react";
 import { ZodError } from "zod";
 import Layout from "../components/Layout";
@@ -40,52 +41,58 @@ export default function ContactPage() {
   };
 
   return (
-    <Layout>
-      <form
-        onSubmit={handleSbumit}
-        className="mx-6 my-12 grid gap-6 rounded-md bg-white p-6 shadow lg:mx-auto lg:w-1/2 lg:max-w-[500px]"
-      >
-        <h1 className="text-4xl font-bold">Contact</h1>
+    <>
+      <Head>
+        <title>Juan Alvarez - Contact</title>
+      </Head>
 
-        <TextInput
-          label="Name"
-          name="name"
-          onChange={handleChange}
-          value={form.name}
-          required
-        />
-        <TextInput
-          label="Email"
-          type="email"
-          name="email"
-          onChange={handleChange}
-          value={form.email}
-          required
-        />
-        <TextInput
-          label="Subject"
-          name="subject"
-          onChange={handleChange}
-          value={form.subject}
-          required
-        />
-        <TextInput
-          label="Message"
-          name="message"
-          onChange={handleChange}
-          value={form.message}
-          required
-          area
-        />
-
-        <button
-          type="submit"
-          className="ml-auto block w-fit rounded-md bg-primary-900 py-2 px-6 text-white hover:bg-primary-800"
+      <Layout>
+        <form
+          onSubmit={handleSbumit}
+          className="mx-6 my-12 grid gap-6 rounded-md bg-white p-6 shadow lg:mx-auto lg:w-1/2 lg:max-w-[500px]"
         >
-          Submit
-        </button>
-      </form>
-    </Layout>
+          <h1 className="text-4xl font-bold">Contact</h1>
+
+          <TextInput
+            label="Name"
+            name="name"
+            onChange={handleChange}
+            value={form.name}
+            required
+          />
+          <TextInput
+            label="Email"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            value={form.email}
+            required
+          />
+          <TextInput
+            label="Subject"
+            name="subject"
+            onChange={handleChange}
+            value={form.subject}
+            required
+          />
+          <TextInput
+            label="Message"
+            name="message"
+            onChange={handleChange}
+            value={form.message}
+            required
+            area
+          />
+
+          <button
+            type="submit"
+            className="ml-auto block w-fit rounded-md bg-primary-900 py-2 px-6 text-white hover:bg-primary-800"
+          >
+            Submit
+          </button>
+        </form>
+      </Layout>
+    </>
   );
 }
 
