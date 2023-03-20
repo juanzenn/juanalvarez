@@ -13,11 +13,17 @@
   "scripts": {
     "lint": "next lint",
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run db-migrate",
     "start": "next start",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "dev:env-local": "dotenv -e .env.local",
+    "dev:db-push": "npm run dev:env-local -- prisma db push --preview-feature",
+    "dev:db-migrate": "npm run dev:env-local -- prisma migrate dev --preview-feature",
+    "dev:db-studio": "npm run dev:env-local -- prisma studio",
+    "db-migrate": "prisma migrate prod"
   },
   "dependencies": {
+    "@prisma/client": "^4.11.0",
     "@prismicio/client": "^6.0.0",
     "@prismicio/helpers": "^2.3.9",
     "@prismicio/next": "^1.0.2",
@@ -47,6 +53,7 @@
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.2",
+    "prisma": "^4.11.0",
     "prismic-ts-codegen": "^0.1.5",
     "tailwind-merge": "^1.9.1",
     "tailwindcss": "^3.2.4"
