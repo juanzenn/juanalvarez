@@ -11,7 +11,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-function handlePOST(res: NextApiResponse, payload: string) {
+async function handlePOST(res: NextApiResponse, payload: string) {
   try {
     const bodySchema = zod.object({
       name: zod.string().trim().min(1),
@@ -29,6 +29,15 @@ function handlePOST(res: NextApiResponse, payload: string) {
         pass: "qTh28v55y5Lv*ap",
       },
     };
+
+    let transporter = nodemailer.createTransport(configOptions);
+    await new Promise((resolve, reject) => {
+      transporter.verify(function (error, success) {
+        if (error) reject(error);
+        else resolve(success);
+      });
+    });
+
     const message: Mail.Options = {
       from: `"Contacto - Juan Alvarez" <info@juanalvarez.dev>`,
       replyTo: `${body.name} ${body.email}`,
@@ -38,12 +47,11 @@ function handlePOST(res: NextApiResponse, payload: string) {
       bcc: "juanandres140299@gmail.com",
     };
 
-    let transporter = nodemailer.createTransport(configOptions);
-    transporter.verify(function (error) {
-      if (error) throw error;
-    });
-    transporter.sendMail(message, function (error) {
-      if (error) throw error;
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(message, function (error, success) {
+        if (error) reject(error);
+        else resolve(success);
+      });
     });
   } catch (error) {
     if (error instanceof zod.ZodError) {
