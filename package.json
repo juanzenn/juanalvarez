@@ -17,10 +17,10 @@
     "start": "next start",
     "cypress:open": "cypress open",
     "dev:env-local": "dotenv -e .env.local",
-    "dev:db-push": "npm run dev:env-local -- prisma db push --preview-feature",
-    "dev:db-migrate": "npm run dev:env-local -- prisma migrate dev --preview-feature",
+    "dev:db-push": "npm run dev:env-local -- prisma db push",
+    "dev:db-migrate": "npm run dev:env-local -- prisma migrate dev",
     "dev:db-studio": "npm run dev:env-local -- prisma studio",
-    "prod:db-config": "prisma generate && prisma migrate deploy"
+    "prod:db-config": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
