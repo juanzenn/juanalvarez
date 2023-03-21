@@ -1,4 +1,4 @@
-import { TextAlignJustified } from "akar-icons";
+import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
 import Link, { LinkProps } from "next/link";
 import React, { useEffect, useState } from "react";
 import { useScroll } from "~/hooks/useScroll";
@@ -51,7 +51,7 @@ export default function Navbar() {
 
         <div className="flex w-full justify-end lg:hidden">
           <button className="lg:hidden " onClick={handleClose}>
-            <TextAlignJustified className="text-primary-900" size={24} />
+            <Bars3Icon className="h-6 w-6 text-primary-900" />
           </button>
         </div>
       </article>

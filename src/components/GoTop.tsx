@@ -1,4 +1,4 @@
-import { ArrowUp } from "akar-icons";
+import ArrowUpIcon from "@heroicons/react/24/solid/ArrowUpIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useScroll } from "~/hooks/useScroll";
@@ -25,7 +25,7 @@ function GoTop() {
           animate={variants.visible}
           exit={variants.hidden}
         >
-          <ArrowUp size={24} />
+          <ArrowUpIcon className="h-6 w-6 text-white" />
         </motion.div>
       ) : null}
     </AnimatePresence>

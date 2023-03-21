@@ -1,11 +1,9 @@
 import createClient from "@/prismic";
-import { Content } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 import { InferGetStaticPropsType, PreviewData } from "next";
 import Head from "next/head";
 import React from "react";
 import BlogPosts from "~/components/IndexSlices/BlogPosts";
-import Contact from "~/components/IndexSlices/Contact";
 import HeroAbout from "~/components/IndexSlices/HeroAbout";
 import Projects from "~/components/IndexSlices/Projects";
 import Layout from "~/components/Layout";
@@ -14,10 +12,6 @@ export default function Home({
   slices,
   latestPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const contactSlice = slices.find(
-    (s) => s.slice_type === "contact"
-  ) as Content.IndexDocumentDataBodyContactSlice;
-
   return (
     <>
       <Head>
@@ -69,7 +63,6 @@ export default function Home({
         />
 
         <BlogPosts posts={latestPosts} />
-        {contactSlice && <Contact slice={contactSlice} />}
       </Layout>
     </>
   );
