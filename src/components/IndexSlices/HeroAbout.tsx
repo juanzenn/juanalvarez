@@ -1,5 +1,6 @@
 import { Content } from "@prismicio/client";
 import { PrismicText, SliceComponentProps } from "@prismicio/react";
+import { motion } from "framer-motion";
 import React from "react";
 
 export default function HeroAbout({
@@ -21,7 +22,15 @@ export default function HeroAbout({
         </p>
       </section>
 
-      <div className="hero-decoration" />
+      <motion.div
+        className="hero-decoration"
+        initial={{ opacity: 0, scale: 0, x: "-50%" }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          type: "spring",
+          duration: 1,
+        }}
+      />
     </div>
   );
 }
