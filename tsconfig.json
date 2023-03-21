@@ -14,7 +14,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "paths": { "~/*": ["*"] }
+    "paths": {
+      "~/prisma/*": ["./prisma/*"],
+      "~/cypress/*": ["./cypress/*"],
+      "~/*": ["./src/*"],
+      "@/*": ["./*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.generated.ts"],
   "exclude": ["node_modules"]

@@ -3,7 +3,7 @@ import { PrismicProvider } from "@prismicio/react";
 import { AppProps } from "next/app";
 import Script from "next/script";
 import "tailwindcss/tailwind.css";
-import "../styles/global.css";
+import "~/styles/global.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

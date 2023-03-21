@@ -1,6 +1,6 @@
+import createClient from "@/prismic";
 import { redirectToPreviewURL, setPreviewData } from "@prismicio/next";
 import { NextApiRequest, NextApiResponse } from "next";
-import createClient from "../../prismic";
 
 const preview = async (req: NextApiRequest, res: NextApiResponse) => {
   const client = createClient({ req });

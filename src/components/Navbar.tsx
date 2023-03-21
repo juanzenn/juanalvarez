@@ -1,8 +1,8 @@
 import { TextAlignJustified } from "akar-icons";
 import Link, { LinkProps } from "next/link";
 import React, { useEffect, useState } from "react";
-import { useScroll } from "../hooks/useScroll";
-import { clsx } from "../utils/clsx";
+import { useScroll } from "~/hooks/useScroll";
+import { clsx } from "~/utils/clsx";
 import MobileMenu from "./MobileMenu";
 
 export const LinkItem = ({

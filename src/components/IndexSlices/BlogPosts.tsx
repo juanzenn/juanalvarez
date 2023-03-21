@@ -1,7 +1,7 @@
+import { BlogPostDocument } from "@/types.generated";
 import { PrismicImage, PrismicText } from "@prismicio/react";
 import Link from "next/link";
 import React from "react";
-import { BlogPostDocument } from "../../types.generated";
 
 const BlogPost = ({ data }: BlogPostDocument) => {
   const { title, cover, slug, description } = data;

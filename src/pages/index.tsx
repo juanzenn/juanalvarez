@@ -1,14 +1,14 @@
+import createClient from "@/prismic";
 import { Content } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 import { InferGetStaticPropsType, PreviewData } from "next";
 import Head from "next/head";
 import React from "react";
-import BlogPosts from "../components/IndexSlices/BlogPosts";
-import Contact from "../components/IndexSlices/Contact";
-import HeroAbout from "../components/IndexSlices/HeroAbout";
-import Projects from "../components/IndexSlices/Projects";
-import Layout from "../components/Layout";
-import createClient from "../prismic";
+import BlogPosts from "~/components/IndexSlices/BlogPosts";
+import Contact from "~/components/IndexSlices/Contact";
+import HeroAbout from "~/components/IndexSlices/HeroAbout";
+import Projects from "~/components/IndexSlices/Projects";
+import Layout from "~/components/Layout";
 
 export default function Home({
   slices,

@@ -1,8 +1,8 @@
+import createClient from "@/prismic";
 import { InferGetStaticPropsType, PreviewData } from "next";
 import Head from "next/head";
-import Layout from "../../components/Layout";
-import PostPreview from "../../components/PostPreview";
-import createClient from "../../prismic";
+import Layout from "~/components/Layout";
+import PostPreview from "~/components/PostPreview";
 
 export default function Index({
   posts,

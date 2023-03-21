@@ -1,15 +1,15 @@
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "~/components/Layout";
 
+import createClient from "@/prismic";
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
 import { GetStaticProps, InferGetStaticPropsType, PreviewData } from "next";
-import createClient from "../../prismic";
 
 export default function BlogPost({
   post,

@@ -1,7 +1,7 @@
 import { ArrowUp } from "akar-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { useScroll } from "../hooks/useScroll";
+import { useScroll } from "~/hooks/useScroll";
 
 const variants = {
   visible: { opacity: 1, bottom: 16 },

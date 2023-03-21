@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import { ZodError } from "zod";
-import Layout from "../components/Layout";
+import Layout from "~/components/Layout";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
