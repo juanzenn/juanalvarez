@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import Script from "next/script";
 import "tailwindcss/tailwind.css";
 import "~/styles/global.css";
+import { trpc } from "~/utils/trpc";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,4 +22,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);
