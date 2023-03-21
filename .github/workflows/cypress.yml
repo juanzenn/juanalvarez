@@ -17,6 +17,9 @@ jobs:
         with:
           runTests: false
           build: npm run build
+        env:
+          API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Save build folder
         uses: actions/upload-artifact@v3
