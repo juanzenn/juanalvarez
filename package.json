@@ -13,14 +13,14 @@
   "scripts": {
     "lint": "next lint",
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prod:db-config && next build",
     "start": "next start",
     "cypress:open": "cypress open",
     "dev:env-local": "dotenv -e .env.local",
     "dev:db-push": "npm run dev:env-local -- prisma db push --preview-feature",
     "dev:db-migrate": "npm run dev:env-local -- prisma migrate dev --preview-feature",
     "dev:db-studio": "npm run dev:env-local -- prisma studio",
-    "db-migrate": "prisma migrate prod"
+    "prod:db-config": "prisma generate && prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
