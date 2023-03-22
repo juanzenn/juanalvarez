@@ -13,7 +13,7 @@ export const LinkItem = ({
   <li {...rest}>
     <Link
       href={href}
-      className="block py-2 px-6 text-xl font-medium text-gray-800 transition-colors hover:bg-gray-100 hover:text-primary-700 lg:rounded-md lg:py-1 lg:px-3 lg:text-base lg:font-normal"
+      className="block py-2 px-6 text-xl font-medium text-gray-800 transition-colors hover:bg-gray-100 hover:text-primary-700 lg:rounded-md lg:py-1 lg:px-3 lg:text-base"
     >
       {children}
     </Link>
@@ -27,8 +27,8 @@ export default function Navbar() {
   const handleClose = () => setOpen(!open);
 
   const navbarClass = clsx(
-    "transition-all bg-transparent sticky top-0 isolate z-10 flex h-[56px] backdrop-blur-sm flex-col items-center justify-center lg:flex-row lg:gap-8, py-2",
-    scrolled && "bg-white/30 shadow"
+    "transition-all bg-transparent sticky top-0 isolate z-10 flex h-[56px] backdrop-blur flex-col items-center justify-center lg:flex-row lg:gap-8, py-2",
+    scrolled && "bg-white/50 shadow"
   );
 
   useEffect(() => {
