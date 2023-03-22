@@ -63,7 +63,7 @@ export default function BlogPost({
         <meta property="twitter:image" content={cover?.src} />
       </Head>
 
-      <main className="mx-auto w-screen px-4 py-8 lg:w-7/12">
+      <main className="mx-auto px-4 py-8">
         <header>
           <article className="mb-2 text-4xl font-bold tracking-tighter">
             <PrismicText field={title} />

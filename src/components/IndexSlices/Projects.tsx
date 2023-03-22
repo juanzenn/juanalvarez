@@ -10,7 +10,7 @@ export default function Projects({
   const { primary, items } = slice;
 
   return (
-    <div className="mx-auto max-w-[1080px] px-4 py-12 lg:w-10/12">
+    <div className="px-4 py-12 lg:px-0">
       <header className="mb-4">
         <span className="text-4xl font-bold tracking-tight">
           <PrismicRichText field={primary?.title} />

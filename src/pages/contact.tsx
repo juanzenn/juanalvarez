@@ -12,7 +12,7 @@ export default function ContactPage() {
       </Head>
 
       <Layout>
-        <section className="mx-auto flex max-w-[1080px] flex-col gap-12 px-8 py-8 md:flex-row lg:py-28">
+        <section className="flex flex-col gap-12 px-8 py-8 md:flex-row lg:py-28 lg:px-0">
           <Information />
           <ContactForm />
         </section>

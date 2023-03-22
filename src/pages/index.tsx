@@ -15,53 +15,29 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Juan Alvarez | Front-end web developer</title>
-        <meta name="title" content="Juan Alvarez | Front-end web developer" />
+        <title>
+          Juan Alvarez | Fullstack Web Developer, freelancer, and writer.
+        </title>
+        <meta
+          name="title"
+          content="Juan Alvarez | Fullstack Web Developer, freelancer, and writer."
+        />
         <meta
           name="description"
-          content="I make websites and web applications for modern businesses. If you want to have a strong online presence, contact me. Let's work together."
+          content="I'm Juan, a fullstack web developer and freelancer, based in Venezuela. I build web applications and websites with quality in mind."
         />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://juanalvarez.vercel.app/" />
-        <meta
-          property="og:title"
-          content="Juan Alvarez | Front-end web developer"
-        />
-        <meta
-          property="og:description"
-          content="I make websites and web applications for modern businesses. If you want to have a strong online presence, contact me. Let's work together."
-        />
-        <meta property="og:image" content="/cover.png" />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://juanalvarez.vercel.app/"
-        />
-        <meta
-          property="twitter:title"
-          content="Juan Alvarez | Front-end web developer"
-        />
-        <meta
-          property="twitter:description"
-          content="I make websites and web applications for modern businesses. If you want to have a strong online presence, contact me. Let's work together."
-        />
-        <meta property="twitter:image" content="/cover.png" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
 
       <Layout>
+        <HeroAbout />
         <SliceZone
           slices={slices}
           components={{
-            heroabout: HeroAbout,
+            heroabout: () => null,
             projects: Projects,
             contact: () => null,
           }}
         />
-
         <BlogPosts posts={latestPosts} />
       </Layout>
     </>
