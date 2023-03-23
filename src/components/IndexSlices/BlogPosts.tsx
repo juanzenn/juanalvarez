@@ -32,7 +32,7 @@ const BlogPost = ({ data }: BlogPostDocument) => {
 
 export default function BlogPosts({ posts }: { posts: BlogPostDocument[] }) {
   return (
-    <section className="px-4 py-12">
+    <section className="mx-auto max-w-[1080px] px-4 py-12">
       <h2 className="mb-6 text-4xl font-bold tracking-tight">Latest Blogs</h2>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

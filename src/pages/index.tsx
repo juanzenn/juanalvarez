@@ -3,6 +3,7 @@ import { SliceZone } from "@prismicio/react";
 import { InferGetStaticPropsType, PreviewData } from "next";
 import Head from "next/head";
 import React from "react";
+import AboutMe from "~/components/IndexSlices/AboutMe";
 import BlogPosts from "~/components/IndexSlices/BlogPosts";
 import HeroAbout from "~/components/IndexSlices/HeroAbout";
 import Projects from "~/components/IndexSlices/Projects";
@@ -30,6 +31,7 @@ export default function Home({
 
       <Layout>
         <HeroAbout />
+        <AboutMe />
         <SliceZone
           slices={slices}
           components={{

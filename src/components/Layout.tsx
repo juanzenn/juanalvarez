@@ -7,9 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />
-      <main className="mx-auto min-h-full max-w-[1080px] flex-1">
-        {children}
-      </main>
+      <main className="min-h-full flex-1">{children}</main>
       <Footer />
       <GoTop />
     </>

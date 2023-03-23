@@ -63,7 +63,7 @@ export default function BlogPost({
         <meta property="twitter:image" content={cover?.src} />
       </Head>
 
-      <main className="mx-auto px-4 py-8">
+      <main className="mx-auto max-w-[1080px] px-4 py-8">
         <header>
           <article className="mb-2 text-4xl font-bold tracking-tighter">
             <PrismicText field={title} />
@@ -112,7 +112,7 @@ export default function BlogPost({
         <footer className="my-8">
           <section className="flex items-center gap-4">
             <figure className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full">
-              <Image fill src="/me.jpg" alt="" />
+              <Image fill src="/images/me.jpg" alt="" />
             </figure>
 
             <article>

@@ -14,7 +14,7 @@ export default function Index({
       </Head>
 
       <Layout>
-        <section className="mb-2 w-full px-4">
+        <section className="mx-auto mb-2 w-full max-w-[1080px] px-4">
           <header className="py-12">
             <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-800">
               Blog

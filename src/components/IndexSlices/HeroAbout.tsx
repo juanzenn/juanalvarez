@@ -14,8 +14,8 @@ export default function HeroAbout() {
 
   return (
     <div className="min-h-[50vh] px-4 py-12">
-      <section className="mt-16 flex h-full flex-col">
-        <h1 className="mb-6 text-4xl font-bold tracking-tighter text-gray-900 lg:text-5xl">
+      <section className="mx-auto mt-16 flex h-full max-w-[1080px] flex-col">
+        <h1 className="mb-6 text-4xl font-extrabold tracking-tighter text-gray-900 lg:text-5xl">
           Fullstack web developer, freelancer, <br />
           and technical writer.
         </h1>

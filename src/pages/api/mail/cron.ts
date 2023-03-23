@@ -34,7 +34,7 @@ export default async function handler(
   for (const _email of emails) {
     const { id, name, email, subject, message } = _email;
     const messageOptions: Mail.Options = {
-      from: `"Contacto - Juan Alvarez" <info@juanalvarez.dev>`,
+      from: `Contacto - ${name} <info@juanalvarez.dev>`,
       replyTo: `${name} ${email}`,
       subject: subject,
       text: `${message}`,
@@ -45,19 +45,17 @@ export default async function handler(
     await new Promise((resolve, reject) => {
       transporter.sendMail(messageOptions, function (error, success) {
         if (error) reject(error);
-        else {
-          prisma.email.update({
-            where: {
-              id,
-            },
-            data: {
-              isPending: false,
-            },
-          });
-
-          resolve(success);
-        }
+        else resolve(success);
       });
+    });
+
+    await prisma.email.update({
+      where: {
+        id,
+      },
+      data: {
+        isPending: false,
+      },
     });
   }
 
