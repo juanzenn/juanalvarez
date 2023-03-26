@@ -8,6 +8,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import React from "react";
 import { clsx } from "~/utils/clsx";
+import { H1, Paragraph } from "../utils/text";
 
 export default function HeroAbout() {
   const images = [image1, image2, image3, image4, image5, image6];
@@ -15,15 +16,15 @@ export default function HeroAbout() {
   return (
     <div className="min-h-[50vh] px-4 py-12">
       <section className="mx-auto mt-16 flex h-full max-w-[1080px] flex-col">
-        <h1 className="mb-6 text-4xl font-extrabold tracking-tighter text-gray-900 lg:text-5xl">
+        <H1 className="mb-4">
           Fullstack web developer, freelancer, <br />
           and technical writer.
-        </h1>
+        </H1>
 
-        <p className="text-lg text-gray-700 md:w-1/2 lg:w-3/4 lg:text-xl">
+        <Paragraph className="text-xl md:w-1/2 lg:w-3/4">
           I’m Juan, a fullstack web developer and freelancer, based in
           Venezuela. I build web applications and websites with quality in mind.
-        </p>
+        </Paragraph>
 
         <Link
           href="/contact"

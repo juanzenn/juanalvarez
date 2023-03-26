@@ -2,6 +2,7 @@ import { BlogPostDocument } from "@/types.generated";
 import { PrismicImage, PrismicText } from "@prismicio/react";
 import Link from "next/link";
 import React from "react";
+import { Paragraph } from "../utils/text";
 
 const BlogPost = ({ data }: BlogPostDocument) => {
   const { title, cover, slug, description } = data;
@@ -18,14 +19,14 @@ const BlogPost = ({ data }: BlogPostDocument) => {
       </Link>
 
       <Link href={blogHref}>
-        <strong className="text-primary-900 hover:underline">
+        <strong className="text-primary-800 hover:underline dark:text-primary-500">
           <PrismicText field={title} />
         </strong>
       </Link>
 
-      <p className="prose-sm mt-2 text-gray-600">
+      <Paragraph size="small" className="mt-2">
         <PrismicText field={description} />
-      </p>
+      </Paragraph>
     </article>
   );
 };

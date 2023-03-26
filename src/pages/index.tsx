@@ -5,6 +5,7 @@ import Head from "next/head";
 import React from "react";
 import AboutMe from "~/components/IndexSlices/AboutMe";
 import BlogPosts from "~/components/IndexSlices/BlogPosts";
+// import Employment from "~/components/IndexSlices/Employment";
 import HeroAbout from "~/components/IndexSlices/HeroAbout";
 import Projects from "~/components/IndexSlices/Projects";
 import Layout from "~/components/Layout";
@@ -32,6 +33,7 @@ export default function Home({
       <Layout>
         <HeroAbout />
         <AboutMe />
+        {/* <Employment /> */}
         <SliceZone
           slices={slices}
           components={{

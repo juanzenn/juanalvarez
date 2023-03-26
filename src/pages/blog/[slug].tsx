@@ -8,8 +8,9 @@ import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, PrismicText } from "@prismicio/react";
-import { GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
 import { GetStaticProps, InferGetStaticPropsType, PreviewData } from "next";
+import SocialmediaLinks from "~/components/SocialmediaLinks";
+import { H1, H4, Paragraph } from "~/components/utils/text";
 
 export default function BlogPost({
   post,
@@ -65,13 +66,13 @@ export default function BlogPost({
 
       <main className="mx-auto max-w-[1080px] px-4 py-8">
         <header>
-          <article className="mb-2 text-4xl font-bold tracking-tighter">
+          <H1 className="mb-2">
             <PrismicText field={title} />
-          </article>
+          </H1>
 
-          <article className="prose mb-8 text-gray-600">
+          <Paragraph className="mb-8">
             <PrismicText field={description} />
-          </article>
+          </Paragraph>
 
           <figure className="relative -mx-4 mb-2 overflow-hidden shadow-md md:left-0 md:rounded-md lg:mx-0">
             <PrismicNextImage field={cover} fallbackAlt="" />
@@ -79,7 +80,7 @@ export default function BlogPost({
         </header>
 
         <main className="mb-6">
-          <article className="prose-primary prose max-w-none">
+          <article className="prose-primary prose max-w-none hover:prose-a:underline dark:text-gray-100 dark:prose-headings:text-gray-100 dark:prose-a:text-primary-500 dark:prose-strong:text-primary-500 dark:prose-pre:bg-gray-700 dark:prose-pre:text-gray-100">
             <PrismicRichText field={content} />
           </article>
         </main>
@@ -90,7 +91,7 @@ export default function BlogPost({
             <span className="uppercase text-gray-400">share</span>
             <section className="space-x-12 lg:space-x-4">
               <a
-                className="font-semibold text-primary-600 transition-colors hover:text-primary-700 "
+                className="font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                 target="_blank"
                 rel="noreferrer"
                 href={twitterShare}
@@ -98,7 +99,7 @@ export default function BlogPost({
                 Twitter
               </a>
               <a
-                className="font-semibold text-primary-600 transition-colors hover:text-primary-700 "
+                className="font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                 target="_blank"
                 rel="noreferrer"
                 href={fbShare}
@@ -110,45 +111,18 @@ export default function BlogPost({
         </section>
 
         <footer className="my-8">
-          <section className="flex items-center gap-4">
+          <section className="flex gap-4">
             <figure className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full">
               <Image fill src="/images/me.jpg" alt="" />
             </figure>
 
             <article>
-              <strong className="mb-1 text-sm lg:text-base">
-                Juan Alvarez
-              </strong>
-              <p className="prose prose-sm mb-4">
+              <H4 className="mb-1">Juan Alvarez</H4>
+              <Paragraph size="small" className="md:w-1/2">
                 I’m a front-end developer from Venezuela. I do freelance work
                 and create content about web development and JavaScript.
-              </p>
-              <section className="flex gap-4">
-                <a
-                  className="font-semibold text-primary-600 transition-colors hover:text-primary-700"
-                  href="https://twitter.com/juanzenweb"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <TwitterFill />
-                </a>
-                <a
-                  className="font-semibold text-primary-600 transition-colors hover:text-primary-700"
-                  href="https://linkedin.com/in/juan-alvarez11/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <LinkedInV1Fill />
-                </a>
-                <a
-                  className="font-semibold text-primary-600 transition-colors hover:text-primary-700"
-                  href="https://github.com/juanzenn"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <GithubFill />
-                </a>
-              </section>
+              </Paragraph>
+              <SocialmediaLinks />
             </article>
           </section>
         </footer>

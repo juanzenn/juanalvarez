@@ -90,13 +90,16 @@ function TextInput({
 }) {
   return (
     <div className="w-full">
-      <label className="mb-2 block font-bold text-gray-700" htmlFor={rest.name}>
+      <label
+        className="mb-2 block font-bold text-gray-700 dark:text-gray-200"
+        htmlFor={rest.name}
+      >
         {label}
       </label>
       {area ? (
         <textarea
           id={rest.name}
-          className="w-full resize-none rounded"
+          className="w-full resize-none rounded dark:text-gray-800"
           rows={5}
           {...rest}
         />
@@ -104,7 +107,7 @@ function TextInput({
         <input
           id={rest.name}
           type={rest.type ?? "text"}
-          className="w-full rounded"
+          className="w-full rounded dark:text-gray-800"
           {...rest}
         />
       )}

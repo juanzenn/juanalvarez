@@ -3,6 +3,7 @@ import { InferGetStaticPropsType, PreviewData } from "next";
 import Head from "next/head";
 import Layout from "~/components/Layout";
 import PostPreview from "~/components/PostPreview";
+import { H1 } from "~/components/utils/text";
 
 export default function Index({
   posts,
@@ -16,12 +17,7 @@ export default function Index({
       <Layout>
         <section className="mx-auto mb-2 w-full max-w-[1080px] px-4">
           <header className="py-12">
-            <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-800">
-              Blog
-            </h1>
-            <p className="prose prose-sm mb-6 text-gray-500">
-              Personal notes from my thoughts
-            </p>
+            <H1>Blog</H1>
           </header>
 
           <section className="mb-12 grid gap-6 md:grid-cols-2 lg:gap-12">

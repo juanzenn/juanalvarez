@@ -1,9 +1,12 @@
 import React from "react";
+import { Paragraph } from "./utils/text";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-primary-600 py-6 text-center text-sm text-primary-200">
-      <span>Juan Alvarez - {new Date().getFullYear()}</span>
+    <footer className="w-full bg-gray-800 py-4 text-center text-sm dark:bg-gray-900">
+      <Paragraph size="small" className="text-primary-100">
+        Juan Alvarez - {new Date().getFullYear()}
+      </Paragraph>
     </footer>
   );
 }

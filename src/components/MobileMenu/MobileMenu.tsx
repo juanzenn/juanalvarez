@@ -25,7 +25,7 @@ function MobileMenu({
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="absolute top-0 flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden"
+          className="absolute top-0 flex h-screen w-screen justify-end overflow-hidden bg-black/60 lg:hidden"
         >
           <motion.ul
             layout
@@ -33,11 +33,11 @@ function MobileMenu({
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="absolute top-0 right-0 flex h-screen w-3/4 flex-col gap-4 bg-white py-4 shadow-inner md:w-1/2"
+            className="absolute top-0 right-0 flex h-screen w-3/4 flex-col gap-4 bg-gray-50 py-4 shadow-inner dark:bg-gray-800 md:w-1/2"
             ref={mobileNavRef}
           >
             <Cross
-              className="mr-4 mb-6 self-end text-primary-900"
+              className="mr-4 mb-6 self-end text-primary-900 dark:text-primary-500"
               size={20}
               onClick={handleClose}
             />

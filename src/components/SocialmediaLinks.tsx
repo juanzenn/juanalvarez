@@ -9,7 +9,7 @@ import React from "react";
 
 export default function SocialmediaLinks() {
   return (
-    <section className="my-6 w-fit space-x-6 text-gray-800">
+    <section className="my-6 w-fit space-x-6 text-gray-800 dark:text-gray-200">
       <a
         title="GitHub"
         href="https://github.com/juanzenn"
@@ -17,7 +17,7 @@ export default function SocialmediaLinks() {
         rel="noreferrer"
       >
         <FontAwesomeIcon
-          className="h-6 w-6 cursor-pointer hover:text-primary-800"
+          className="h-6 w-6 cursor-pointer hover:text-primary-800 dark:hover:text-primary-500"
           icon={faGithub}
         />
       </a>
@@ -28,7 +28,7 @@ export default function SocialmediaLinks() {
         rel="noreferrer"
       >
         <FontAwesomeIcon
-          className="h-6 w-6 cursor-pointer hover:text-primary-800"
+          className="h-6 w-6 cursor-pointer hover:text-primary-800 dark:hover:text-primary-500"
           icon={faTwitter}
         />
       </a>
@@ -39,7 +39,7 @@ export default function SocialmediaLinks() {
         rel="noreferrer"
       >
         <FontAwesomeIcon
-          className="h-6 w-6 cursor-pointer hover:text-primary-800"
+          className="h-6 w-6 cursor-pointer hover:text-primary-800 dark:hover:text-primary-500"
           icon={faInstagram}
         />
       </a>
@@ -50,7 +50,7 @@ export default function SocialmediaLinks() {
         rel="noreferrer"
       >
         <FontAwesomeIcon
-          className="h-6 w-6 cursor-pointer hover:text-primary-800"
+          className="h-6 w-6 cursor-pointer hover:text-primary-800 dark:hover:text-primary-500"
           icon={faLinkedinIn}
         />
       </a>
