@@ -16,7 +16,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           runTests: false
-          build: npm run build
+          build: npm run github:build
         env:
           API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -51,7 +51,7 @@ jobs:
       - name: "UI Tests - Chrome"
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
-          start: npm start
+          start: npm i
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
