@@ -1,9 +1,9 @@
 import { initTRPC } from "@trpc/server";
-import prisma from "~/prisma/client";
+import { db } from "~/lib/db";
 
 const t = initTRPC
   .context<{
-    prisma: typeof prisma;
+    prisma: typeof db;
   }>()
   .create();
 

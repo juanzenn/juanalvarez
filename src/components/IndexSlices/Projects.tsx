@@ -1,5 +1,4 @@
-import { Content } from "@prismicio/client";
-import { asLink } from "@prismicio/helpers";
+import { Content, asLink } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { GithubFill, LinkOut } from "akar-icons";
 import React from "react";

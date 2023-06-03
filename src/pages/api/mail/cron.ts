@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import * as nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
-import prisma from "~/prisma/client";
+import { db } from "~/lib/db";
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,7 +25,7 @@ export default async function handler(
     });
   });
 
-  const emails = await prisma.email.findMany({
+  const emails = await db.email.findMany({
     where: {
       isPending: true,
     },
@@ -49,7 +49,7 @@ export default async function handler(
       });
     });
 
-    await prisma.email.update({
+    await db.email.update({
       where: {
         id,
       },

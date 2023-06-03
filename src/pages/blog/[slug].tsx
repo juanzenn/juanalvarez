@@ -5,7 +5,6 @@ import Layout from "~/components/Layout";
 
 import createClient from "@/prismic";
 import * as prismic from "@prismicio/client";
-import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { GetStaticProps, InferGetStaticPropsType, PreviewData } from "next";
@@ -20,7 +19,7 @@ export default function BlogPost({
 
   const currentUrl = "https://juanalvarez.dev";
   const link = `${currentUrl}/blog/${slug}`;
-  const twitterShare = `https://twitter.com/intent/tweet?url=${link}&text=${prismicH.asText(
+  const twitterShare = `https://twitter.com/intent/tweet?url=${link}&text=${prismic.asText(
     title
   )}`;
   const fbShare = `http://www.facebook.com/share.php?u=${link}`;
@@ -28,10 +27,10 @@ export default function BlogPost({
   return (
     <Layout>
       <Head>
-        <title>{prismicH.asText(title)}</title>
+        <title>{prismic.asText(title)}</title>
         <meta
           name="description"
-          content={prismicH.asText(description) ?? undefined}
+          content={prismic.asText(description) ?? undefined}
         />
 
         <meta property="og:type" content="article" />
@@ -41,11 +40,11 @@ export default function BlogPost({
         />
         <meta
           property="og:title"
-          content={prismicH.asText(title) ?? undefined}
+          content={prismic.asText(title) ?? undefined}
         />
         <meta
           property="og:description"
-          content={prismicH.asText(description) ?? undefined}
+          content={prismic.asText(description) ?? undefined}
         />
         <meta property="og:image" content={cover?.src} />
         <meta property="twitter:card" content="summary_large_image" />
@@ -55,11 +54,11 @@ export default function BlogPost({
         />
         <meta
           property="twitter:title"
-          content={prismicH.asText(title) ?? undefined}
+          content={prismic.asText(title) ?? undefined}
         />
         <meta
           property="twitter:description"
-          content={prismicH.asText(description) ?? undefined}
+          content={prismic.asText(description) ?? undefined}
         />
         <meta property="twitter:image" content={cover?.src} />
       </Head>

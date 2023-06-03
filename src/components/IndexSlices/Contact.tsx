@@ -1,9 +1,8 @@
 import React from "react";
 
-import { Content } from "@prismicio/client";
-import { asLink } from "@prismicio/helpers";
+import { Content, asLink } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { Envelope, GithubFill, LinkedInV1Fill, TwitterFill } from "akar-icons";
+import { Envelope, GithubFill, LinkedinFill, TwitterFill } from "akar-icons";
 
 export default function Contact({
   slice,
@@ -52,7 +51,7 @@ export default function Contact({
             case "Linkedin":
               return (
                 <a key={`link-${index}`} href={asLink(item.contact_link) ?? ""}>
-                  <LinkedInV1Fill
+                  <LinkedinFill
                     className="transition-all hover:text-primary-600"
                     size={36}
                   />

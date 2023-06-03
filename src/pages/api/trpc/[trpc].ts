@@ -1,5 +1,5 @@
 import * as trpcNext from "@trpc/server/adapters/next";
-import prisma from "~/prisma/client";
+import { db } from "~/lib/db";
 import { appRouter } from "~/server/routers/_app";
 
 // export API handler
@@ -7,6 +7,6 @@ import { appRouter } from "~/server/routers/_app";
 export default trpcNext.createNextApiHandler({
   router: appRouter,
   createContext: () => ({
-    prisma: prisma,
+    prisma: db,
   }),
 });
