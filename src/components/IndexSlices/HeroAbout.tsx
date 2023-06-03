@@ -7,7 +7,7 @@ import image6 from "@/public/images/banner (6).jpg";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import React from "react";
-import { clsx } from "~/utils/clsx";
+import { cn } from "~/lib/cn";
 import { H1, Paragraph } from "../utils/text";
 
 export default function HeroAbout() {
@@ -57,7 +57,7 @@ export default function HeroAbout() {
 function FigureComponent({ image }: { image: StaticImageData }) {
   return (
     <figure
-      className={clsx(
+      className={cn(
         "relative h-[50vh] w-[300px] overflow-hidden rounded-xl shadow-lg"
       )}
     >

@@ -1,3 +1,7 @@
+@apply base;
+@apply components;
+@apply utilities;
+
 html,
 body {
   height: 100%;

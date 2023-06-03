@@ -1,5 +1,5 @@
 import React from "react";
-import { clsx } from "~/utils/clsx";
+import { cn } from "~/lib/cn";
 
 type HeadingProps = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ type HeadingProps = {
 export function H1({ children, className, ...rest }: HeadingProps) {
   return (
     <h1
-      className={clsx(
+      className={cn(
         "text-4xl font-extrabold tracking-tight lg:text-5xl",
         className
       )}
@@ -22,7 +22,7 @@ export function H1({ children, className, ...rest }: HeadingProps) {
 export function H2({ children, className, ...rest }: HeadingProps) {
   return (
     <h2
-      className={clsx(
+      className={cn(
         "text-3xl font-semibold tracking-tight transition-colors first:mt-0",
         className
       )}
@@ -36,7 +36,7 @@ export function H2({ children, className, ...rest }: HeadingProps) {
 export function H3({ children, className, ...rest }: HeadingProps) {
   return (
     <h3
-      className={clsx("text-2xl font-semibold tracking-tight", className)}
+      className={cn("text-2xl font-semibold tracking-tight", className)}
       {...rest}
     >
       {children}
@@ -47,7 +47,7 @@ export function H3({ children, className, ...rest }: HeadingProps) {
 export function H4({ children, className, ...rest }: HeadingProps) {
   return (
     <h4
-      className={clsx("text-xl font-semibold tracking-tight", className)}
+      className={cn("text-xl font-semibold tracking-tight", className)}
       {...rest}
     >
       {children}

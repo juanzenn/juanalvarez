@@ -1,5 +1,5 @@
 import React from "react";
-import { clsx } from "~/utils/clsx";
+import { cn } from "~/lib/cn";
 
 type Props = {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ export default function Paragraph({
 
   return (
     <p
-      className={clsx(
+      className={cn(
         "leading-7 text-gray-700 dark:text-gray-200",
         sizes[size],
         className

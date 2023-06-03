@@ -4,7 +4,7 @@ import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
 import Link, { LinkProps } from "next/link";
 import React, { useEffect, useState } from "react";
 import { useScroll } from "~/hooks/useScroll";
-import { clsx } from "~/utils/clsx";
+import { cn } from "~/lib/cn";
 import MobileMenu from "./MobileMenu";
 
 export const LinkItem = ({
@@ -29,7 +29,7 @@ export default function Navbar() {
 
   const handleClose = () => setOpen(!open);
 
-  const navbarClass = clsx(
+  const navbarClass = cn(
     "transition-all bg-transparent sticky top-0 isolate z-10 flex h-[56px] backdrop-blur flex-col items-center justify-center lg:flex-row lg:gap-8, py-2",
     scrolled && "bg-white/50 dark:bg-gray-800/50 shadow"
   );

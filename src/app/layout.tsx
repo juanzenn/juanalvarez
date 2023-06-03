@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import React from "react";
-import "tailwindcss/tailwind.css";
 import Footer from "~/components/Footer";
 import GoTop from "~/components/GoTop";
 import Navbar from "~/components/Navbar";
-import "~/styles/global.css";
+import "./global.css";
 
 export const metadata: Metadata = {
   title: "Juan Alvarez | Fullstack Web Developer, freelancer, and writer.",
