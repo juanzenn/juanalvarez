@@ -1,3 +1,4 @@
+"use client";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
 import Link, { LinkProps } from "next/link";

@@ -1,3 +1,4 @@
+"use client";
 import ArrowUpIcon from "@heroicons/react/24/solid/ArrowUpIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";

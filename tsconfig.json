@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,12 +19,33 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~/prisma/*": ["./prisma/*"],
-      "~/cypress/*": ["./cypress/*"],
-      "~/*": ["./src/*"],
-      "@/*": ["./*"]
-    }
+      "~/prisma/*": [
+        "./prisma/*"
+      ],
+      "~/cypress/*": [
+        "./cypress/*"
+      ],
+      "~/*": [
+        "./src/*"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.generated.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "types.generated.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

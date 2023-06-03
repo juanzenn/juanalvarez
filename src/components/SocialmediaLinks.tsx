@@ -9,7 +9,7 @@ import React from "react";
 
 export default function SocialmediaLinks() {
   return (
-    <section className="my-6 w-fit space-x-6 text-gray-800 dark:text-gray-200">
+    <section className="my-6 w-fit space-x-6 text-gray-800 dark:text-gray-200 flex">
       <a
         title="GitHub"
         href="https://github.com/juanzenn"
