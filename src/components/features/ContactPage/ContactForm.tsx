@@ -1,14 +1,18 @@
 "use client";
 import React, { useState } from "react";
+import { useContactForm } from "./use-contact-form";
+
+const DEFAULT_FORM = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+};
 
 export default function ContactForm() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [form, setForm] = useState(DEFAULT_FORM);
 
+  const { handleSubmit, isLoading } = useContactForm(form);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
@@ -16,27 +20,14 @@ export default function ContactForm() {
     });
   };
 
-  const handleSbumit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // mutate(form, {
-    //   onSuccess: () => {
-    //     setForm({
-    //       name: "",
-    //       email: "",
-    //       subject: "",
-    //       message: "",
-    //     });
-    //     alert("Message sent! I'll get back to you as soon as possible.");
-    //   },
-    //   onError: (err) => {
-    //     alert(err.message);
-    //   },
-    // });
-  };
-
   return (
-    <form onSubmit={handleSbumit} className="block flex-1 space-y-4">
+    <form
+      onSubmit={async (e) => {
+        await handleSubmit(e);
+        setForm(DEFAULT_FORM);
+      }}
+      className="block flex-1 space-y-4"
+    >
       <TextInput
         label="Name"
         name="name"
@@ -71,8 +62,9 @@ export default function ContactForm() {
       <button
         type="submit"
         className="ml-auto block w-fit rounded-md bg-primary-900 py-2 px-6 text-white hover:bg-primary-800 disabled:cursor-wait disabled:bg-gray-300 disabled:text-gray-500"
+        disabled={isLoading}
       >
-        Send
+        {isLoading ? "Sending..." : "Send"}
       </button>
     </form>
   );
