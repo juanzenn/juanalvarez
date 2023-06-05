@@ -1,30 +1,18 @@
 "use client";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
 import Link, { LinkProps } from "next/link";
 import React, { useEffect, useState } from "react";
 import { useScroll } from "~/hooks/useScroll";
 import { cn } from "~/lib/cn";
 import MobileMenu from "./MobileMenu";
+import ThemeButton from "./ThemeButton";
 
-export const LinkItem = ({
-  href,
-  children,
-  ...rest
-}: LinkProps & React.HTMLAttributes<HTMLLIElement>) => (
-  <li {...rest}>
-    <Link
-      href={href}
-      className="block py-2 px-6 text-xl font-medium hover:bg-gray-100 dark:hover:bg-gray-700 lg:rounded-md lg:py-1 lg:px-3 lg:text-base lg:transition-colors"
-    >
-      {children}
-    </Link>
-  </li>
-);
+type Props = {
+  defaultTheme?: string;
+};
 
-export default function Navbar() {
+export default function Navbar({ defaultTheme }: Props) {
   const [open, setOpen] = useState(false);
-
   const scrolled = useScroll(50);
 
   const handleClose = () => setOpen(!open);
@@ -76,52 +64,27 @@ export default function Navbar() {
           Contact
         </LinkItem>
 
-        <ThemeButton />
+        <ThemeButton defaultTheme={defaultTheme} />
       </MobileMenu>
 
       <span className="hidden lg:block">
-        <ThemeButton />
+        <ThemeButton defaultTheme={defaultTheme} />
       </span>
     </nav>
   );
 }
 
-function ThemeButton() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return "light";
-    else return localStorage.getItem("theme") || "light";
-  });
-  const ThemeIcon = theme === "dark" ? MoonIcon : SunIcon;
-
-  const handleChangeTheme = () => {
-    if (theme === "dark") {
-      setTheme("light");
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-    } else {
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-    }
-  };
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const theme = localStorage.getItem("theme");
-
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      setTheme("light");
-    }
-  }, []);
-  return (
-    <ThemeIcon
-      onClick={handleChangeTheme}
-      className="ml-auto mr-6 h-6 w-6 cursor-pointer hover:scale-105 lg:block"
-    />
-  );
-}
+const LinkItem = ({
+  href,
+  children,
+  ...rest
+}: LinkProps & React.HTMLAttributes<HTMLLIElement>) => (
+  <li {...rest}>
+    <Link
+      href={href}
+      className="block py-2 px-6 text-xl font-medium hover:bg-gray-100 dark:hover:bg-gray-700 lg:rounded-md lg:py-1 lg:px-3 lg:text-base lg:transition-colors"
+    >
+      {children}
+    </Link>
+  </li>
+);
