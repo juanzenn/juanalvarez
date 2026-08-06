@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     "I'm Juan, a fullstack web developer and freelancer, based in Venezuela. I build web applications and websites with quality in mind.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const defaultTheme = cookies().get("theme")?.value;
+  const defaultTheme = (await cookies()).get("theme")?.value;
 
   return (
     <html lang="en" className={cn(defaultTheme === "dark" && "dark")}>

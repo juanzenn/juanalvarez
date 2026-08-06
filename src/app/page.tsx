@@ -1,5 +1,4 @@
 import { SliceZone } from "@prismicio/react";
-import React from "react";
 import AboutMe from "~/components/IndexSlices/AboutMe";
 import BlogPosts from "~/components/IndexSlices/BlogPosts";
 import HeroAbout from "~/components/IndexSlices/HeroAbout";
@@ -12,6 +11,10 @@ export default async function RootPage() {
   const indexDoc = await client.getSingle("index");
   const { results: latestPosts } = await client.getByType("blog_post", {
     pageSize: 3,
+    orderings: {
+      direction: "desc",
+      field: "document.last_publication_date",
+    },
   });
   const slices = indexDoc.data.body;
 

@@ -4,7 +4,6 @@ import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import React from "react";
 import SocialmediaLinks from "~/components/SocialmediaLinks";
 import { H1, H4, Paragraph } from "~/components/utils/text";
 import { prismicClient } from "~/lib/prismic";
@@ -36,7 +35,7 @@ export default async function BlogPost({ params }: Props) {
   const currentUrl = "https://juanalvarez.dev";
   const link = `${currentUrl}/blog/${slug}`;
   const twitterShare = `https://twitter.com/intent/tweet?url=${link}&text=${prismic.asText(
-    title
+    title,
   )}`;
   const fbShare = `http://www.facebook.com/share.php?u=${link}`;
 

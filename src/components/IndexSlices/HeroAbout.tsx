@@ -6,7 +6,6 @@ import image5 from "@/public/images/banner (5).jpg";
 import image6 from "@/public/images/banner (6).jpg";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import React from "react";
 import { cn } from "~/lib/cn";
 import { H1, Paragraph } from "../utils/text";
 
@@ -58,10 +57,16 @@ function FigureComponent({ image }: { image: StaticImageData }) {
   return (
     <figure
       className={cn(
-        "relative h-[50vh] w-[300px] overflow-hidden rounded-xl shadow-lg"
+        "relative h-[50vh] w-[300px] overflow-hidden rounded-xl shadow-lg",
       )}
     >
-      <Image alt="" src={image} placeholder="blur" fill />
+      <Image
+        alt=""
+        src={image}
+        placeholder="blur"
+        fill
+        sizes="(max-width: 768px) 100vw, 33vw"
+      />
     </figure>
   );
 }

@@ -1,8 +1,7 @@
 import { Content, asLink } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { GithubFill, LinkOut } from "akar-icons";
-import React from "react";
-import { H2, H4 } from "../utils/text";
+import { H2, H3 } from "../utils/text";
 
 export default function Projects({
   slice,
@@ -12,9 +11,12 @@ export default function Projects({
   return (
     <div className="mx-auto max-w-[1080px] px-4 py-12 lg:px-0">
       <header className="mb-4">
-        <H2>
-          <PrismicRichText field={primary?.title} />
-        </H2>
+        <PrismicRichText
+          field={primary?.title}
+          components={{
+            heading2: ({ children }) => <H2>{children}</H2>,
+          }}
+        />
         <span className="text-gray-700 dark:text-gray-200">
           {!primary?.subtitle ? (
             ``
@@ -31,12 +33,15 @@ export default function Projects({
               <span className="text-sm font-bold uppercase tracking-wide text-primary-700 dark:text-primary-500">
                 {item.project_type}
               </span>
-              <H4>
-                <PrismicRichText field={item.project_title} />
-              </H4>
+              <PrismicRichText
+                field={item.project_title}
+                components={{
+                  heading3: ({ children }) => <H3>{children}</H3>,
+                }}
+              />
             </header>
 
-            <article className="prose prose-strong:text-gray-400 dark:text-gray-100">
+            <article className="prose prose-strong:text-gray-600 dark:text-gray-100">
               <PrismicRichText field={item.project_description} />
             </article>
 
