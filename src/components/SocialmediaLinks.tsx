@@ -18,7 +18,7 @@ export default function SocialmediaLinks() {
       </a>
       <a
         title="Linkedin"
-        href="https://www.linkedin.com/in/juan-alvarez11/"
+        href="https://www.linkedin.com/in/alvarezjads/"
         target="_blank"
         rel="noreferrer"
       >
