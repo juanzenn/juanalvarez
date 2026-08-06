@@ -1,24 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useScroll = (scrolledValue = 200) => {
   const [scrolled, setScrolled] = useState(false);
 
-  const handleScroll = useCallback(() => {
-    const offset = window.scrollY;
-    setScrolled(offset > scrolledValue);
-  }, [scrolledValue]);
-
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-    }
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > scrolledValue;
 
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("scroll", handleScroll);
-      }
+      setScrolled((current) => (current === isScrolled ? current : isScrolled));
     };
-  }, [handleScroll]);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrolledValue]);
 
   return scrolled;
 };
