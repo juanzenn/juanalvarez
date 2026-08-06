@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
   }
 
-  revalidateTag("prismic");
+  revalidateTag("prismic", { expire: 0 });
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
