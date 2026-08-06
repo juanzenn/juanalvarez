@@ -31,9 +31,6 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
-          record: true
         env:
           API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
