@@ -1,1 +1,1 @@
-export { default } from "./MobileMenu";
+export { default, MOBILE_MENU_ID } from "./MobileMenu";

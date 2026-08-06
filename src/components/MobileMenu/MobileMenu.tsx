@@ -1,20 +1,92 @@
 import { Cross } from "akar-icons";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import { backdropVariants, menuVariants } from "./variants";
 
+export const MOBILE_MENU_ID = "mobile-menu";
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 function MobileMenu({
-  handleClose,
+  onClose,
   open,
+  triggerRef,
   children,
 }: {
-  handleClose: () => void;
+  onClose: () => void;
   open: boolean;
+  triggerRef: React.RefObject<HTMLButtonElement>;
   children: React.ReactNode;
 }) {
-  const mobileNavRef = useRef(null);
-  useOnClickOutside(mobileNavRef, handleClose);
+  const mobileNavRef = useRef<HTMLUListElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useOnClickOutside(mobileNavRef, (event) => {
+    const target = event.target as Node | null;
+
+    if (target && triggerRef.current?.contains(target)) return;
+
+    onClose();
+  });
+
+  useEffect(() => {
+    if (!open) return;
+
+    const trigger = triggerRef.current;
+    const menu = mobileNavRef.current;
+    closeButtonRef.current?.focus();
+
+    return () => {
+      const active = document.activeElement;
+      const focusWasInsideMenu =
+        !active || active === document.body || !!menu?.contains(active);
+
+      if (focusWasInsideMenu) trigger?.focus();
+    };
+  }, [open, triggerRef]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const menu = mobileNavRef.current;
+      if (!menu) return;
+
+      const focusable = Array.from(
+        menu.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      const insideMenu = active instanceof Node && menu.contains(active);
+
+      if (event.shiftKey && (!insideMenu || active === first)) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (!event.shiftKey && (!insideMenu || active === last)) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, onClose]);
 
   return (
     <AnimatePresence presenceAffectsLayout>
@@ -25,7 +97,7 @@ function MobileMenu({
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="absolute top-0 flex h-screen w-screen justify-end overflow-hidden bg-black/60 lg:hidden"
+          className="fixed top-0 flex h-screen w-screen justify-end overflow-hidden bg-black/60 lg:hidden"
         >
           <motion.ul
             layout
@@ -34,13 +106,20 @@ function MobileMenu({
             animate="visible"
             exit="hidden"
             className="absolute top-0 right-0 flex h-screen w-3/4 flex-col gap-4 bg-gray-50 py-4 shadow-inner dark:bg-gray-800 md:w-1/2"
+            id={MOBILE_MENU_ID}
             ref={mobileNavRef}
           >
-            <Cross
-              className="mr-4 mb-6 self-end text-primary-900 dark:text-primary-500"
-              size={20}
-              onClick={handleClose}
-            />
+            <li className="mb-6 self-end">
+              <button
+                ref={closeButtonRef}
+                type="button"
+                aria-label="Close menu"
+                className="mr-4 block text-primary-900 dark:text-primary-500"
+                onClick={onClose}
+              >
+                <Cross size={20} />
+              </button>
+            </li>
             {children}
           </motion.ul>
         </motion.div>
