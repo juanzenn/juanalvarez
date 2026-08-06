@@ -30,4 +30,3 @@ jobs:
       - run: pnpm build
         env:
           API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}

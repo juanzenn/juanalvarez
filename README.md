@@ -34,7 +34,6 @@ You need a `.env` before the app will boot — Prismic is required, the rest dep
 | `MAIL_USER` | contact form only | Gmail account used as the SMTP sender. |
 | `MAIL_PASSWORD` | contact form only | Gmail **app password**, not the account password. |
 | `PRISMIC_WEBHOOK_SECRET` | production only | Shared secret guarding `/api/revalidate`. If unset, the route accepts any request. |
-| `DATABASE_URL` | build only | MySQL connection string for Prisma. Needed because `prisma generate` runs as part of `pnpm build`. |
 
 ## Layout
 
@@ -51,7 +50,6 @@ src/
     MobileMenu/           Animated mobile nav
   lib/
     prismic.ts            Prismic client factory + preview support
-    db.ts                 Prisma client
 types.generated.ts        Generated from the Prismic custom types — do not edit by hand
 ```
 
@@ -78,7 +76,7 @@ Two separate things, easy to confuse:
 | Command | Does |
 | --- | --- |
 | `pnpm dev` | Dev server |
-| `pnpm build` | `prisma generate`, then `next build` |
+| `pnpm build` | Production build (`next build`) |
 | `pnpm start` | Serve a production build |
 | `pnpm lint` | ESLint (flat config, `eslint.config.mjs`) |
 | `pnpm cypress:open` | Open the Cypress runner |

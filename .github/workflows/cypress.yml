@@ -33,4 +33,3 @@ jobs:
           browser: chrome
         env:
           API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}

@@ -20,9 +20,6 @@ importers:
       '@heroicons/react':
         specifier: ^2.0.18
         version: 2.2.0(react@18.3.1)
-      '@prisma/client':
-        specifier: ^4.15.0
-        version: 4.16.2(prisma@4.16.2)
       '@prismicio/client':
         specifier: ^7.0.1
         version: 7.21.8
@@ -105,9 +102,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.3.0
         version: 0.3.0(prettier@2.8.8)
-      prisma:
-        specifier: ^4.15.0
-        version: 4.16.2
       prismic-ts-codegen:
         specifier: ^0.1.11
         version: 0.1.30(@prismicio/client@7.21.8)(@prismicio/types@0.2.9)
@@ -569,21 +563,6 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
-
-  '@prisma/client@4.16.2':
-    resolution: {integrity: sha512-qCoEyxv1ZrQ4bKy39GnylE8Zq31IRmm8bNhNbZx7bF2cU5aiCCnSa93J2imF88MBjn7J9eUQneNxUQVJdl/rPQ==}
-    engines: {node: '>=14.17'}
-    peerDependencies:
-      prisma: '*'
-    peerDependenciesMeta:
-      prisma:
-        optional: true
-
-  '@prisma/engines-version@4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81':
-    resolution: {integrity: sha512-q617EUWfRIDTriWADZ4YiWRZXCa/WuhNgLTVd+HqWLffjMSPzyM5uOWoauX91wvQClSKZU4pzI4JJLQ9Kl62Qg==}
-
-  '@prisma/engines@4.16.2':
-    resolution: {integrity: sha512-vx1nxVvN4QeT/cepQce68deh/Turxy5Mr+4L4zClFuK1GlxN3+ivxfuv+ej/gvidWn1cE1uAhW7ALLNlYbRUAw==}
 
   '@prismicio/client@7.21.8':
     resolution: {integrity: sha512-HFXrV/XdbVy/AL7V5K/976gr4SEa7WA7xuZuSNuseLK5VSl0DlMSgy7GTUk+ngjz9QvN0Xu3nxWzUGFxnD8RIA==}
@@ -2555,11 +2534,6 @@ packages:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
 
-  prisma@4.16.2:
-    resolution: {integrity: sha512-SYCsBvDf0/7XSJyf2cHTLjLeTLVXYfqp7pG5eEVafFLeT0u/hLFz/9W196nDRGUOo1JfPatAEb+uEnTQImQC1g==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   prismic-ts-codegen@0.1.30:
     resolution: {integrity: sha512-EiHQOYJ7h6QkEW7rTG8HQAZV5/ez5dVV/7NNO1JqL2zT7L2wVz8RSORtl6ceqwXZPjdxTLWEt7nUse59GmCHSA==}
     engines: {node: '>=20'}
@@ -3590,16 +3564,6 @@ snapshots:
       fastq: 1.20.1
 
   '@nolyfill/is-core-module@1.0.39': {}
-
-  '@prisma/client@4.16.2(prisma@4.16.2)':
-    dependencies:
-      '@prisma/engines-version': 4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
-    optionalDependencies:
-      prisma: 4.16.2
-
-  '@prisma/engines-version@4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81': {}
-
-  '@prisma/engines@4.16.2': {}
 
   '@prismicio/client@7.21.8':
     dependencies:
@@ -5656,10 +5620,6 @@ snapshots:
   prettier@2.8.8: {}
 
   pretty-bytes@5.6.0: {}
-
-  prisma@4.16.2:
-    dependencies:
-      '@prisma/engines': 4.16.2
 
   prismic-ts-codegen@0.1.30(@prismicio/client@7.21.8)(@prismicio/types@0.2.9):
     dependencies:
