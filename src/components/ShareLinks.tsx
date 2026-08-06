@@ -12,6 +12,9 @@ export default function ShareLinks({
 }) {
   const encodedUrl = encodeURIComponent(url);
   const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+  const twitterShare = `https://x.com/intent/post?url=${encodedUrl}&text=${encodeURIComponent(
+    title
+  )}`;
   const facebookShare = `https://www.facebook.com/share.php?u=${encodedUrl}`;
 
   return (
@@ -19,7 +22,7 @@ export default function ShareLinks({
       <hr className="w-full text-gray-300 lg:w-2/3" />
       <article className="flex w-full justify-between gap-4 px-4 lg:w-1/3">
         <span className="uppercase text-gray-400">share</span>
-        <section className="space-x-12 lg:space-x-4">
+        <section className="space-x-6 lg:space-x-4">
           <a
             className={anchorClassName}
             target="_blank"
@@ -28,6 +31,15 @@ export default function ShareLinks({
             aria-label={`Share "${title}" on LinkedIn`}
           >
             LinkedIn
+          </a>
+          <a
+            className={anchorClassName}
+            target="_blank"
+            rel="noreferrer"
+            href={twitterShare}
+            aria-label={`Share "${title}" on Twitter`}
+          >
+            Twitter
           </a>
           <a
             className={anchorClassName}
