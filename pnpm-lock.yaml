@@ -27,11 +27,11 @@ importers:
         specifier: ^7.0.1
         version: 7.21.8
       '@prismicio/next':
-        specifier: ^1.2.1
-        version: 1.7.2(@prismicio/client@7.21.8)(next@16.3.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: ^2.3.0
+        version: 2.3.0(@prismicio/client@7.21.8)(next@16.3.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@prismicio/react':
-        specifier: ^2.6.2
-        version: 2.9.2(@prismicio/client@7.21.8)(react@18.3.1)
+        specifier: ^3.4.1
+        version: 3.4.1(@prismicio/client@7.21.8)(react@18.3.1)
       '@types/nodemailer':
         specifier: ^6.4.8
         version: 6.4.24
@@ -266,9 +266,6 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@formatjs/intl-localematcher@0.5.10':
-    resolution: {integrity: sha512-af3qATX+m4Rnd9+wHcjJ4w2ijq+rAVP3CCinJQvFv1kgSu1W6jypUmvleJxcewdxmutM8dmIRZFxO/IQBZmP2Q==}
 
   '@fortawesome/fontawesome-common-types@6.7.2':
     resolution: {integrity: sha512-Zs+YeHUC5fkt7Mg1l6XTniei3k4bwG/yo3iFUtZWd/pMx9g3fdvkSK9E0FOC+++phXOka78uJcYb8JaFkW52Xg==}
@@ -598,25 +595,26 @@ packages:
     peerDependencies:
       '@prismicio/client': '>=7'
 
-  '@prismicio/next@1.7.2':
-    resolution: {integrity: sha512-dS9fRujiqK+uyhA5vCJgvxp4k7w3s6jm5Ln4fh1NSMS00yo7lHVL4GnhNmrxqATnIn/nHLbQmO24+yZVRWvxjw==}
-    engines: {node: '>=14.15.0'}
+  '@prismicio/next@2.3.0':
+    resolution: {integrity: sha512-Zo6KfE0NitFHagtL1vgvzI/UB1YLlBSFfwH5wqXz49hZgCHbjnKGTsU0uPp62wep05nfzzGH6k7EQCCYAi75lg==}
+    engines: {node: '>=20'}
     peerDependencies:
-      '@prismicio/client': ^6 || ^7
-      next: ^13.4.5 || ^14 || ^15.0.0-rc.0
-      react: ^18 || ^19.0.0-rc.0
+      '@prismicio/client': ^7
+      next: ^13.4.5 || ^14 || ^15 || ^16
+      react: ^18 || ^19
 
-  '@prismicio/react@2.9.2':
-    resolution: {integrity: sha512-aXTIYI1DNbBMaaDd4czW8foqJku2VXVGqI4n34w2BKMBPXqugCcL1dqaKtsyreza3bo0nE5C6YhUyil4rx70BA==}
-    engines: {node: '>=12.7.0'}
+  '@prismicio/react@3.4.1':
+    resolution: {integrity: sha512-OR/F1+B6tlPMGm5YCE7Ir0FXXfobyQDQvNGl22TUYVbyCMc7qyY4VtPIxyEbKJBQNRRM22UYc8a4THS49Fwetg==}
+    engines: {node: '>=20'}
     peerDependencies:
-      '@prismicio/client': ^6 || ^7
-      react: ^18 || ^19.0.0-rc.0
+      '@prismicio/client': ^7
+      react: ^18 || ^19
 
-  '@prismicio/richtext@2.1.5':
-    resolution: {integrity: sha512-Sf6iCsciPmfK3uQeFmeY9RTRSuhrCVzyU39OkiJ1VJn8O0531pKapGoWS+5WGxouJtE5+jGqV8L+L2mKP7NkXQ==}
-    engines: {node: '>=12.7.0'}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+  '@prismicio/simulator@0.2.4':
+    resolution: {integrity: sha512-dmxqaihyUkuUbbJwe/AJuE40c6jH233plJiGza8sTGmzNKd/V8tsP11+NuBN0vuFSpZ1zBEWYsZFbsCwHuJZyA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@prismicio/client': ^7
 
   '@prismicio/types@0.2.9':
     resolution: {integrity: sha512-1uhHnZTiGeCi+rmO507B8jtnUTCNetdgrC5sfZEw9zsCplfgBELt0+BN1RFsXWLbZbyvR9xzHcrJ87Ykqa8JZA==}
@@ -1508,6 +1506,9 @@ packages:
       jiti:
         optional: true
 
+  esm-env@1.2.2:
+    resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
+
   espree@10.4.0:
     resolution: {integrity: sha512-j6PAQ2uUr79PZhBjP5C5fhl8e39FmRnOjsD5lGnWrFU8i2G776tBK7+nP8KuQUTTyAZUwfQqXAgrVH5MbH9CYQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1805,10 +1806,6 @@ packages:
   ignore@7.0.6:
     resolution: {integrity: sha512-BAg6QkE8W+TuQLrrw0Ugr7HegXduRuuj8/ti2kSOc+jz1dmx8/WNcjr6XGnq5YpDWxFwwaavqD0+jIUOKelTsw==}
     engines: {node: '>= 4'}
-
-  imgix-url-builder@0.0.4:
-    resolution: {integrity: sha512-JRLydfxGTTbSSOG82ewuCgnmw/CzIPzoDqpP3UYD7RE+QWS8ZZbpF87ZuRqtcbEKdxahRsExinuKRxPZVvukWA==}
-    engines: {node: '>=12.7.0'}
 
   imgix-url-builder@0.0.6:
     resolution: {integrity: sha512-lFVbvaE9vMck8qz9j+y6o7vsyc1vZhdqzWu+Wp/nlnOCi9zAErc31QMkZKYUGMNLLzxOO4YIBAUPndTPah8HFg==}
@@ -2149,6 +2146,10 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
+  lz-string@1.5.0:
+    resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
+    hasBin: true
+
   map-obj@4.3.0:
     resolution: {integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==}
     engines: {node: '>=8'}
@@ -2230,10 +2231,6 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
-
-  negotiator@0.6.4:
-    resolution: {integrity: sha512-myRT3DiWPHqho5PrJaIRyaMv2kgYf0mUVgBNOYMuCH5Ki1yEiQaf/ZJuQ62nvpc44wL5WDbTX7yGJi1Neevw8w==}
-    engines: {node: '>= 0.6'}
 
   next@16.3.0:
     resolution: {integrity: sha512-NEdGOzH+08eTXMUp9UYkA99Nhi5N6Thrhc1jgFOQgfgnGK/dA2hRwBpXep+exdFQrnwlRf/3Wixyp8lLBUpE2A==}
@@ -3379,10 +3376,6 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@formatjs/intl-localematcher@0.5.10':
-    dependencies:
-      tslib: 2.8.1
-
   '@fortawesome/fontawesome-common-types@6.7.2': {}
 
   '@fortawesome/fontawesome-svg-core@6.7.2':
@@ -3616,26 +3609,27 @@ snapshots:
     dependencies:
       '@prismicio/client': 7.21.8
 
-  '@prismicio/next@1.7.2(@prismicio/client@7.21.8)(next@16.3.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@prismicio/next@2.3.0(@prismicio/client@7.21.8)(next@16.3.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@formatjs/intl-localematcher': 0.5.10
       '@prismicio/client': 7.21.8
-      imgix-url-builder: 0.0.4
-      negotiator: 0.6.4
+      '@prismicio/simulator': 0.2.4(@prismicio/client@7.21.8)
+      imgix-url-builder: 0.0.6
+      lz-string: 1.5.0
       next: 16.3.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
-  '@prismicio/react@2.9.2(@prismicio/client@7.21.8)(react@18.3.1)':
+  '@prismicio/react@3.4.1(@prismicio/client@7.21.8)(react@18.3.1)':
     dependencies:
       '@prismicio/client': 7.21.8
-      '@prismicio/richtext': 2.1.5
+      esm-env: 1.2.2
       react: 18.3.1
 
-  '@prismicio/richtext@2.1.5':
+  '@prismicio/simulator@0.2.4(@prismicio/client@7.21.8)':
     dependencies:
-      '@prismicio/types': 0.2.9
+      '@prismicio/client': 7.21.8
 
-  '@prismicio/types@0.2.9': {}
+  '@prismicio/types@0.2.9':
+    optional: true
 
   '@rtsao/scc@1.1.0': {}
 
@@ -4683,6 +4677,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  esm-env@1.2.2: {}
+
   espree@10.4.0:
     dependencies:
       acorn: 8.18.0
@@ -4987,8 +4983,6 @@ snapshots:
   ignore@5.3.2: {}
 
   ignore@7.0.6: {}
-
-  imgix-url-builder@0.0.4: {}
 
   imgix-url-builder@0.0.6: {}
 
@@ -5309,6 +5303,8 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
+  lz-string@1.5.0: {}
+
   map-obj@4.3.0: {}
 
   math-intrinsics@1.1.0: {}
@@ -5382,8 +5378,6 @@ snapshots:
   napi-postinstall@0.3.4: {}
 
   natural-compare@1.4.0: {}
-
-  negotiator@0.6.4: {}
 
   next@16.3.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
