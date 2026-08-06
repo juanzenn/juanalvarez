@@ -1,64 +1,39 @@
 name: Cypress
 
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node18.12.0-chrome107
-      options: --user 1001
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Cypress install
-        uses: cypress-io/github-action@v5
-        with:
-          runTests: false
-          build: npm run github:build
-        env:
-          API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: .next
-          if-no-files-found: error
-
   e2e-chrome-tests:
     runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node18.12.0-chrome107
-      options: --user 1001
-    needs: install
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: [1, 2]
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
-      - name: Download the build folders
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: .next
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
 
-      - name: "UI Tests - Chrome"
-        uses: cypress-io/github-action@v5 # use the explicit version number
+      - name: Install Node.js
+        uses: actions/setup-node@v7
         with:
-          start: npm i
+          node-version: 22.x
+          cache: "pnpm"
+
+      - name: UI Tests - Chrome
+        uses: cypress-io/github-action@v7
+        with:
+          package-manager-cache: false
+          build: pnpm build
+          start: pnpm start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
           record: true
-          parallel: true
-          group: "UI - Chrome"
-          spec: cypress/e2e/*
         env:
+          API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
