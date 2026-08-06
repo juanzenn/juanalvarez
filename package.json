@@ -13,6 +13,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
     "dev": "next dev",
     "build": "pnpm prod:db-config && next build",
     "start": "next start",

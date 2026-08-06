@@ -36,6 +36,8 @@ You need a `.env` before the app will boot — Prismic is required, the rest dep
 | `PRISMIC_WEBHOOK_SECRET` | production only | Shared secret guarding `/api/revalidate`. If unset, the route accepts any request. |
 | `DATABASE_URL` | build only | MySQL connection string for Prisma. Needed because `prisma generate` runs as part of `pnpm build`. |
 
+To typecheck, run `pnpm typecheck` rather than a bare `tsc --noEmit`. On a checkout that has never run `dev` or `build`, `tsc` alone reports seven false `TS2307` "cannot find module" errors against the static image imports — see [Scripts](#scripts).
+
 ## Layout
 
 ```
@@ -81,4 +83,7 @@ Two separate things, easy to confuse:
 | `pnpm build` | `prisma generate`, then `next build` |
 | `pnpm start` | Serve a production build |
 | `pnpm lint` | ESLint (flat config, `eslint.config.mjs`) |
+| `pnpm typecheck` | `next typegen`, then `tsc --noEmit` |
 | `pnpm cypress:open` | Open the Cypress runner |
+
+`pnpm typecheck` runs `next typegen` first because TypeScript only knows that `import mePicture from "@/public/images/me-big.jpg"` is a module through `next-env.d.ts`, which references `next/image-types/global`. Next generates that file rather than committing it — it's gitignored, and in Next 16 it imports from `.next/`, which is build output. Generating it first makes the script correct from any starting state, including a fresh clone or CI checkout.
