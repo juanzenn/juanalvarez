@@ -4,6 +4,7 @@ import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import ShareLinks from "~/components/ShareLinks";
 import SocialmediaLinks from "~/components/SocialmediaLinks";
 import { H1, H4, Paragraph } from "~/components/utils/text";
 import { prismicClient } from "~/lib/prismic";
@@ -34,10 +35,6 @@ export default async function BlogPost({ params }: Props) {
 
   const currentUrl = "https://juanalvarez.dev";
   const link = `${currentUrl}/blog/${slug}`;
-  const twitterShare = `https://twitter.com/intent/tweet?url=${link}&text=${prismic.asText(
-    title,
-  )}`;
-  const fbShare = `http://www.facebook.com/share.php?u=${link}`;
 
   return (
     <main className="mx-auto max-w-[1080px] px-4 py-8">
@@ -61,30 +58,7 @@ export default async function BlogPost({ params }: Props) {
         </article>
       </main>
 
-      <section className="my-8 flex flex-col items-center gap-4 lg:flex-row">
-        <hr className="w-full text-gray-300 lg:w-2/3" />
-        <article className="flex w-full justify-between gap-4 px-4 lg:w-1/3">
-          <span className="uppercase text-gray-400">share</span>
-          <section className="space-x-12 lg:space-x-4">
-            <a
-              className="font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-              target="_blank"
-              rel="noreferrer"
-              href={twitterShare}
-            >
-              Twitter
-            </a>
-            <a
-              className="font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-              target="_blank"
-              rel="noreferrer"
-              href={fbShare}
-            >
-              Facebook
-            </a>
-          </section>
-        </article>
-      </section>
+      <ShareLinks url={link} title={prismic.asText(title)} />
 
       <footer className="my-8">
         <section className="flex gap-4">
