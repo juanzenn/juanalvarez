@@ -9,9 +9,9 @@ import { H1, H4, Paragraph } from "~/components/utils/text";
 import { prismicClient } from "~/lib/prismic";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default async function BlogPost({ params }: Props) {
   const client = prismicClient();
-  const { slug } = params;
+  const { slug } = await params;
 
   if (!slug) notFound();
 
