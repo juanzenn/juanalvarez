@@ -12,7 +12,7 @@
     "type": "git"
   },
   "scripts": {
-    "lint": "next lint",
+    "lint": "eslint .",
     "dev": "next dev",
     "build": "pnpm prod:db-config && next build",
     "start": "next start",
@@ -46,14 +46,15 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/js-cookie": "^3.0.3",
     "@types/react": "^18.2.8",
     "autoprefixer": "^10.4.14",
     "cypress": "^12.13.0",
-    "eslint": "^10.8.0",
-    "eslint-config-next": "^13.4.4",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.0",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
