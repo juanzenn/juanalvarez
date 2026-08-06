@@ -19,9 +19,6 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "~/prisma/*": [
-        "./prisma/*"
-      ],
       "~/cypress/*": [
         "./cypress/*"
       ],
