@@ -1,8 +1,10 @@
 import { Cross } from "akar-icons";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import { backdropVariants, menuVariants } from "./variants";
+
+export const MOBILE_MENU_ID = "mobile-menu";
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -15,32 +17,34 @@ function MobileMenu({
 }: {
   onClose: () => void;
   open: boolean;
-  triggerRef?: React.RefObject<HTMLButtonElement>;
+  triggerRef: React.RefObject<HTMLButtonElement>;
   children: React.ReactNode;
 }) {
   const mobileNavRef = useRef<HTMLUListElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleClickOutside = useCallback(
-    (event: MouseEvent | TouchEvent) => {
-      const target = event.target as Node | null;
+  useOnClickOutside(mobileNavRef, (event) => {
+    const target = event.target as Node | null;
 
-      if (target && triggerRef?.current?.contains(target)) return;
+    if (target && triggerRef.current?.contains(target)) return;
 
-      onClose();
-    },
-    [onClose, triggerRef]
-  );
-
-  useOnClickOutside(mobileNavRef, handleClickOutside);
+    onClose();
+  });
 
   useEffect(() => {
     if (!open) return;
 
-    const trigger = triggerRef?.current;
+    const trigger = triggerRef.current;
+    const menu = mobileNavRef.current;
     closeButtonRef.current?.focus();
 
-    return () => trigger?.focus();
+    return () => {
+      const active = document.activeElement;
+      const focusWasInsideMenu =
+        !active || active === document.body || !!menu?.contains(active);
+
+      if (focusWasInsideMenu) trigger?.focus();
+    };
   }, [open, triggerRef]);
 
   useEffect(() => {
@@ -102,7 +106,7 @@ function MobileMenu({
             animate="visible"
             exit="hidden"
             className="absolute top-0 right-0 flex h-screen w-3/4 flex-col gap-4 bg-gray-50 py-4 shadow-inner dark:bg-gray-800 md:w-1/2"
-            id="mobile-menu"
+            id={MOBILE_MENU_ID}
             ref={mobileNavRef}
           >
             <li className="mb-6 self-end">

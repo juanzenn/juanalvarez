@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useScroll } from "~/hooks/useScroll";
 import { cn } from "~/lib/cn";
-import MobileMenu from "./MobileMenu";
+import MobileMenu, { MOBILE_MENU_ID } from "./MobileMenu";
 import ThemeButton from "./ThemeButton";
 
 type Props = {
@@ -71,7 +71,7 @@ export default function Navbar({ defaultTheme }: Props) {
             type="button"
             aria-label="Main menu"
             aria-expanded={isOpen}
-            aria-controls="mobile-menu"
+            aria-controls={MOBILE_MENU_ID}
             onClick={toggleMenu}
           >
             <Bars3Icon className="h-6 w-6 text-primary-900 dark:text-primary-500" />
@@ -103,7 +103,9 @@ export default function Navbar({ defaultTheme }: Props) {
           </LinkItem>
         ))}
 
-        <ThemeButton defaultTheme={defaultTheme} />
+        <li className="self-end">
+          <ThemeButton defaultTheme={defaultTheme} />
+        </li>
       </MobileMenu>
 
       <span className="hidden lg:block">

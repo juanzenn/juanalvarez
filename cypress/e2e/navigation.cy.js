@@ -22,6 +22,29 @@ describe("Mobile navigation", () => {
     cy.get(TRIGGER).should("have.attr", "aria-expanded", "false");
   });
 
+  it("toggles from the trigger without double-toggling itself", () => {
+    cy.get(TRIGGER).click();
+    cy.get(MENU).should("be.visible");
+
+    cy.get(TRIGGER).click({ force: true });
+    cy.get(MENU).should("not.exist");
+    cy.get(TRIGGER).should("have.attr", "aria-expanded", "false");
+
+    cy.get(TRIGGER).click();
+    cy.get(MENU).should("be.visible");
+    cy.get(TRIGGER).should("have.attr", "aria-expanded", "true");
+  });
+
+  it("does not close on the dismissing mousedown that precedes a trigger click", () => {
+    cy.get(TRIGGER).click();
+    cy.get(MENU).should("be.visible");
+
+    cy.get(TRIGGER).trigger("mousedown", { force: true });
+
+    cy.get(MENU).should("be.visible");
+    cy.get(TRIGGER).should("have.attr", "aria-expanded", "true");
+  });
+
   it("moves focus into the menu, closes on Escape and restores focus to the trigger", () => {
     cy.get(TRIGGER).click();
     cy.focused().should("have.attr", "aria-label", "Close menu");
@@ -106,27 +129,30 @@ describe("Mobile navigation", () => {
 });
 
 describe("Scrolled navbar", () => {
-  const scrollTo = (offset) =>
-    cy.window().then((win) => {
-      win.scrollTo(0, offset);
-      win.dispatchEvent(new win.Event("scroll"));
-    });
+  const scrollWindowTo = (offset) => {
+    cy.scrollTo(0, offset);
+    cy.window().then((win) => win.dispatchEvent(new win.Event("scroll")));
+  };
 
-  it("gains the scrolled background once past the threshold", () => {
-    cy.viewport("iphone-x");
-    cy.visit("/");
-
+  const openAndCloseMenuToProveHydration = () => {
     cy.get(TRIGGER).click();
     cy.get(MENU).should("be.visible");
     cy.get(CLOSE).click();
     cy.get(MENU).should("not.exist");
+  };
 
+  it("gains the scrolled background once past the threshold", () => {
+    cy.viewport("iphone-x");
+    cy.visit("/");
+    openAndCloseMenuToProveHydration();
+
+    scrollWindowTo(0);
     cy.get("nav").should("not.have.class", "shadow");
 
-    scrollTo(400);
+    scrollWindowTo(400);
     cy.get("nav").should("have.class", "shadow");
 
-    scrollTo(0);
+    scrollWindowTo(0);
     cy.get("nav").should("not.have.class", "shadow");
   });
 });
