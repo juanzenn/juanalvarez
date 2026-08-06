@@ -26,21 +26,13 @@ export default function ThemeButton({ defaultTheme }: Props) {
   };
 
   useEffect(() => {
-    const theme = Cookies.get("theme");
+    const storedTheme = Cookies.get("theme");
 
-    if (!theme) {
+    if (!storedTheme) {
       Cookies.set("theme", "light");
-      setTheme("light");
-
-      return;
     }
 
-    setTheme(theme);
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    document.documentElement.classList.toggle("dark", storedTheme === "dark");
   }, []);
 
   return (
