@@ -20,8 +20,7 @@
     "dev:db-push": "prisma db push",
     "dev:db-migrate": "prisma migrate dev",
     "dev:db-studio": "prisma studio",
-    "prod:db-config": "prisma generate",
-    "github:build": "npm run prod:db-config && next build"
+    "prod:db-config": "prisma generate"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
