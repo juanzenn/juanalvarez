@@ -1,8 +1,9 @@
 const SITE_URL = "https://juanalvarez.dev";
+const DEFAULT_COVER_URL = `${SITE_URL}/cover.png`;
 
-const fetchDocument = (path, options = {}) =>
+const fetchDocument = (path) =>
   cy
-    .request({ url: path, ...options })
+    .request(path)
     .then(({ body }) => new DOMParser().parseFromString(body, "text/html"));
 
 const meta = (doc, key) =>
@@ -10,10 +11,18 @@ const meta = (doc, key) =>
     .querySelector(`meta[property="${key}"], meta[name="${key}"]`)
     ?.getAttribute("content");
 
+const text = (doc, selector) => {
+  const element = doc.querySelector(selector);
+
+  expect(element, `${selector} in fetched document`).not.to.be.null;
+
+  return element.textContent.trim();
+};
+
 const blogPostSlugs = () =>
-  cy.request("/blog").then(({ body }) => {
-    const slugs = [...body.matchAll(/href="\/blog\/([^"?#]+)"/g)].map(
-      (match) => match[1]
+  fetchDocument("/blog").then((doc) => {
+    const slugs = [...doc.querySelectorAll('a[href^="/blog/"]')].map((anchor) =>
+      anchor.getAttribute("href").replace("/blog/", "")
     );
 
     return [...new Set(slugs)];
@@ -25,14 +34,17 @@ describe("Default site metadata", () => {
   pages.forEach((path) => {
     it(`gives ${path} a share card built on the default cover`, () => {
       fetchDocument(path).then((doc) => {
-        const pageTitle = doc.querySelector("title").textContent;
+        const pageTitle = text(doc, "title");
 
         expect(pageTitle).not.to.be.empty;
         expect(meta(doc, "og:title")).to.equal(pageTitle);
+
+        expect(meta(doc, "description")).not.to.be.empty;
         expect(meta(doc, "og:description")).to.equal(meta(doc, "description"));
+
         expect(meta(doc, "og:site_name")).to.equal("Juan Alvarez");
         expect(meta(doc, "og:type")).to.equal("website");
-        expect(meta(doc, "og:image")).to.equal(`${SITE_URL}/cover.png`);
+        expect(meta(doc, "og:image")).to.equal(DEFAULT_COVER_URL);
         expect(meta(doc, "twitter:card")).to.equal("summary_large_image");
       });
     });
@@ -43,7 +55,7 @@ describe("Default site metadata", () => {
 
     pages.forEach((path) => {
       fetchDocument(path).then((doc) => {
-        titles.push(doc.querySelector("title").textContent);
+        titles.push(text(doc, "title"));
       });
     });
 
@@ -57,10 +69,10 @@ describe("Blog post metadata", () => {
   it("advertises the post's own title, description and cover image", () => {
     blogPostSlugs().then(([slug]) => {
       fetchDocument(`/blog/${slug}`).then((doc) => {
-        const heading = doc.querySelector("h1").textContent.trim();
+        const heading = text(doc, "h1");
 
         expect(heading).not.to.be.empty;
-        expect(doc.querySelector("title").textContent).to.equal(heading);
+        expect(text(doc, "title")).to.equal(heading);
         expect(meta(doc, "og:title")).to.equal(heading);
 
         expect(meta(doc, "description")).not.to.be.empty;
@@ -69,9 +81,14 @@ describe("Blog post metadata", () => {
         expect(meta(doc, "og:type")).to.equal("article");
         expect(meta(doc, "og:url")).to.equal(`${SITE_URL}/blog/${slug}`);
 
-        expect(meta(doc, "og:image")).to.match(
-          /^https:\/\/images\.prismic\.io\//
-        );
+        if (doc.querySelector("header figure img")) {
+          expect(meta(doc, "og:image")).to.match(
+            /^https:\/\/images\.prismic\.io\//
+          );
+        } else {
+          expect(meta(doc, "og:image")).to.equal(DEFAULT_COVER_URL);
+        }
+
         expect(Number(meta(doc, "og:image:width"))).to.be.greaterThan(0);
         expect(Number(meta(doc, "og:image:height"))).to.be.greaterThan(0);
 
@@ -97,8 +114,8 @@ describe("Blog post metadata", () => {
 
       fetchDocument(`/blog/${first}`).then((firstDoc) => {
         fetchDocument(`/blog/${second}`).then((secondDoc) => {
-          expect(firstDoc.querySelector("title").textContent).not.to.equal(
-            secondDoc.querySelector("title").textContent
+          expect(text(firstDoc, "title")).not.to.equal(
+            text(secondDoc, "title")
           );
           expect(meta(firstDoc, "og:title")).not.to.equal(
             meta(secondDoc, "og:title")

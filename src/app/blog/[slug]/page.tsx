@@ -8,7 +8,12 @@ import ShareLinks from "~/components/ShareLinks";
 import SocialmediaLinks from "~/components/SocialmediaLinks";
 import { H1, H4, Paragraph } from "~/components/utils/text";
 import { getPostBySlug } from "~/lib/posts";
-import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "~/lib/site";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "~/lib/site";
 
 type Props = {
   params: Promise<{
@@ -25,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { title, description, cover } = post.data;
 
   const postTitle = prismic.asText(title);
-  const postDescription = prismic.asText(description);
+  const postDescription = prismic.asText(description) || SITE_DESCRIPTION;
 
   return {
     title: postTitle,

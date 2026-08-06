@@ -5,18 +5,21 @@ import Footer from "~/components/Footer";
 import GoTop from "~/components/GoTop";
 import Navbar from "~/components/Navbar";
 import { cn } from "~/lib/cn";
-import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "~/lib/site";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "~/lib/site";
 import "./global.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Juan Alvarez | Fullstack Web Developer, freelancer, and writer.",
-  description:
-    "I'm Juan, a fullstack web developer and freelancer, based in Venezuela. I build web applications and websites with quality in mind.",
+  description: SITE_DESCRIPTION,
   openGraph: {
     siteName: SITE_NAME,
     type: "website",
-    locale: "en_US",
     images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
