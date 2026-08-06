@@ -7,7 +7,8 @@ import { notFound } from "next/navigation";
 import ShareLinks from "~/components/ShareLinks";
 import SocialmediaLinks from "~/components/SocialmediaLinks";
 import { H1, H4, Paragraph } from "~/components/utils/text";
-import { prismicClient } from "~/lib/prismic";
+import { getPostBySlug } from "~/lib/posts";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "~/lib/site";
 
 type Props = {
   params: Promise<{
@@ -15,26 +16,53 @@ type Props = {
   }>;
 };
 
-export const metadata: Metadata = {
-  // Mejorar esto
-  title: "Juan Alvarez | Blog",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) notFound();
+
+  const { title, description, cover } = post.data;
+
+  const postTitle = prismic.asText(title);
+  const postDescription = prismic.asText(description);
+
+  return {
+    title: postTitle,
+    description: postDescription,
+    openGraph: {
+      title: postTitle,
+      description: postDescription,
+      url: `/blog/${slug}`,
+      type: "article",
+      siteName: SITE_NAME,
+      images: prismic.isFilled.image(cover)
+        ? [
+            {
+              url: cover.url,
+              width: cover.dimensions.width,
+              height: cover.dimensions.height,
+              alt: cover.alt ?? postTitle,
+            },
+          ]
+        : [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
+}
 
 export default async function BlogPost({ params }: Props) {
-  const client = prismicClient();
   const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
-  if (!slug) notFound();
-
-  const post = await client.getSingle("blog_post", {
-    predicates: [prismic.filter.at("my.blog_post.slug", slug)],
-  });
+  if (!post) notFound();
 
   const { data } = post;
   const { title, description, cover, content } = data;
 
-  const currentUrl = "https://juanalvarez.dev";
-  const link = `${currentUrl}/blog/${slug}`;
+  const link = `${SITE_URL}/blog/${slug}`;
 
   return (
     <main className="mx-auto max-w-[1080px] px-4 py-8">
