@@ -2,7 +2,7 @@ import React from "react";
 
 import { Content, asLink } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { Envelope, GithubFill, LinkedinFill, TwitterFill } from "akar-icons";
+import { Envelope, GithubFill, LinkedinFill } from "akar-icons";
 
 export default function Contact({
   slice,
@@ -25,15 +25,6 @@ export default function Contact({
                   href="mailto:alvarezdasilvaj@gmail.com"
                 >
                   <Envelope
-                    className="transition-all hover:text-primary-600"
-                    size={36}
-                  />
-                </a>
-              );
-            case "Twitter":
-              return (
-                <a key={`link-${index}`} href={asLink(item.contact_link) ?? ""}>
-                  <TwitterFill
                     className="transition-all hover:text-primary-600"
                     size={36}
                   />
