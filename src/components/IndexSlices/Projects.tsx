@@ -1,10 +1,8 @@
 import { Content, asLink, asText } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { GithubFill, LinkOut } from "akar-icons";
+import { FOCUS_RING } from "~/lib/focus-ring";
 import { H2, H3 } from "../utils/text";
-
-const FOCUS_RING =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 dark:focus-visible:ring-primary-400 dark:focus-visible:ring-offset-gray-700";
 
 export default function Projects({
   slice,

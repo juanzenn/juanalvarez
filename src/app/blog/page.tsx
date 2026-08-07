@@ -24,7 +24,7 @@ export default async function Index() {
         <H1>Blog</H1>
       </header>
 
-      <section className="mb-12 grid gap-6 md:grid-cols-2 lg:gap-12">
+      <section className="mb-12 grid gap-6 sm:grid-cols-2">
         {posts?.map((post) => (
           <PostPreview post={post} key={post?.id} />
         ))}
