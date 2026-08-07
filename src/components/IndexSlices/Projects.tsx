@@ -1,12 +1,13 @@
-import { Content, asLink, asText } from "@prismicio/client";
+import { asLink, asText } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { GithubFill, LinkOut } from "akar-icons";
 import { FOCUS_RING } from "~/lib/focus-ring";
+import type { IndexDocumentDataBodyProjectsSlice } from "~/types.generated";
 import { H2, H3 } from "../utils/text";
 
 export default function Projects({
   slice,
-}: SliceComponentProps<Content.IndexDocumentDataBodyProjectsSlice>) {
+}: SliceComponentProps<IndexDocumentDataBodyProjectsSlice>) {
   const { primary, items } = slice;
 
   return (

@@ -2,398 +2,483 @@
 
 import type * as prismic from "@prismicio/client";
 
-type Simplify<T> = {
-  [KeyType in keyof T]: T[KeyType];
-};
-/** Content for Blog post documents */
+type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
+
+
+type PickContentRelationshipFieldData<
+	TRelationship extends prismic.CustomTypeModelFetchCustomTypeLevel1 | prismic.CustomTypeModelFetchCustomTypeLevel2 | prismic.CustomTypeModelFetchGroupLevel1 | prismic.CustomTypeModelFetchGroupLevel2,
+	TData extends Record<string, prismic.AnyRegularField | prismic.GroupField | prismic.NestedGroupField | prismic.SliceZone>,
+	TLang extends string
+> = |
+	// Content relationship fields
+	{
+		[TSubRelationship in Extract<
+			TRelationship["fields"][number], prismic.CustomTypeModelFetchContentRelationshipLevel1
+		> as TSubRelationship["id"]]:
+			ContentRelationshipFieldWithData<TSubRelationship["customtypes"], TLang>;
+	} &
+	// Group
+	{
+		[TGroup in Extract<
+			TRelationship["fields"][number], prismic.CustomTypeModelFetchGroupLevel1 | prismic.CustomTypeModelFetchGroupLevel2
+		> as TGroup["id"]]:
+			TData[TGroup["id"]] extends prismic.GroupField<infer TGroupData>
+				? prismic.GroupField<PickContentRelationshipFieldData<TGroup, TGroupData, TLang>>
+				: never
+	} &
+	// Other fields
+	{
+		[TFieldKey in Extract<TRelationship["fields"][number], string>]:
+			TFieldKey extends keyof TData ? TData[TFieldKey] : never;
+	};
+
+type ContentRelationshipFieldWithData<
+	TCustomType extends readonly (prismic.CustomTypeModelFetchCustomTypeLevel1 | string)[] | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
+	TLang extends string = string
+> = {
+	[ID in Exclude<TCustomType[number], string>["id"]]:
+		prismic.ContentRelationshipField<
+			ID,
+			TLang,
+			PickContentRelationshipFieldData<
+				Extract<TCustomType[number], { id: ID }>,
+				Extract<prismic.Content.AllDocumentTypes, { type: ID }>["data"],
+				TLang
+			>
+		>
+}[Exclude<TCustomType[number], string>["id"]];
+
+/**
+ * Content for Blog post documents
+ */
 interface BlogPostDocumentData {
-  /**
-   * Title field in *Blog post*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_post.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  title: prismic.TitleField;
-  /**
-   * Slug field in *Blog post*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_post.slug
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
-   *
-   */
-  slug: prismic.KeyTextField;
-  /**
-   * Description field in *Blog post*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_post.description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  description: prismic.RichTextField;
-  /**
-   * Cover field in *Blog post*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_post.cover
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/core-concepts/image
-   *
-   */
-  cover: prismic.ImageField<never>;
-  /**
-   * Content field in *Blog post*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_post.content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  content: prismic.RichTextField;
+	/**
+	 * Title field in *Blog post*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: blog_post.title
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	title: prismic.RichTextField;
+	
+	/**
+	 * Slug field in *Blog post*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: blog_post.slug
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	slug: prismic.KeyTextField;
+	
+	/**
+	 * Description field in *Blog post*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: blog_post.description
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	description: prismic.RichTextField;
+	
+	/**
+	 * Cover field in *Blog post*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: blog_post.cover
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	cover: prismic.ImageField<never>;
+	
+	/**
+	 * Content field in *Blog post*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: blog_post.content
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	content: prismic.RichTextField;
 }
+
 /**
  * Blog post document from Prismic
  *
  * - **API ID**: `blog_post`
  * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ * - **Documentation**: https://prismic.io/docs/content-modeling
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type BlogPostDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<BlogPostDocumentData>,
-    "blog_post",
-    Lang
-  >;
-/** Content for Homepage documents */
-interface IndexDocumentData {
-  /**
-   * Slice zone field in *Homepage*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: index.body[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/core-concepts/slices
-   *
-   */
-  body: prismic.SliceZone<IndexDocumentDataBodySlice>;
-}
+export type BlogPostDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<BlogPostDocumentData>, "blog_post", Lang>;
+
 /**
- * Primary content in Homepage → Slice zone → `heroabout` → Primary
- *
+ * Primary content in *Homepage → Slice zone → About Me → Primary*
  */
-interface IndexDocumentDataBodyHeroaboutSlicePrimary {
-  /**
-   * Title field in *Homepage → Slice zone → `heroabout` → Primary*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: Hi, I'm ...
-   * - **API ID Path**: index.body[].heroabout.primary.title
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  title: prismic.TitleField;
-  /**
-   * About field in *Homepage → Slice zone → `heroabout` → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Hey, I like mac & cheese
-   * - **API ID Path**: index.body[].heroabout.primary.about
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  about: prismic.RichTextField;
+export interface IndexDocumentDataBodyHeroaboutSlicePrimary {
+	/**
+	 * Title field in *Homepage → Slice zone → About Me → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: Hi, I'm ...
+	 * - **API ID Path**: index.body[].heroabout.primary.title
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	title: prismic.RichTextField;
+	
+	/**
+	 * About field in *Homepage → Slice zone → About Me → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: Hey, I like mac & cheese
+	 * - **API ID Path**: index.body[].heroabout.primary.about
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	about: prismic.RichTextField;
+	
+	/**
+	 * CTA Button Text field in *Homepage → Slice zone → About Me → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: index.body[].heroabout.primary.cta_button_text
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	cta_button_text: prismic.RichTextField;
+	
+	/**
+	 * CTA Button URL field in *Homepage → Slice zone → About Me → Primary*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: index.body[].heroabout.primary.cta_button_url
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	cta_button_url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
-export type IndexDocumentDataBodyHeroaboutSlice = prismic.Slice<
-  "heroabout",
-  Simplify<IndexDocumentDataBodyHeroaboutSlicePrimary>,
-  never
->;
-/**
- * Primary content in Homepage → Slice zone → `projects` → Primary
- *
- */
-interface IndexDocumentDataBodyProjectsSlicePrimary {
-  /**
-   * Title field in *Homepage → Slice zone → `projects` → Primary*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: Ultimate Project
-   * - **API ID Path**: index.body[].projects.primary.title
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  title: prismic.TitleField;
-  /**
-   * Subtitle field in *Homepage → Slice zone → `projects` → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: You want to add something?
-   * - **API ID Path**: index.body[].projects.primary.subtitle
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  subtitle: prismic.RichTextField;
-}
-/**
- * Item in Homepage → Slice zone → `projects` → Items
- *
- */
-export interface IndexDocumentDataBodyProjectsSliceItem {
-  /**
-   * Project title field in *Homepage → Slice zone → `projects` → Items*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: Turtle Finder
-   * - **API ID Path**: index.body[].projects.items[].project_title
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  project_title: prismic.TitleField;
-  /**
-   * Project Type field in *Homepage → Slice zone → `projects` → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Web Application
-   * - **API ID Path**: index.body[].projects.items[].project_type
-   * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
-   *
-   */
-  project_type: prismic.KeyTextField;
-  /**
-   * Github Link field in *Homepage → Slice zone → `projects` → Items*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: index.body[].projects.items[].github_link
-   * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-   *
-   */
-  github_link: prismic.LinkField;
-  /**
-   * Link field in *Homepage → Slice zone → `projects` → Items*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: http://turtlefinder.io
-   * - **API ID Path**: index.body[].projects.items[].link
-   * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-   *
-   */
-  link: prismic.LinkField;
-  /**
-   * Project Description field in *Homepage → Slice zone → `projects` → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: I made this app for finding turtles near me
-   * - **API ID Path**: index.body[].projects.items[].project_description
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  project_description: prismic.RichTextField;
-}
-export type IndexDocumentDataBodyProjectsSlice = prismic.Slice<
-  "projects",
-  Simplify<IndexDocumentDataBodyProjectsSlicePrimary>,
-  Simplify<IndexDocumentDataBodyProjectsSliceItem>
->;
-/**
- * Primary content in Homepage → Slice zone → `blog_posts` → Primary
- *
- */
-interface IndexDocumentDataBodyBlogPostsSlicePrimary {
-  /**
-   * Title field in *Homepage → Slice zone → `blog_posts` → Primary*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: Blog Posts about Cats
-   * - **API ID Path**: index.body[].blog_posts.primary.title
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  title: prismic.TitleField;
-  /**
-   * Subtitle field in *Homepage → Slice zone → `blog_posts` → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Want to add something?
-   * - **API ID Path**: index.body[].blog_posts.primary.subtitle
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  subtitle: prismic.RichTextField;
-}
-/**
- * Item in Homepage → Slice zone → `blog_posts` → Items
- *
- */
-export interface IndexDocumentDataBodyBlogPostsSliceItem {
-  /**
-   * Blog field in *Homepage → Slice zone → `blog_posts` → Items*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: index.body[].blog_posts.items[].blog
-   * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-   *
-   */
-  blog: prismic.ContentRelationshipField<"blog_post">;
-}
-export type IndexDocumentDataBodyBlogPostsSlice = prismic.Slice<
-  "blog_posts",
-  Simplify<IndexDocumentDataBodyBlogPostsSlicePrimary>,
-  Simplify<IndexDocumentDataBodyBlogPostsSliceItem>
->;
-/**
- * Item in Homepage → Slice zone → `contact` → Items
- *
- */
-export interface IndexDocumentDataBodyContactSliceItem {
-  /**
-   * Contact Label field in *Homepage → Slice zone → `contact` → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Twitter/GitHub/Email...
-   * - **API ID Path**: index.body[].contact.items[].contact_label
-   * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
-   *
-   */
-  contact_label: prismic.KeyTextField;
-  /**
-   * Contact Link field in *Homepage → Slice zone → `contact` → Items*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: https://github.com/xxx | mailto:myemail@email.com
-   * - **API ID Path**: index.body[].contact.items[].contact_link
-   * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-   *
-   */
-  contact_link: prismic.LinkField;
-}
-export type IndexDocumentDataBodyContactSlice = prismic.Slice<
-  "contact",
-  Record<string, never>,
-  Simplify<IndexDocumentDataBodyContactSliceItem>
->;
+
 /**
  * Slice for *Homepage → Slice zone*
- *
  */
-type IndexDocumentDataBodySlice =
-  | IndexDocumentDataBodyHeroaboutSlice
-  | IndexDocumentDataBodyProjectsSlice
-  | IndexDocumentDataBodyBlogPostsSlice
-  | IndexDocumentDataBodyContactSlice;
+export type IndexDocumentDataBodyHeroaboutSlice = prismic.Slice<"heroabout", Simplify<IndexDocumentDataBodyHeroaboutSlicePrimary>, never>
+
+/**
+ * Primary content in *Homepage → Slice zone → Projects → Primary*
+ */
+export interface IndexDocumentDataBodyProjectsSlicePrimary {
+	/**
+	 * Title field in *Homepage → Slice zone → Projects → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: Ultimate Project
+	 * - **API ID Path**: index.body[].projects.primary.title
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	title: prismic.RichTextField;
+	
+	/**
+	 * Subtitle field in *Homepage → Slice zone → Projects → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: You want to add something?
+	 * - **API ID Path**: index.body[].projects.primary.subtitle
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	subtitle: prismic.RichTextField;
+}
+
+/**
+ * Item content in *Homepage → Slice zone → Projects → Items*
+ */
+export interface IndexDocumentDataBodyProjectsSliceItem {
+	/**
+	 * Project title field in *Homepage → Slice zone → Projects → Items*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: Turtle Finder
+	 * - **API ID Path**: index.body[].projects.items.project_title
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	project_title: prismic.RichTextField;
+	
+	/**
+	 * Project Type field in *Homepage → Slice zone → Projects → Items*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Web Application
+	 * - **API ID Path**: index.body[].projects.items.project_type
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	project_type: prismic.KeyTextField;
+	
+	/**
+	 * Github Link field in *Homepage → Slice zone → Projects → Items*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: index.body[].projects.items.github_link
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	github_link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+	
+	/**
+	 * Link field in *Homepage → Slice zone → Projects → Items*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: http://turtlefinder.io
+	 * - **API ID Path**: index.body[].projects.items.link
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+	
+	/**
+	 * Project Description field in *Homepage → Slice zone → Projects → Items*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: I made this app for finding turtles near me
+	 * - **API ID Path**: index.body[].projects.items.project_description
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	project_description: prismic.RichTextField;
+}
+
+/**
+ * Slice for *Homepage → Slice zone*
+ */
+export type IndexDocumentDataBodyProjectsSlice = prismic.Slice<"projects", Simplify<IndexDocumentDataBodyProjectsSlicePrimary>, Simplify<IndexDocumentDataBodyProjectsSliceItem>>
+
+/**
+ * Primary content in *Homepage → Slice zone → Blog Posts → Primary*
+ */
+export interface IndexDocumentDataBodyBlogPostsSlicePrimary {
+	/**
+	 * Title field in *Homepage → Slice zone → Blog Posts → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: Blog Posts about Cats
+	 * - **API ID Path**: index.body[].blog_posts.primary.title
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	title: prismic.RichTextField;
+	
+	/**
+	 * Subtitle field in *Homepage → Slice zone → Blog Posts → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: Want to add something?
+	 * - **API ID Path**: index.body[].blog_posts.primary.subtitle
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	subtitle: prismic.RichTextField;
+}
+
+/**
+ * Slice for *Homepage → Slice zone*
+ */
+export type IndexDocumentDataBodyBlogPostsSlice = prismic.Slice<"blog_posts", Simplify<IndexDocumentDataBodyBlogPostsSlicePrimary>, never>
+
+/**
+ * Primary content in *Homepage → Slice zone → Bio → Primary*
+ */
+export interface IndexDocumentDataBodyAboutMeSlicePrimary {
+	/**
+	 * Heading field in *Homepage → Slice zone → Bio → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: index.body[].about_me.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	heading: prismic.RichTextField;
+	
+	/**
+	 * Content field in *Homepage → Slice zone → Bio → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: index.body[].about_me.primary.content
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	content: prismic.RichTextField;
+}
+
+/**
+ * Slice for *Homepage → Slice zone*
+ */
+export type IndexDocumentDataBodyAboutMeSlice = prismic.Slice<"about_me", Simplify<IndexDocumentDataBodyAboutMeSlicePrimary>, never>
+
+type IndexDocumentDataBodySlice = IndexDocumentDataBodyHeroaboutSlice | IndexDocumentDataBodyProjectsSlice | IndexDocumentDataBodyBlogPostsSlice | IndexDocumentDataBodyAboutMeSlice
+
+/**
+ * Content for Homepage documents
+ */
+interface IndexDocumentData {
+	/**
+	 * Slice zone field in *Homepage*
+	 *
+	 * - **Field Type**: Slice Zone
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: index.body[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/slices
+	 */
+	body: prismic.SliceZone<IndexDocumentDataBodySlice>;
+}
+
 /**
  * Homepage document from Prismic
  *
  * - **API ID**: `index`
  * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ * - **Documentation**: https://prismic.io/docs/content-modeling
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type IndexDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<Simplify<IndexDocumentData>, "index", Lang>;
-export type AllDocumentTypes = BlogPostDocument | IndexDocument;
+export type IndexDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<IndexDocumentData>, "index", Lang>;
+
 /**
- * Primary content in IndexHero → Primary
- *
+ * Item in *Settings → Socials*
  */
-interface IndexHeroSliceDefaultSlicePrimary {
-  /**
-   * Title field in *IndexHero → Primary*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: Your Nice title...
-   * - **API ID Path**: index_hero.primary.Title
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  Title: prismic.TitleField;
-  /**
-   * About field in *IndexHero → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: I like turtles...
-   * - **API ID Path**: index_hero.primary.About
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  About: prismic.RichTextField;
+export interface SettingsDocumentDataSocialsItem {
+	/**
+	 * Platform field in *Settings → Socials*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.socials[].platform
+	 * - **Documentation**: https://prismic.io/docs/fields/select
+	 */
+	platform: prismic.SelectField<"github" | "linkedin">;
+	
+	/**
+	 * url field in *Settings → Socials*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.socials[].url
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
+
 /**
- * Default slice variation for IndexHero Slice
- *
- * - **API ID**: `default-slice`
- * - **Description**: `IndexHero`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
+ * Content for Settings documents
  */
-export type IndexHeroSliceDefaultSlice = prismic.SharedSliceVariation<
-  "default-slice",
-  Simplify<IndexHeroSliceDefaultSlicePrimary>,
-  never
->;
+interface SettingsDocumentData {
+	/**
+	 * Location field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.location
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	location: prismic.KeyTextField;
+	
+	/**
+	 * Email field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.email
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	email: prismic.KeyTextField;
+	
+	/**
+	 * Phone field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.phone
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	phone: prismic.KeyTextField;
+	
+	/**
+	 * Socials field in *Settings*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.socials[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	socials: prismic.GroupField<Simplify<SettingsDocumentDataSocialsItem>>;/**
+	 * Meta Title field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Falls back to the hero heading
+	 * - **API ID Path**: settings.meta_title
+	 * - **Tab**: SEO
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_title: prismic.KeyTextField;
+	
+	/**
+	 * Meta Description field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Falls back to the hero intro paragraph
+	 * - **API ID Path**: settings.meta_description
+	 * - **Tab**: SEO
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_description: prismic.KeyTextField;
+}
+
 /**
- * Slice variation for *IndexHero*
+ * Settings document from Prismic
  *
+ * - **API ID**: `settings`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
  */
-type IndexHeroSliceVariation = IndexHeroSliceDefaultSlice;
-/**
- * IndexHero Shared Slice
- *
- * - **API ID**: `index_hero`
- * - **Description**: `IndexHero`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type IndexHeroSlice = prismic.SharedSlice<
-  "index_hero",
-  IndexHeroSliceVariation
->;
+export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<SettingsDocumentData>, "settings", Lang>;
+
+export type AllDocumentTypes = BlogPostDocument | IndexDocument | SettingsDocument;
+
 declare module "@prismicio/client" {
-  interface CreateClient {
-    (
-      repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig
-    ): prismic.Client<AllDocumentTypes>;
-  }
-  namespace Content {
-    export type {
-      BlogPostDocumentData,
-      BlogPostDocument,
-      IndexDocumentData,
-      IndexDocumentDataBodyHeroaboutSlicePrimary,
-      IndexDocumentDataBodyHeroaboutSlice,
-      IndexDocumentDataBodyProjectsSlicePrimary,
-      IndexDocumentDataBodyProjectsSliceItem,
-      IndexDocumentDataBodyProjectsSlice,
-      IndexDocumentDataBodyBlogPostsSlicePrimary,
-      IndexDocumentDataBodyBlogPostsSliceItem,
-      IndexDocumentDataBodyBlogPostsSlice,
-      IndexDocumentDataBodyContactSliceItem,
-      IndexDocumentDataBodyContactSlice,
-      IndexDocumentDataBodySlice,
-      IndexDocument,
-      AllDocumentTypes,
-      IndexHeroSliceDefaultSlicePrimary,
-      IndexHeroSliceDefaultSlice,
-      IndexHeroSliceVariation,
-      IndexHeroSlice,
-    };
-  }
+	interface CreateClient {
+		(repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
+	}
+	
+	interface CreateWriteClient {
+		(repositoryNameOrEndpoint: string, options: prismic.WriteClientConfig): prismic.WriteClient<AllDocumentTypes>;
+	}
+	
+	interface CreateMigration {
+		(): prismic.Migration<AllDocumentTypes>;
+	}
+	
+	namespace Content {
+		export type {
+			BlogPostDocument,
+			BlogPostDocumentData,
+			IndexDocument,
+			IndexDocumentData,
+			IndexDocumentDataBodyHeroaboutSlicePrimary,
+			IndexDocumentDataBodyProjectsSlicePrimary,
+			IndexDocumentDataBodyProjectsSliceItem,
+			IndexDocumentDataBodyBlogPostsSlicePrimary,
+			IndexDocumentDataBodyAboutMeSlicePrimary,
+			IndexDocumentDataBodySlice,
+			SettingsDocument,
+			SettingsDocumentData,
+			SettingsDocumentDataSocialsItem,
+			AllDocumentTypes
+		}
+	}
 }
