@@ -1,26 +1,11 @@
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicText } from "@prismicio/react";
 import { ArrowRight } from "akar-icons";
-import Link, { LinkProps } from "next/link";
-import React from "react";
+import Link from "next/link";
+import { cn } from "~/lib/cn";
+import { FOCUS_RING } from "~/lib/focus-ring";
 import { H3, Paragraph } from "./utils/text";
-
-function LinkToPost({
-  children,
-  href,
-  ...rest
-}: {
-  children: React.ReactNode;
-  href: string;
-} & LinkProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  return (
-    <Link href={href} {...rest}>
-      {children}
-    </Link>
-  );
-}
 
 export default function PostPreview({
   post,
@@ -31,31 +16,47 @@ export default function PostPreview({
   const postHref = `/blog/${slug}`;
 
   return (
-    <div className="flex flex-col">
-      <LinkToPost href={postHref}>
-        <PrismicNextImage
-          field={cover}
-          className="mb-4 rounded-md shadow-sm"
-          alt=""
-        />
-      </LinkToPost>
+    <article className="flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-600 dark:bg-gray-700">
+      {isFilled.image(cover) && (
+        <Link
+          href={postHref}
+          tabIndex={-1}
+          aria-hidden
+          className="mb-4 block rounded-md"
+        >
+          <PrismicNextImage
+            field={cover}
+            alt=""
+            className="h-auto w-full rounded-md"
+          />
+        </Link>
+      )}
 
-      <LinkToPost href={postHref}>
-        <H3 className="text-primary-800 hover:underline dark:text-primary-500">
+      <H3>
+        <Link
+          href={postHref}
+          className={cn(
+            "rounded text-primary-800 hover:underline dark:text-primary-400",
+            FOCUS_RING
+          )}
+        >
           <PrismicText field={title} />
-        </H3>
-      </LinkToPost>
+        </Link>
+      </H3>
 
-      <Paragraph className="my-2">
+      <Paragraph className="mb-6 mt-2">
         <PrismicText field={description} />
       </Paragraph>
 
-      <LinkToPost
+      <Link
         href={postHref}
-        className="ml-auto mt-auto flex w-fit items-center gap-2 rounded-md px-6 py-2 font-semibold text-gray-500 transition-colors hover:bg-gray-800/30 hover:text-gray-900 dark:text-gray-500 dark:hover:bg-gray-200/30 dark:hover:text-gray-300"
+        className={cn(
+          "mt-auto flex w-fit items-center gap-2 rounded text-sm font-semibold text-primary-700 transition-colors hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-200",
+          FOCUS_RING
+        )}
       >
-        Read more <ArrowRight size={20} />
-      </LinkToPost>
-    </div>
+        Read more <ArrowRight size={18} />
+      </Link>
+    </article>
   );
 }
