@@ -51,3 +51,35 @@
     }
   }
 }
+
+.prose .shiki {
+  background-color: var(--shiki-light-bg);
+  color: var(--shiki-light);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.prose .shiki span {
+  color: var(--shiki-light);
+}
+
+.prose .shiki code {
+  display: grid;
+}
+
+.prose .shiki .line {
+  --indent: 0ch;
+
+  min-height: 1lh;
+  padding-left: calc(var(--indent) + 2ch);
+  text-indent: calc(-1 * (var(--indent) + 2ch));
+}
+
+html.dark .prose .shiki {
+  background-color: var(--shiki-dark-bg);
+  color: var(--shiki-dark);
+}
+
+html.dark .prose .shiki span {
+  color: var(--shiki-dark);
+}

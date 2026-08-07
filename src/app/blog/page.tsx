@@ -11,7 +11,7 @@ export default async function Index() {
   const client = prismicClient();
   const res = await client.getAllByType("blog_post", {
     orderings: {
-      field: "document.last_publication_date",
+      field: "document.first_publication_date",
       direction: "desc",
     },
   });
