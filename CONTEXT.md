@@ -29,11 +29,10 @@ slice is labelled "About Me" and `about_me` is labelled "Bio". Codegen copies
 those labels into the doc comments in `src/types.generated.ts`, so both places
 point you at the wrong slice.
 
-**`blog_posts` fetches its own posts.** The slice model also carries an
-`items[].blog` content relationship for hand-picking posts. It is deliberately
-empty — `src/components/IndexSlices/BlogPosts.tsx` queries the three most recent
-`blog_post` documents itself and never reads `items`. Filling that field in
-Prismic looks like it should work and does nothing.
+**The `blog_posts` slice only supplies the heading.** It carries `title` and
+`subtitle` and no items — `src/components/IndexSlices/BlogPosts.tsx` queries the
+three most recent `blog_post` documents itself. Which posts appear, and in what
+order, is deliberately not editable from Prismic.
 
 **`settings` is a site-wide singleton, not a slice.** `getSettings` in
 `src/lib/prismic.ts` wraps the fetch in `React.cache`, and

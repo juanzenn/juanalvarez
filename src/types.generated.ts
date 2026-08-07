@@ -430,54 +430,6 @@ export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocu
 
 export type AllDocumentTypes = BlogPostDocument | IndexDocument | SettingsDocument;
 
-/**
- * Primary content in *IndexHero → Default slice → Primary*
- */
-export interface IndexHeroSliceDefaultSlicePrimary {
-	/**
-	 * Title field in *IndexHero → Default slice → Primary*
-	 *
-	 * - **Field Type**: Rich Text
-	 * - **Placeholder**: Your Nice title...
-	 * - **API ID Path**: index_hero.default-slice.primary.Title
-	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
-	 */
-	Title: prismic.RichTextField;
-	
-	/**
-	 * About field in *IndexHero → Default slice → Primary*
-	 *
-	 * - **Field Type**: Rich Text
-	 * - **Placeholder**: I like turtles...
-	 * - **API ID Path**: index_hero.default-slice.primary.About
-	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
-	 */
-	About: prismic.RichTextField;
-}
-
-/**
- * Default slice variation for IndexHero Slice
- *
- * - **API ID**: `default-slice`
- * - **Description**: IndexHero
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type IndexHeroSliceDefaultSlice = prismic.SharedSliceVariation<"default-slice", Simplify<IndexHeroSliceDefaultSlicePrimary>, never>;
-
-/**
- * Slice variation for *IndexHero*
- */
-type IndexHeroSliceVariation = IndexHeroSliceDefaultSlice
-
-/**
- * IndexHero Shared Slice
- *
- * - **API ID**: `index_hero`
- * - **Description**: IndexHero
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type IndexHeroSlice = prismic.SharedSlice<"index_hero", IndexHeroSliceVariation>;
-
 declare module "@prismicio/client" {
 	interface CreateClient {
 		(repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
@@ -506,11 +458,7 @@ declare module "@prismicio/client" {
 			SettingsDocument,
 			SettingsDocumentData,
 			SettingsDocumentDataSocialsItem,
-			AllDocumentTypes,
-			IndexHeroSlice,
-			IndexHeroSliceDefaultSlicePrimary,
-			IndexHeroSliceVariation,
-			IndexHeroSliceDefaultSlice
+			AllDocumentTypes
 		}
 	}
 }
