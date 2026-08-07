@@ -1,5 +1,6 @@
 import * as prismic from "@prismicio/client";
 import * as prismicNext from "@prismicio/next";
+import { cache } from "react";
 
 const apiEndpoint = prismic.getRepositoryEndpoint(process.env.API_ENDPOINT!);
 
@@ -19,3 +20,5 @@ export const prismicClient = (config: prismic.ClientConfig = {}) => {
 
   return client;
 };
+
+export const getSettings = cache(() => prismicClient().getSingle("settings"));

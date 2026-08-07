@@ -6,31 +6,20 @@ import Projects from "~/components/IndexSlices/Projects";
 import { prismicClient } from "~/lib/prismic";
 
 export default async function RootPage() {
-  const client = prismicClient();
-
-  const indexDoc = await client.getSingle("index");
-  const { results: latestPosts } = await client.getByType("blog_post", {
-    pageSize: 3,
-    orderings: {
-      direction: "desc",
-      field: "document.first_publication_date",
-    },
-  });
-  const slices = indexDoc.data.body;
+  const indexDoc = await prismicClient().getSingle("index");
 
   return (
     <>
-      <HeroAbout />
-      <AboutMe />
       {/* <Employment /> */}
       <SliceZone
-        slices={slices}
+        slices={indexDoc.data.body}
         components={{
-          heroabout: () => null,
+          heroabout: HeroAbout,
+          about_me: AboutMe,
           projects: Projects,
+          blog_posts: BlogPosts,
         }}
       />
-      <BlogPosts posts={latestPosts} />
     </>
   );
 }

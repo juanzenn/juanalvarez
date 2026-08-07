@@ -1,44 +1,45 @@
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import React from "react";
+import { getSettings } from "~/lib/prismic";
 
-export default function ContactDetails() {
+const ICON_CLASSES = "h-6 w-6 text-gray-800 dark:text-gray-200";
+
+export default async function ContactDetails() {
+  const { data } = await getSettings();
+
   return (
     <ul className="space-y-4">
-      <ListItem
-        icon={
-          <MapPinIcon className="h-6 w-6 text-gray-800 dark:text-gray-200" />
-        }
-      >
-        <div>Venezuela, Miranda</div>
-      </ListItem>
-      <ListItem
-        icon={
-          <EnvelopeIcon className="h-6 w-6 text-gray-800 dark:text-gray-200" />
-        }
-      >
-        <a
-          href="mailto:info@juanalvarez.dev"
-          target="_blank"
-          rel="noreferrer"
-          className="hover:underline"
-        >
-          info@juanalvarez.dev
-        </a>
-      </ListItem>
-      <ListItem
-        icon={
-          <PhoneIcon className="h-6 w-6 text-gray-800 dark:text-gray-200" />
-        }
-      >
-        <a
-          href="tel:+584142654031"
-          target="_blank"
-          rel="noreferrer"
-          className="hover:underline"
-        >
-          +58 414-265 4031
-        </a>
-      </ListItem>
+      {data.location ? (
+        <ListItem icon={<MapPinIcon className={ICON_CLASSES} />}>
+          <div>{data.location}</div>
+        </ListItem>
+      ) : null}
+
+      {data.email ? (
+        <ListItem icon={<EnvelopeIcon className={ICON_CLASSES} />}>
+          <a
+            href={`mailto:${data.email}`}
+            target="_blank"
+            rel="noreferrer"
+            className="hover:underline"
+          >
+            {data.email}
+          </a>
+        </ListItem>
+      ) : null}
+
+      {data.phone ? (
+        <ListItem icon={<PhoneIcon className={ICON_CLASSES} />}>
+          <a
+            href={`tel:${data.phone.replace(/[^\d+]/g, "")}`}
+            target="_blank"
+            rel="noreferrer"
+            className="hover:underline"
+          >
+            {data.phone}
+          </a>
+        </ListItem>
+      ) : null}
     </ul>
   );
 }

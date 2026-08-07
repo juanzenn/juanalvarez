@@ -1,11 +1,35 @@
-import { BlogPostDocument } from "~/types.generated";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { prismicClient } from "~/lib/prismic";
+import type { IndexDocumentDataBodyBlogPostsSlice } from "~/types.generated";
 import PostPreview from "../PostPreview";
 import { H2 } from "../utils/text";
 
-export default function BlogPosts({ posts }: { posts: BlogPostDocument[] }) {
+export default async function BlogPosts({
+  slice,
+}: SliceComponentProps<IndexDocumentDataBodyBlogPostsSlice>) {
+  const { primary } = slice;
+
+  const { results: posts } = await prismicClient().getByType("blog_post", {
+    pageSize: 3,
+    orderings: {
+      direction: "desc",
+      field: "document.first_publication_date",
+    },
+  });
+
   return (
     <section className="mx-auto max-w-[1080px] px-4 py-12">
-      <H2 className="mb-6">Latest Blogs</H2>
+      <header className="mb-6">
+        <PrismicRichText
+          field={primary.title}
+          components={{
+            heading2: ({ children }) => <H2>{children}</H2>,
+          }}
+        />
+        <span className="text-gray-700 dark:text-gray-200">
+          {!primary.subtitle ? `` : <PrismicRichText field={primary.subtitle} />}
+        </span>
+      </header>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
