@@ -28,7 +28,6 @@ export default async function RootPage() {
         components={{
           heroabout: () => null,
           projects: Projects,
-          contact: () => null,
         }}
       />
       <BlogPosts posts={latestPosts} />
