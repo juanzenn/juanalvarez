@@ -13,7 +13,7 @@ export default async function RootPage() {
     pageSize: 3,
     orderings: {
       direction: "desc",
-      field: "document.last_publication_date",
+      field: "document.first_publication_date",
     },
   });
   const slices = indexDoc.data.body;
