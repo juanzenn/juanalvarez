@@ -42,3 +42,6 @@ prismicCodegen.config.ts
 
 # vercel
 .vercel
+
+# claude
+/.claude/
