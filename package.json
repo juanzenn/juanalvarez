@@ -13,6 +13,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "codegen": "node --env-file=.env.local node_modules/prismic-ts-codegen/bin/prismic-ts-codegen.js",
     "typecheck": "next typegen && tsc --noEmit",
     "dev": "next dev",
     "build": "next build",

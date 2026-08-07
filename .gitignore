@@ -37,9 +37,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# prismicCodegenFile
-prismicCodegen.config.ts
-
 # vercel
 .vercel
 
