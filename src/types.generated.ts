@@ -280,54 +280,9 @@ export interface IndexDocumentDataBodyBlogPostsSlicePrimary {
 }
 
 /**
- * Item content in *Homepage → Slice zone → Blog Posts → Items*
- */
-export interface IndexDocumentDataBodyBlogPostsSliceItem {
-	/**
-	 * Blog field in *Homepage → Slice zone → Blog Posts → Items*
-	 *
-	 * - **Field Type**: Content Relationship
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: index.body[].blog_posts.items.blog
-	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
-	 */
-	blog: prismic.ContentRelationshipField<"blog_post">;
-}
-
-/**
  * Slice for *Homepage → Slice zone*
  */
-export type IndexDocumentDataBodyBlogPostsSlice = prismic.Slice<"blog_posts", Simplify<IndexDocumentDataBodyBlogPostsSlicePrimary>, Simplify<IndexDocumentDataBodyBlogPostsSliceItem>>
-
-/**
- * Item content in *Homepage → Slice zone → Contact → Items*
- */
-export interface IndexDocumentDataBodyContactSliceItem {
-	/**
-	 * Contact Label field in *Homepage → Slice zone → Contact → Items*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: Twitter/GitHub/Email...
-	 * - **API ID Path**: index.body[].contact.items.contact_label
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	contact_label: prismic.KeyTextField;
-	
-	/**
-	 * Contact Link field in *Homepage → Slice zone → Contact → Items*
-	 *
-	 * - **Field Type**: Link
-	 * - **Placeholder**: https://github.com/xxx | mailto:myemail@email.com
-	 * - **API ID Path**: index.body[].contact.items.contact_link
-	 * - **Documentation**: https://prismic.io/docs/fields/link
-	 */
-	contact_link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-}
-
-/**
- * Slice for *Homepage → Slice zone*
- */
-export type IndexDocumentDataBodyContactSlice = prismic.Slice<"contact", Record<string, never>, Simplify<IndexDocumentDataBodyContactSliceItem>>
+export type IndexDocumentDataBodyBlogPostsSlice = prismic.Slice<"blog_posts", Simplify<IndexDocumentDataBodyBlogPostsSlicePrimary>, never>
 
 /**
  * Primary content in *Homepage → Slice zone → Bio → Primary*
@@ -359,7 +314,7 @@ export interface IndexDocumentDataBodyAboutMeSlicePrimary {
  */
 export type IndexDocumentDataBodyAboutMeSlice = prismic.Slice<"about_me", Simplify<IndexDocumentDataBodyAboutMeSlicePrimary>, never>
 
-type IndexDocumentDataBodySlice = IndexDocumentDataBodyHeroaboutSlice | IndexDocumentDataBodyProjectsSlice | IndexDocumentDataBodyBlogPostsSlice | IndexDocumentDataBodyContactSlice | IndexDocumentDataBodyAboutMeSlice
+type IndexDocumentDataBodySlice = IndexDocumentDataBodyHeroaboutSlice | IndexDocumentDataBodyProjectsSlice | IndexDocumentDataBodyBlogPostsSlice | IndexDocumentDataBodyAboutMeSlice
 
 /**
  * Content for Homepage documents
@@ -546,8 +501,6 @@ declare module "@prismicio/client" {
 			IndexDocumentDataBodyProjectsSlicePrimary,
 			IndexDocumentDataBodyProjectsSliceItem,
 			IndexDocumentDataBodyBlogPostsSlicePrimary,
-			IndexDocumentDataBodyBlogPostsSliceItem,
-			IndexDocumentDataBodyContactSliceItem,
 			IndexDocumentDataBodyAboutMeSlicePrimary,
 			IndexDocumentDataBodySlice,
 			SettingsDocument,
