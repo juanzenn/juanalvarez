@@ -2,6 +2,8 @@
 
 My personal site and blog — [juanalvarez.dev](https://juanalvarez.dev). Next.js App Router, content managed in Prismic, deployed on Vercel.
 
+For why the code is shaped the way it is — what's deliberate, what's a fossil, and what will bite you — see [CONTEXT.md](CONTEXT.md).
+
 ## Stack
 
 | Piece | What it does |
@@ -33,7 +35,7 @@ You need a `.env` before the app will boot — Prismic is required, the rest dep
 | `API_ENDPOINT` | yes | Prismic repository name. Passed to `prismic.getRepositoryEndpoint()`, so it's the repo **name**, not a full URL. |
 | `MAIL_USER` | contact form only | Gmail account used as the SMTP sender. |
 | `MAIL_PASSWORD` | contact form only | Gmail **app password**, not the account password. |
-| `PRISMIC_WEBHOOK_SECRET` | production only | Shared secret guarding `/api/revalidate`. If unset, the route accepts any request. |
+| `PRISMIC_WEBHOOK_SECRET` | production only | Shared secret guarding `/api/revalidate`. If unset the route accepts any request — deliberate, so local dev needs no secret, which also means production breaks open if it's ever missing there. |
 | `PRISMIC_CUSTOM_TYPES_TOKEN` | `pnpm codegen` only | Write-scoped bearer token for the Custom Types API, used to regenerate `src/types.generated.ts`. Mint it with `npx prismic token create --write`, or in the repository's Settings → API & Security → Write APIs. |
 
 To typecheck, run `pnpm typecheck` rather than a bare `tsc --noEmit`. On a checkout that has never run `dev` or `build`, `tsc` alone reports seven false `TS2307` "cannot find module" errors against the static image imports — see [Scripts](#scripts).
