@@ -4,6 +4,8 @@ import { getSettings } from "~/lib/prismic";
 
 const ICON_CLASSES = "h-6 w-6 text-gray-800 dark:text-gray-200";
 
+const toDialHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
+
 export default async function ContactDetails() {
   const { data } = await getSettings();
 
@@ -31,7 +33,7 @@ export default async function ContactDetails() {
       {data.phone ? (
         <ListItem icon={<PhoneIcon className={ICON_CLASSES} />}>
           <a
-            href={`tel:${data.phone.replace(/[^\d+]/g, "")}`}
+            href={toDialHref(data.phone)}
             target="_blank"
             rel="noreferrer"
             className="hover:underline"

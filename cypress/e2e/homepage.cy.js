@@ -25,13 +25,23 @@ describe("Homepage slices render Prismic content", () => {
     cy.get(BIO).find("p").should("have.length.at.least", 2);
   });
 
-  it("renders the contact details from the settings document", () => {
-    cy.get('main a[href^="mailto:"]').should("have.length.at.least", 1);
-    cy.get('main a[href^="tel:"]')
-      .should("have.length.at.least", 1)
-      .and(($link) => {
-        expect($link.attr("href")).to.match(/^tel:\+?\d+$/);
+  it("renders well-formed contact links from the settings document", () => {
+    cy.get("main").then(($main) => {
+      const tel = $main.find('a[href^="tel:"]');
+      const mail = $main.find('a[href^="mailto:"]');
+
+      expect(tel.length + mail.length, "contact links rendered").to.be.at.least(
+        1,
+      );
+
+      tel.each((_, link) => {
+        expect(link.getAttribute("href")).to.match(/^tel:\+?\d+$/);
       });
+
+      mail.each((_, link) => {
+        expect(link.getAttribute("href")).to.match(/^mailto:.+@.+$/);
+      });
+    });
   });
 
   it("renders the socials from the settings document", () => {

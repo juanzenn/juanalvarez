@@ -75,7 +75,7 @@ Deleting it as monorepo leftovers breaks installs.
 - **`cn()`** (`src/lib/cn.ts`) is `classNames(twMerge(...))` — that nesting, not
   the usual `twMerge(clsx(...))`. Commit `19f820a` replaced clsx with it.
 - **Commits** are Conventional Commits: English, lowercase, `feat:` / `fix:` /
-  `chore:` / `ci:` / `docs:`. Consistent across the whole history.
+  `chore:` / `ci:` / `docs:` / `build:`. Consistent across the whole history.
 - **Text** is rendered through `src/components/utils/text` (`H1`–`H4`,
   `Paragraph`) rather than raw heading tags.
 - **Icons**: `@heroicons/react` for UI icons,

@@ -4,7 +4,7 @@ import image3 from "@/public/images/banner (3).jpg";
 import image4 from "@/public/images/banner (4).jpg";
 import image5 from "@/public/images/banner (5).jpg";
 import image6 from "@/public/images/banner (6).jpg";
-import { asText } from "@prismicio/client";
+import { asLink, asText } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Image, { StaticImageData } from "next/image";
@@ -18,6 +18,7 @@ export default function HeroAbout({
   const { primary } = slice;
   const images = [image1, image2, image3, image4, image5, image6];
   const ctaLabel = asText(primary.cta_button_text);
+  const ctaHref = asLink(primary.cta_button_url);
 
   return (
     <div className="min-h-[50vh] px-4 py-12">
@@ -40,7 +41,7 @@ export default function HeroAbout({
           }}
         />
 
-        {ctaLabel ? (
+        {ctaLabel && ctaHref ? (
           <PrismicNextLink
             field={primary.cta_button_url}
             className="mt-6 block w-fit cursor-pointer rounded bg-primary-800 py-2 px-6 font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-primary-700"

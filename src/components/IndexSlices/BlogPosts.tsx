@@ -2,7 +2,7 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { prismicClient } from "~/lib/prismic";
 import type { IndexDocumentDataBodyBlogPostsSlice } from "~/types.generated";
 import PostPreview from "../PostPreview";
-import { H2 } from "../utils/text";
+import { H2, Paragraph } from "../utils/text";
 
 export default async function BlogPosts({
   slice,
@@ -26,9 +26,12 @@ export default async function BlogPosts({
             heading2: ({ children }) => <H2>{children}</H2>,
           }}
         />
-        <span className="text-gray-700 dark:text-gray-200">
-          {!primary.subtitle ? `` : <PrismicRichText field={primary.subtitle} />}
-        </span>
+        <PrismicRichText
+          field={primary.subtitle}
+          components={{
+            paragraph: ({ children }) => <Paragraph>{children}</Paragraph>,
+          }}
+        />
       </header>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
