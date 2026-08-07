@@ -1,4 +1,4 @@
-import { BlogPostDocument } from "@/types.generated";
+import { BlogPostDocument } from "~/types.generated";
 import PostPreview from "../PostPreview";
 import { H2 } from "../utils/text";
 

@@ -24,8 +24,8 @@
       "~/*": [
         "./src/*"
       ],
-      "@/*": [
-        "./*"
+      "@/public/*": [
+        "./public/*"
       ]
     },
     "plugins": [
@@ -39,7 +39,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "types.generated.ts",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],

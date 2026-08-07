@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Check CONTEXT.md paths still exist
+        run: node scripts/check-context-paths.mjs
+
       - name: Install pnpm
         uses: pnpm/action-setup@v6
 

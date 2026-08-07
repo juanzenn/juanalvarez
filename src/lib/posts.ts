@@ -1,5 +1,5 @@
 import * as prismic from "@prismicio/client";
-import type { BlogPostDocument } from "@/types.generated";
+import type { BlogPostDocument } from "~/types.generated";
 import { prismicClient } from "~/lib/prismic";
 
 export const getPostBySlug = async (

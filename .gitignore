@@ -11,8 +11,6 @@
 # next.js
 /.next/
 /out/
-AGENTS.md
-CLAUDE.md
 
 # typescript
 *.tsbuildinfo
@@ -36,9 +34,6 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
-# prismicCodegenFile
-prismicCodegen.config.ts
 
 # vercel
 .vercel

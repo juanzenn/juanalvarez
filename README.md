@@ -2,6 +2,8 @@
 
 My personal site and blog — [juanalvarez.dev](https://juanalvarez.dev). Next.js App Router, content managed in Prismic, deployed on Vercel.
 
+For why the code is shaped the way it is — what's deliberate, what's a fossil, and what will bite you — see [CONTEXT.md](CONTEXT.md).
+
 ## Stack
 
 | Piece | What it does |
@@ -33,7 +35,8 @@ You need a `.env` before the app will boot — Prismic is required, the rest dep
 | `API_ENDPOINT` | yes | Prismic repository name. Passed to `prismic.getRepositoryEndpoint()`, so it's the repo **name**, not a full URL. |
 | `MAIL_USER` | contact form only | Gmail account used as the SMTP sender. |
 | `MAIL_PASSWORD` | contact form only | Gmail **app password**, not the account password. |
-| `PRISMIC_WEBHOOK_SECRET` | production only | Shared secret guarding `/api/revalidate`. If unset, the route accepts any request. |
+| `PRISMIC_WEBHOOK_SECRET` | production only | Shared secret guarding `/api/revalidate`. If unset the route returns `500` rather than purging, so publishing stops busting the cache until it's set. |
+| `PRISMIC_CUSTOM_TYPES_TOKEN` | `pnpm codegen` only | Write-scoped bearer token for the Custom Types API, used to regenerate `src/types.generated.ts`. Mint it with `npx prismic token create --write`, or in the repository's Settings → API & Security → Write APIs. |
 
 To typecheck, run `pnpm typecheck` rather than a bare `tsc --noEmit`. On a checkout that has never run `dev` or `build`, `tsc` alone reports seven false `TS2307` "cannot find module" errors against the static image imports — see [Scripts](#scripts).
 
@@ -52,16 +55,16 @@ src/
     MobileMenu/           Animated mobile nav
   lib/
     prismic.ts            Prismic client factory + preview support
-types.generated.ts        Generated from the Prismic custom types — do not edit by hand
+  types.generated.ts      Generated from the Prismic custom types — do not edit by hand
 ```
 
 ### Content
 
 Everything editorial lives in Prismic. The homepage is a slice zone; each slice type maps to a component in `src/components/IndexSlices/`. Blog posts are a `blog_post` custom type, looked up by a `slug` field rather than by Prismic UID.
 
-`types.generated.ts` is produced by [`prismic-ts-codegen`](https://github.com/prismicio/prismic-ts-codegen) from the custom type definitions. Regenerate it after changing a type in Prismic instead of editing it.
+`src/types.generated.ts` is produced by [`prismic-ts-codegen`](https://github.com/prismicio/prismic-ts-codegen) from the custom type definitions. After changing a type in Prismic, run `pnpm codegen` to regenerate it rather than editing it by hand. That reads the models straight from the Custom Types API, so it needs `PRISMIC_CUSTOM_TYPES_TOKEN` in `.env.local`.
 
-Caching: in production the Prismic client tags every fetch with `prismic` and uses `force-cache`. A Prismic webhook pointed at `/api/revalidate` clears that tag on publish. In development it revalidates every 5 seconds instead, so edits show up without a restart.
+Caching: in production the Prismic client tags every fetch with `prismic`, uses `force-cache` and expires after an hour. A Prismic webhook pointed at `/api/revalidate` clears that tag on publish, so the hour is a backstop rather than the normal path. In development it revalidates every 5 seconds instead, so edits show up without a restart.
 
 ## Email
 
@@ -81,6 +84,7 @@ Two separate things, easy to confuse:
 | `pnpm build` | Production build (`next build`) |
 | `pnpm start` | Serve a production build |
 | `pnpm lint` | ESLint (flat config, `eslint.config.mjs`) |
+| `pnpm codegen` | Regenerate `src/types.generated.ts` from the Prismic custom types |
 | `pnpm typecheck` | `next typegen`, then `tsc --noEmit` |
 | `pnpm cypress:open` | Open the Cypress runner |
 
