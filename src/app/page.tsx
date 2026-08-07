@@ -3,10 +3,10 @@ import AboutMe from "~/components/IndexSlices/AboutMe";
 import BlogPosts from "~/components/IndexSlices/BlogPosts";
 import HeroAbout from "~/components/IndexSlices/HeroAbout";
 import Projects from "~/components/IndexSlices/Projects";
-import { prismicClient } from "~/lib/prismic";
+import { getIndex } from "~/lib/prismic";
 
 export default async function RootPage() {
-  const indexDoc = await prismicClient().getSingle("index");
+  const indexDoc = await getIndex();
 
   return (
     <>

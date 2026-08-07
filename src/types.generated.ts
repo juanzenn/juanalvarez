@@ -414,7 +414,27 @@ interface SettingsDocumentData {
 	 * - **Tab**: Main
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
-	socials: prismic.GroupField<Simplify<SettingsDocumentDataSocialsItem>>;
+	socials: prismic.GroupField<Simplify<SettingsDocumentDataSocialsItem>>;/**
+	 * Meta Title field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Falls back to the hero heading
+	 * - **API ID Path**: settings.meta_title
+	 * - **Tab**: SEO
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_title: prismic.KeyTextField;
+	
+	/**
+	 * Meta Description field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Falls back to the hero intro paragraph
+	 * - **API ID Path**: settings.meta_description
+	 * - **Tab**: SEO
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_description: prismic.KeyTextField;
 }
 
 /**

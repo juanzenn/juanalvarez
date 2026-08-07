@@ -47,11 +47,26 @@ and the portrait in `src/components/IndexSlices/AboutMe.tsx` are static
 decorative rather than copy, so they were out of scope for
 [#47](https://github.com/juanzenn/juanalvarez/issues/47).
 
-**Page metadata is hardcoded and has already drifted.** The `title` in
-`src/app/layout.tsx` and both `SITE_DESCRIPTION` and `DEFAULT_OG_IMAGE.alt` in `src/lib/site.ts`
-still spell out superseded hero copy. Nothing derives metadata from the
-`heroabout` slice, so editing the hero changes the page but not its tab title or
-share card.
+**Metadata falls back through three levels.** `generateMetadata` in
+`src/app/layout.tsx` takes its title and description from `settings.meta_title`
+and `settings.meta_description` when those are filled, otherwise from the
+`heroabout` slice, otherwise from `SITE_NAME` and `SITE_DESCRIPTION` in
+`src/lib/site.ts`. The hero step is what keeps the tab title and share card in
+step with the homepage without storing a second copy of the copy. Both fetches
+are `.catch`ed to `null` — this runs for every route, so a throw here would take
+down the whole site's metadata rather than one page's.
+
+The cover image, `SITE_NAME` and `SITE_URL` stay hardcoded deliberately.
+`cypress/e2e/metadata.cy.js` pins `og:image` to `/cover.png` and `og:site_name`
+to "Juan Alvarez", and `metadataBase` needs a build-time constant. Moving the
+cover into Prismic would serve it from `images.prismic.io` and fail that spec.
+
+**The array spread in `src/app/layout.tsx` is load-bearing.**
+`prismic.SliceZone` is a conditional type that distributes into
+`[] | [Slice, ...Slice[]]`, and calling `.find` on that union of tuples throws
+the type predicate away, so `slice.primary` stays the full union. Spreading into
+a plain array first restores the narrowing. Simplifying it back to
+`indexDoc.data.body.find(...)` puts the type error back.
 
 ## Deliberate decisions
 

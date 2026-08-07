@@ -22,3 +22,5 @@ export const prismicClient = (config: prismic.ClientConfig = {}) => {
 };
 
 export const getSettings = cache(() => prismicClient().getSingle("settings"));
+
+export const getIndex = cache(() => prismicClient().getSingle("index"));
