@@ -36,9 +36,8 @@ slices still exist in the Prismic `index` document, and `SliceZone` renders
 needs a Prismic-side change first.
 
 This is a divergence to be closed, not the intended design — tracked in
-[#47](https://github.com/juanzenn/juanalvarez/issues/47), which also covers the
-orphaned `src/components/IndexSlices/Contact.tsx` and a latent `blog_posts`
-slice bug.
+[#47](https://github.com/juanzenn/juanalvarez/issues/47), which also covers a
+latent `blog_posts` slice bug.
 
 ## Deliberate decisions
 
@@ -78,6 +77,3 @@ Deleting it as monorepo leftovers breaks installs.
   is commented out of `src/app/page.tsx` with no import, so uncommenting it does
   not compile. Being built out in
   [#20](https://github.com/juanzenn/juanalvarez/issues/20).
-- `src/components/IndexSlices/Contact.tsx` is a complete slice component that
-  nothing imports. Kept deliberately — it is what gets wired back in by
-  [#47](https://github.com/juanzenn/juanalvarez/issues/47).
