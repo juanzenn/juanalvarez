@@ -4,6 +4,7 @@ import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import CodeBlock from "~/components/CodeBlock";
 import ShareLinks from "~/components/ShareLinks";
 import SocialmediaLinks from "~/components/SocialmediaLinks";
 import { H1, H4, Paragraph } from "~/components/utils/text";
@@ -86,8 +87,13 @@ export default async function BlogPost({ params }: Props) {
       </header>
 
       <main className="mb-6">
-        <article className="prose-primary prose max-w-none hover:prose-a:underline dark:text-gray-100 dark:prose-headings:text-gray-100 dark:prose-a:text-primary-500 dark:prose-strong:text-primary-500 dark:prose-pre:bg-gray-700 dark:prose-pre:text-gray-100">
-          <PrismicRichText field={content} />
+        <article className="prose-primary prose max-w-none hover:prose-a:underline dark:text-gray-100 dark:prose-headings:text-gray-100 dark:prose-a:text-primary-500 dark:prose-strong:text-primary-500">
+          <PrismicRichText
+            field={content}
+            components={{
+              preformatted: ({ node }) => <CodeBlock code={node.text} />,
+            }}
+          />
         </article>
       </main>
 
