@@ -31,7 +31,7 @@
     "@types/nodemailer": "^6.4.8",
     "akar-icons": "^1.9.28",
     "classnames": "^2.3.2",
-    "framer-motion": "^10.12.16",
+    "framer-motion": "^13.0.0",
     "js-cookie": "^3.0.5",
     "next": "^16.3.0",
     "nodemailer": "^9.0.4",
