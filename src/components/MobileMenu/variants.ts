@@ -1,9 +1,8 @@
-const spring = {
-  type: "tween",
-};
+import { Variant } from "framer-motion";
+
 const delay = 0.1;
 
-const backdropVariants = {
+const backdropVariants: { [key: string]: Variant } = {
   visible: {
     opacity: 1,
     transition: {
@@ -21,7 +20,7 @@ const backdropVariants = {
   },
 };
 
-const menuVariants = {
+const menuVariants: { [key: string]: Variant } = {
   visible: {
     x: 0,
     transition: {
@@ -33,7 +32,7 @@ const menuVariants = {
   hidden: {
     x: "100%",
     transition: {
-      ...spring,
+      type: "tween",
       duration: 0.1,
     },
   },
