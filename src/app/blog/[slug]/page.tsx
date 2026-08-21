@@ -101,7 +101,7 @@ export default async function BlogPost({ params }: Props) {
 
       <footer className="my-8">
         <section className="flex gap-4">
-          <figure className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full">
+          <figure className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full">
             <Image fill src="/images/me.jpg" alt="" />
           </figure>
 
