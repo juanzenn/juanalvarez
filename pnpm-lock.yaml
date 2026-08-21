@@ -109,8 +109,8 @@ importers:
         specifier: ^0.1.11
         version: 0.1.30(@prismicio/client@7.21.8)(@prismicio/types@0.2.9)
       tailwind-merge:
-        specifier: ^1.13.0
-        version: 1.14.0
+        specifier: ^3.6.0
+        version: 3.6.0
       tailwindcss:
         specifier: ^3.3.2
         version: 3.4.19
@@ -1455,6 +1455,7 @@ packages:
   eslint@9.39.5:
     resolution: {integrity: sha512-DgZS62aPLXKlnxILS/AYCoRvHaZeXceIzlXPkkGGzJWSow1aEk0lbTlxUSlyjC8jcaKxAdOnTDz+o1JFSBsyjw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2836,8 +2837,8 @@ packages:
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
 
-  tailwind-merge@1.14.0:
-    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
+  tailwind-merge@3.6.0:
+    resolution: {integrity: sha512-uxL7qAVQriqRQPAyK3pj66VqskWqoZ37PW94jwOTwNfq/z9oyu1V+eqrZqtR2+fCiXdYOZe/Modt8GtvqNzu+w==}
 
   tailwindcss@3.4.19:
     resolution: {integrity: sha512-3ofp+LL8E+pK/JuPLPggVAIaEuhvIz4qNcf3nA1Xn2o/7fb7s/TYpHhwGDv1ZU3PkBluUVaF8PyCHcm48cKLWQ==}
@@ -6003,7 +6004,7 @@ snapshots:
 
   systeminformation@5.33.1: {}
 
-  tailwind-merge@1.14.0: {}
+  tailwind-merge@3.6.0: {}
 
   tailwindcss@3.4.19:
     dependencies:
