@@ -15,7 +15,7 @@ export default function AboutMe({
 
   return (
     <section className="mx-auto my-12 flex max-w-[1080px] flex-col-reverse gap-10 px-4 md:flex-row lg:px-0">
-      <article className="flex-[2] space-y-6">
+      <article className="flex-2 space-y-6">
         <PrismicRichText
           field={primary.heading}
           components={{

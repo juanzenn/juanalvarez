@@ -59,7 +59,7 @@ export default function Navbar({ defaultTheme }: Props) {
       <article className="flex w-full justify-between px-4 lg:w-max lg:px-8">
         <Link
           href="/"
-          className="inline-block flex-shrink-0 text-xl font-semibold tracking-tighter text-primary-800 transition-all hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400"
+          className="inline-block shrink-0 text-xl font-semibold tracking-tighter text-primary-800 transition-all hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400"
         >
           Juan Alvarez
         </Link>
