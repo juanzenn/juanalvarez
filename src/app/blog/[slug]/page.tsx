@@ -87,7 +87,7 @@ export default async function BlogPost({ params }: Props) {
       </header>
 
       <main className="mb-6">
-        <article className="prose-primary prose max-w-none hover:prose-a:underline dark:text-gray-100 dark:prose-headings:text-gray-100 dark:prose-a:text-primary-500 dark:prose-strong:text-primary-500">
+        <article className="prose-primary prose max-w-none prose-a:no-underline prose-a:hover:text-primary-700 hover:prose-a:underline dark:text-gray-100 dark:prose-headings:text-gray-100 dark:prose-a:text-primary-500 dark:prose-strong:text-primary-500">
           <PrismicRichText
             field={content}
             components={{
