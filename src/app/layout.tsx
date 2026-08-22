@@ -1,4 +1,5 @@
 import { asText } from "@prismicio/client";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import React from "react";
@@ -62,6 +63,7 @@ export default async function RootLayout({
         <Navbar defaultTheme={defaultTheme} />
         <main className="min-h-full flex-1">{children}</main>
         <Footer />
+        <SpeedInsights />
         <GoTop />
       </body>
     </html>
