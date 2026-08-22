@@ -1,6 +1,8 @@
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { asLink, asText } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { GithubFill, LinkOut } from "akar-icons";
 import { FOCUS_RING } from "~/lib/focus-ring";
 import type { IndexDocumentDataBodyProjectsSlice } from "~/types.generated";
 import { H2, H3 } from "../utils/text";
@@ -88,7 +90,7 @@ export default function Projects({
                     className={`flex items-center gap-2 rounded bg-primary-700 py-2 px-4 text-sm font-semibold text-white transition duration-300 hover:bg-primary-800 ${FOCUS_RING}`}
                   >
                     Live View
-                    <LinkOut size={18} />
+                    <ArrowTopRightOnSquareIcon className="h-[18px] w-[18px]" />
                   </a>
                 )}
 
@@ -98,7 +100,7 @@ export default function Projects({
                     aria-label={`${title} on GitHub`}
                     className={`flex items-center rounded border border-gray-300 p-2 text-gray-700 transition duration-300 hover:bg-gray-100 dark:border-gray-500 dark:text-gray-100 dark:hover:bg-gray-600 ${FOCUS_RING}`}
                   >
-                    <GithubFill size={18} />
+                    <FontAwesomeIcon className="h-[18px] w-[18px]" icon={faGithub} />
                   </a>
                 )}
               </footer>

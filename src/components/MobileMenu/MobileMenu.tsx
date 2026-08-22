@@ -1,4 +1,4 @@
-import { Cross } from "akar-icons";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
@@ -117,7 +117,7 @@ function MobileMenu({
                 className="mr-4 block text-primary-900 dark:text-primary-500"
                 onClick={onClose}
               >
-                <Cross size={20} />
+                <XMarkIcon className="h-5 w-5" />
               </button>
             </li>
             {children}

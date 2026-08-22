@@ -109,9 +109,7 @@ Deleting it as monorepo leftovers breaks installs.
 - **Text** is rendered through `src/components/utils/text` (`H1`–`H4`,
   `Paragraph`) rather than raw heading tags.
 - **Icons**: `@heroicons/react` for UI icons,
-  `@fortawesome/free-brands-svg-icons` for brand icons. `akar-icons` is legacy —
-  don't reach for it in new code. Removal tracked in
-  [#48](https://github.com/juanzenn/juanalvarez/issues/48).
+  `@fortawesome/free-brands-svg-icons` for brand icons.
 - **Language** is English. The one Spanish string,
   `subject: "Mensaje de formulario: ..."` in `src/app/api/mail/route.ts`, is the
   subject line of a mail to the site owner and is meant to be Spanish.
