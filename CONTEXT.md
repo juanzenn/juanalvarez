@@ -80,6 +80,20 @@ the obvious modernisation — silently brings the flash back, because the server
 cannot read `localStorage`. There is no `prefers-color-scheme` fallback, so a
 first visit is always light.
 
+Because that theme is a class, `src/app/global.css` redefines Tailwind's `dark`
+variant with `@custom-variant`. Tailwind v4 ships `dark:` as a
+`prefers-color-scheme` media query, so dropping that line does not error — it
+silently hands the theme back to the OS and leaves the toggle inert, which is
+what [#65](https://github.com/juanzenn/juanalvarez/issues/65) was.
+
+**There is no Tailwind JS config.** The theme lives in `@theme` in
+`src/app/global.css`, and `primary` is an alias of Tailwind's `blue` scale
+declared there; the typography and forms plugins load with `@plugin`. A
+v3-style tailwind config at the root is not picked up without an `@config`
+directive, so adding one back would look live and do nothing. Why it went that
+way rather than re-adding `@config` is in
+`docs/adr/0001-tailwind-theme-in-css.md`.
+
 **`pnpm-workspace.yaml` exists and this is not a monorepo.** It has no
 `packages:` key. It exists only to allow postinstall build scripts under pnpm 11.
 Deleting it as monorepo leftovers breaks installs.
