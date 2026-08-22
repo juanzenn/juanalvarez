@@ -20,9 +20,11 @@ is a decision nobody has made, not a fix nobody got round to.
 
 ## What's CMS-driven
 
-The homepage is entirely slice-driven: `src/app/page.tsx` fetches the `index`
-document and hands every slice to `SliceZone`. Hero copy and CTA, the bio, the
-projects and the blog section heading all come from Prismic.
+The homepage is slice-driven with one exception: `src/app/page.tsx` fetches the
+`index` document and renders it through `SliceZone`, split in two around the
+employment timeline, which is deliberately hardcoded rather than a slice
+([#20](https://github.com/juanzenn/juanalvarez/issues/20)). Hero copy and CTA,
+the bio, the projects and the blog section heading all come from Prismic.
 
 **The Prismic labels don't match the API IDs.** In the dashboard the `heroabout`
 slice is labelled "About Me" and `about_me` is labelled "Bio". Codegen copies
@@ -61,12 +63,12 @@ The cover image, `SITE_NAME` and `SITE_URL` stay hardcoded deliberately.
 to "Juan Alvarez", and `metadataBase` needs a build-time constant. Moving the
 cover into Prismic would serve it from `images.prismic.io` and fail that spec.
 
-**The array spread in `src/app/layout.tsx` is load-bearing.**
-`prismic.SliceZone` is a conditional type that distributes into
-`[] | [Slice, ...Slice[]]`, and calling `.find` on that union of tuples throws
-the type predicate away, so `slice.primary` stays the full union. Spreading into
-a plain array first restores the narrowing. Simplifying it back to
-`indexDoc.data.body.find(...)` puts the type error back.
+**The array spreads in `src/app/layout.tsx` and `src/app/page.tsx` are
+load-bearing.** `prismic.SliceZone` is a conditional type that distributes into
+`[] | [Slice, ...Slice[]]`, and calling `.find` or `.findIndex` on that union
+of tuples throws the type predicate away, so `slice.primary` stays the full
+union. Spreading into a plain array first restores the narrowing. Simplifying
+either back to `indexDoc.data.body.find(...)` puts the type error back.
 
 ## Deliberate decisions
 
