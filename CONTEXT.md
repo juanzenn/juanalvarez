@@ -113,10 +113,3 @@ Deleting it as monorepo leftovers breaks installs.
 - **Language** is English. The one Spanish string,
   `subject: "Mensaje de formulario: ..."` in `src/app/api/mail/route.ts`, is the
   subject line of a mail to the site owner and is meant to be Spanish.
-
-## Fossils
-
-- `src/components/IndexSlices/Employment.tsx` returns `<div>Employment</div>` and
-  is commented out of `src/app/page.tsx` with no import, so uncommenting it does
-  not compile. Being built out in
-  [#20](https://github.com/juanzenn/juanalvarez/issues/20).
