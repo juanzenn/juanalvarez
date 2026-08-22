@@ -10,16 +10,19 @@ const EMPLOYMENT = [
     companyLink: "https://www.linkedin.com/company/atrinium/",
     role: "Frontend Developer",
     period: "Apr 2024 – Present",
-    description:
-      "Sole frontend engineer on Linikit, the management platform for Spain's Kit Digital grant program, where I inherited a legacy React, Next.js and TypeScript codebase and shipped four production modules on top of it — device delivery with in-browser photo capture and carrier integration, voucher-extension signing over SMS, WhatsApp and email, distributors, and settlements with Excel and PDF export. Also designed a config-driven editable table family reused across some seventeen screens and built the cross-tenant announcements module end to end, with a server-enforced state machine, queued dispatch and a GDPR-compliant opt-out flow. Now building the Product Builder catalog layer for Hermes, a multi-tenant insurance SaaS, so product configuration no longer needs a backend ticket.",
+    description: [
+      "Sole frontend engineer on Linikit, the management platform for Spain's Kit Digital grant program, where I inherited a legacy React, Next.js and TypeScript codebase and shipped four production modules on top of it — device delivery with in-browser photo capture and carrier integration, voucher-extension signing over SMS, WhatsApp and email, distributors, and settlements with Excel and PDF export.",
+      "For Hermes, a multi-tenant insurance SaaS, designed a config-driven editable table family reused across some seventeen screens and built the cross-tenant announcements module end to end, with a server-enforced state machine, queued dispatch and a GDPR-compliant opt-out flow. Now building its Product Builder catalog layer so product configuration no longer needs a backend ticket.",
+    ],
   },
   {
     company: "Ingeniust",
     companyLink: "https://www.linkedin.com/company/ingeniust/",
     role: "Mid Senior Developer",
     period: "Sep 2021 – Jan 2024",
-    description:
+    description: [
       "Joined as a junior and grew into a mid senior role architecting web applications with React, Next.js, Redux and PHP. Led ADEC Education, a platform teachers across Costa Rica use to author and distribute courses, delivered 28+ production features, cut a persistent bug backlog through targeted refactoring, and set up continuous deployment within an Agile workflow — all while mentoring incoming engineers.",
+    ],
   },
 ];
 
@@ -67,7 +70,11 @@ export default function Employment() {
               {job.period}
             </p>
 
-            <Paragraph className="mt-3">{job.description}</Paragraph>
+            <div className="mt-3 space-y-3">
+              {job.description.map((paragraph) => (
+                <Paragraph key={paragraph}>{paragraph}</Paragraph>
+              ))}
+            </div>
           </li>
         ))}
       </ol>
