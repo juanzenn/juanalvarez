@@ -35,9 +35,6 @@ importers:
       '@vercel/speed-insights':
         specifier: ^2.0.0
         version: 2.0.0(next@16.3.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      akar-icons:
-        specifier: ^1.9.28
-        version: 1.9.31(react@18.3.1)
       classnames:
         specifier: ^2.3.2
         version: 2.5.1
@@ -1010,11 +1007,6 @@ packages:
 
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
-
-  akar-icons@1.9.31:
-    resolution: {integrity: sha512-4lbsVlla/6nsfYz8ZzxjxFlBqNgM63aJWaJYFLmDsJAJ4h6UdbQs3vhQxuuR3QEMLU8IzaTBEW8JV7glzr0RGA==}
-    peerDependencies:
-      react: '>=16'
 
   ansi-escapes@7.3.0:
     resolution: {integrity: sha512-BvU8nYgGQBxcmMuEeUEmNTvrMVjJNSH7RgW24vXexN4Ven6qCvy4TntnvlnwnMLTVlcRQQdbRY8NKnaIoeWDNg==}
@@ -3946,11 +3938,6 @@ snapshots:
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
-
-  akar-icons@1.9.31(react@18.3.1):
-    dependencies:
-      prop-types: 15.8.1
-      react: 18.3.1
 
   ansi-escapes@7.3.0:
     dependencies:

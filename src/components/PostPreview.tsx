@@ -1,7 +1,7 @@
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicText } from "@prismicio/react";
-import { ArrowRight } from "akar-icons";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { cn } from "~/lib/cn";
 import { FOCUS_RING } from "~/lib/focus-ring";
@@ -55,7 +55,7 @@ export default function PostPreview({
           FOCUS_RING
         )}
       >
-        Read more <ArrowRight size={18} />
+        Read more <ArrowRightIcon className="h-[18px] w-[18px]" />
       </Link>
     </article>
   );
