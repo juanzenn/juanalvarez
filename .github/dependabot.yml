@@ -18,3 +18,7 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "@types/react"
         update-types: ["version-update:semver-major"]
+      # Cypress 15 is an intentional pin (see CONTEXT.md). Ignore majors so
+      # 15.x patches still arrive.
+      - dependency-name: "cypress"
+        update-types: ["version-update:semver-major"]
