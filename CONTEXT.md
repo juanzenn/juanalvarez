@@ -18,6 +18,9 @@ React is on 18 while Next is on 16. That is not a stale pin — Next 16's peer
 range is `^18.2.0 || ^19.0.0`, so React 18 is explicitly supported. Moving to 19
 is a decision nobody has made, not a fix nobody got round to.
 
+Cypress stays on 15 the same way. Moving to 16 is a decision nobody has made;
+Dependabot is told to ignore that major so the bump does not keep coming back.
+
 ## What's CMS-driven
 
 The homepage is slice-driven with one exception: `src/app/page.tsx` fetches the
