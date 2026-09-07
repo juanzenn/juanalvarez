@@ -24,8 +24,8 @@ importers:
         specifier: ^7.22.0
         version: 7.22.0
       '@prismicio/next':
-        specifier: ^2.3.0
-        version: 2.3.0(@prismicio/client@7.22.0)(next@16.3.4(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: ^2.3.1
+        version: 2.3.1(@prismicio/client@7.22.0)(next@16.3.4(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@prismicio/react':
         specifier: ^3.4.1
         version: 3.4.1(@prismicio/client@7.22.0)(react@18.3.1)
@@ -568,8 +568,8 @@ packages:
     peerDependencies:
       '@prismicio/client': '>=7'
 
-  '@prismicio/next@2.3.0':
-    resolution: {integrity: sha512-Zo6KfE0NitFHagtL1vgvzI/UB1YLlBSFfwH5wqXz49hZgCHbjnKGTsU0uPp62wep05nfzzGH6k7EQCCYAi75lg==}
+  '@prismicio/next@2.3.1':
+    resolution: {integrity: sha512-Kof3UfvMYC7qdGAjmtNnC6Kq9F3TwrO55bBrTeXtPec5Obsh1LC6Hur5UtDOQJ/qlCLZnVFk0E6RmkHZ7b4sEA==}
     engines: {node: '>=20'}
     peerDependencies:
       '@prismicio/client': ^7
@@ -3572,7 +3572,7 @@ snapshots:
     dependencies:
       '@prismicio/client': 7.22.0
 
-  '@prismicio/next@2.3.0(@prismicio/client@7.22.0)(next@16.3.4(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@prismicio/next@2.3.1(@prismicio/client@7.22.0)(next@16.3.4(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@prismicio/client': 7.22.0
       '@prismicio/simulator': 0.2.4(@prismicio/client@7.22.0)
